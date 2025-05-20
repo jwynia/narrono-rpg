@@ -1,0 +1,326 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Setting - Narrono Game Manual</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="A comprehensive role-playing game manual for Narrono">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../../favicon.svg">
+        <link rel="shortcut icon" href="../../../favicon.png">
+        <link rel="stylesheet" href="../../../css/variables.css">
+        <link rel="stylesheet" href="../../../css/general.css">
+        <link rel="stylesheet" href="../../../css/chrome.css">
+        <link rel="stylesheet" href="../../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../../css/custom.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Narrono Game Manual</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="frontier-clans-setting"><a class="header" href="#frontier-clans-setting">Frontier Clans Setting</a></h1>
+<h2 id="setting-overview"><a class="header" href="#setting-overview">Setting Overview</a></h2>
+<p>In the rugged landscape that was once North America, now known as the Broken Lands, humanity has reorganized into clan-based societies following a global technological collapse. The Frontier Clans setting takes place in this post-collapse world where rival clans vie for territory, resources, and technological remnants, while establishing new traditions and power structures adapted to a world where the old order has crumbled.</p>
+<h2 id="the-five-axes"><a class="header" href="#the-five-axes">The Five Axes</a></h2>
+<ul>
+<li>
+<p><strong>Power Scale</strong>: Regional</p>
+<ul>
+<li>Conflicts affect territories spanning several days' travel</li>
+<li>Success means securing resources and defendable territories</li>
+<li>Relationships center on clan alliances and rivalries</li>
+<li>Assets include territory, survival knowledge, and salvaged technology</li>
+</ul>
+</li>
+<li>
+<p><strong>Supernatural Level</strong>: Minimal</p>
+<ul>
+<li>Setting is largely grounded in practical reality</li>
+<li>Occasional mysterious phenomena with ambiguous explanations</li>
+<li>Knowledge of old-world science appears magical to some</li>
+<li>Some clans maintain ritual practices with psychosocial effects</li>
+</ul>
+</li>
+<li>
+<p><strong>Technology Level</strong>: Mixed</p>
+<ul>
+<li>Salvaged technology from before the collapse</li>
+<li>Hand-crafted tools and weapons</li>
+<li>Communities built around functional old-world infrastructure</li>
+<li>Knowledge of repairing and maintaining technology as valuable as the tech itself</li>
+</ul>
+</li>
+<li>
+<p><strong>Social Structure</strong>: Clan-Based</p>
+<ul>
+<li>Extended family groups with strong internal loyalty</li>
+<li>Status determined by contribution to clan survival</li>
+<li>Complex honor systems governing inter-clan relationships</li>
+<li>Traditions established to maintain social cohesion</li>
+</ul>
+</li>
+<li>
+<p><strong>Conflict Type</strong>: Territorial &amp; Resource</p>
+<ul>
+<li>Competition for arable land and clean water</li>
+<li>Management of limited supplies and equipment</li>
+<li>Protection of clan members and territory</li>
+<li>Preservation and recovery of valuable knowledge</li>
+</ul>
+</li>
+</ul>
+<h2 id="key-setting-elements"><a class="header" href="#key-setting-elements">Key Setting Elements</a></h2>
+<h3 id="the-collapse"><a class="header" href="#the-collapse">The Collapse</a></h3>
+<p>Approximately three generations ago, a series of cascading technological failures led to the breakdown of global communication systems, power grids, and supply chains. The exact causes remain disputed—theories range from coordinated attacks to catastrophic technical failures to natural disasters—but the result was the fragmentation of large-scale society and a return to smaller, more self-sufficient communities.</p>
+<h3 id="the-rememberers"><a class="header" href="#the-rememberers">The Rememberers</a></h3>
+<p>Individuals who maintain the oral history of the time before the collapse and the early struggle years. Their histories vary by clan, but all serve the vital function of preserving knowledge and cautionary tales about the old world's hubris. In some clans, Rememberers hold formal authority; in others, they serve as advisors.</p>
+<h3 id="the-reclamation"><a class="header" href="#the-reclamation">The Reclamation</a></h3>
+<p>A generational project undertaken by most clans to recover useful technology and knowledge from abandoned urban centers. These expeditions are dangerous, as many old cities have become unstable or toxic, but the potential rewards in terms of tools, medicine, and information make the risk worthwhile.</p>
+<h3 id="the-seasonal-gathering"><a class="header" href="#the-seasonal-gathering">The Seasonal Gathering</a></h3>
+<p>A time of truce when clans convene at neutral sites to trade, share information, resolve disputes, arrange marriages, and strengthen ties. These gatherings follow the patterns of seasonal migration and serve as the primary means of inter-clan diplomacy and cultural exchange.</p>
+<h3 id="the-council-of-elders"><a class="header" href="#the-council-of-elders">The Council of Elders</a></h3>
+<p>Most clans are governed by a council of experienced members who have demonstrated wisdom and skill. The exact composition varies—some are hereditary, others meritocratic, some balanced by gender or skill set—but all serve as the decision-making body for major clan choices.</p>
+<h2 id="locations"><a class="header" href="#locations">Locations</a></h2>
+<h3 id="the-great-salt-basin"><a class="header" href="#the-great-salt-basin">The Great Salt Basin</a></h3>
+<p>Once a thriving metropolitan region, now a partially flooded basin where the remnants of skyscrapers rise from brackish water. Rich in salvageable materials but dangerous due to unstable structures and territorial gangs who aren't affiliated with the recognized clans.</p>
+<h3 id="the-heritage-farm-lands"><a class="header" href="#the-heritage-farm-lands">The Heritage Farm Lands</a></h3>
+<p>Fertile territory where several clans have established permanent settlements based around sustainable agriculture. Competition for the best soils creates tension, but the area's productivity makes it too valuable for all-out warfare.</p>
+<h3 id="the-mountain-passes"><a class="header" href="#the-mountain-passes">The Mountain Passes</a></h3>
+<p>Vital trade routes through treacherous terrain, controlled by clans who specialize in navigation and transport. Knowledge of safe paths and seasons is closely guarded, and tolls are extracted in goods or favors rather than currency.</p>
+<h3 id="the-ancient-dam"><a class="header" href="#the-ancient-dam">The Ancient Dam</a></h3>
+<p>A massive hydroelectric facility that still functions at partial capacity, providing power to clans who maintain the knowledge to use it. Control of the dam shifts between alliances, with an unspoken agreement that destroying it would be unforgivable.</p>
+<h3 id="the-trading-post"><a class="header" href="#the-trading-post">The Trading Post</a></h3>
+<p>Originally a highway rest stop, now expanded into a neutral zone where clans can meet for commerce without fear of violence. Maintained by representatives from multiple clans, it operates under strict protocols that all visitors must observe.</p>
+<h2 id="clans"><a class="header" href="#clans">Clans</a></h2>
+<h3 id="the-watershed-clan"><a class="header" href="#the-watershed-clan">The Watershed Clan</a></h3>
+<p>Masters of water management who control several key reservoirs and irrigation systems. Their knowledge of purification techniques and weather prediction makes them essential allies, though their strict water-sharing protocols can create friction with neighbors.</p>
+<h3 id="the-circuit-clan"><a class="header" href="#the-circuit-clan">The Circuit Clan</a></h3>
+<p>Specialists in electrical systems and electronic repair who maintain a repository of pre-collapse devices. They travel between settlements, trading their technical skills for food and other necessities, remaining politically neutral by necessity.</p>
+<h3 id="the-roadwalkers"><a class="header" href="#the-roadwalkers">The Roadwalkers</a></h3>
+<p>Nomadic scouts and messengers who maintain the most comprehensive mental maps of the region. They serve as communication links between stationary clans and are granted passage rights by most groups due to their useful intelligence on conditions elsewhere.</p>
+<h3 id="the-red-valley-clan"><a class="header" href="#the-red-valley-clan">The Red Valley Clan</a></h3>
+<p>Agricultural specialists who control the largest contiguous farmland. Their prosperity has allowed them to grow significantly, creating internal social stratification that mirrors pre-collapse society more than the egalitarian structures of other clans.</p>
+<h3 id="the-forge-clan"><a class="header" href="#the-forge-clan">The Forge Clan</a></h3>
+<p>Metalworkers and manufacturers who have redeveloped complex crafting techniques. Their weapons and tools are the highest quality available, giving them significant leverage in negotiations despite their smaller numbers and limited territory.</p>
+<h2 id="campaign-themes"><a class="header" href="#campaign-themes">Campaign Themes</a></h2>
+<ul>
+<li><strong>Tradition vs. Innovation</strong>: When should old ways be preserved, and when should new approaches be developed?</li>
+<li><strong>Competition vs. Cooperation</strong>: How can clans balance their own needs against the benefits of working together?</li>
+<li><strong>Knowledge as Power</strong>: Who controls information about the past, and how does this shape the future?</li>
+<li><strong>Family vs. Community</strong>: Where do clan loyalties end and broader human connections begin?</li>
+<li><strong>Scarcity vs. Sustainability</strong>: How do people balance immediate needs against long-term survival?</li>
+</ul>
+<h2 id="story-hooks"><a class="header" href="#story-hooks">Story Hooks</a></h2>
+<ol>
+<li>A clan's water purification system fails, forcing them to negotiate with rivals for access to clean water</li>
+<li>The discovery of a sealed pre-collapse facility prompts a race to claim its contents</li>
+<li>A disease spreads through livestock, threatening multiple clans' food security</li>
+<li>A charismatic leader begins uniting smaller clans under a nationalist banner</li>
+<li>Long-dormant automated systems in an old military installation suddenly reactivate</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../../appendices/modules/frontier-clans/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../../appendices/modules/frontier-clans/story.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../../appendices/modules/frontier-clans/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../../appendices/modules/frontier-clans/story.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../../elasticlunr.min.js"></script>
+        <script src="../../../mark.min.js"></script>
+        <script src="../../../searcher.js"></script>
+
+        <script src="../../../clipboard.min.js"></script>
+        <script src="../../../highlight.js"></script>
+        <script src="../../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

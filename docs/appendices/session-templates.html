@@ -1,0 +1,564 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Session Templates - Narrono Game Manual</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="A comprehensive role-playing game manual for Narrono">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../css/custom.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Narrono Game Manual</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="session-templates"><a class="header" href="#session-templates">Session Templates</a></h1>
+<h1 id="first-session-template"><a class="header" href="#first-session-template">First Session Template</a></h1>
+<p>This template guides the Game Facilitator (GF) and players through the initial session of a Narrono campaign. It helps establish characters, setting, relationships, goals, and the first challenge.</p>
+<hr />
+<h2 id="1-character-introductions"><a class="header" href="#1-character-introductions">1. Character Introductions</a></h2>
+<ul>
+<li>
+<p>Each player introduces their character:</p>
+<ul>
+<li><strong>Origin</strong> (linked to Social Structure axis)</li>
+<li><strong>Drive</strong> (linked to Conflict Type axis)</li>
+<li><strong>Goal</strong> (linked to Power Scale axis)</li>
+<li>Key <strong>Assets</strong> and initial <strong>Relationships</strong></li>
+</ul>
+</li>
+<li>
+<p>GF records key details for reference.</p>
+</li>
+</ul>
+<hr />
+<h2 id="2-setting-establishment"><a class="header" href="#2-setting-establishment">2. Setting Establishment</a></h2>
+<ul>
+<li>
+<p>Review the Five Axes framework:</p>
+<ul>
+<li>Power Scale</li>
+<li>Supernatural Level</li>
+<li>Technology Level</li>
+<li>Social Structure</li>
+<li>Conflict Type</li>
+</ul>
+</li>
+<li>
+<p>Confirm or adjust axis choices collaboratively.</p>
+</li>
+<li>
+<p>Discuss:</p>
+<ul>
+<li>Key factions and locations</li>
+<li>Current tensions and opportunities</li>
+<li>Known supernatural or technological elements</li>
+<li>Social hierarchies and conflicts</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="3-relationship-web-creation"><a class="header" href="#3-relationship-web-creation">3. Relationship Web Creation</a></h2>
+<ul>
+<li>
+<p>Players establish initial relationships:</p>
+<ul>
+<li>Between characters</li>
+<li>With factions or key NPCs</li>
+</ul>
+</li>
+<li>
+<p>For each relationship:</p>
+<ol>
+<li>Define <strong>type</strong> (ally, rival, mentor, etc.)</li>
+<li>Set initial <strong>status</strong> (Strong, Strained, Broken, Transformed)</li>
+<li>Identify <strong>tension points</strong> or secrets</li>
+<li>Note development potential</li>
+</ol>
+</li>
+<li>
+<p>GF maps the Relationship Web visually.</p>
+</li>
+</ul>
+<hr />
+<h2 id="4-initial-goal-setting"><a class="header" href="#4-initial-goal-setting">4. Initial Goal Setting</a></h2>
+<ul>
+<li>Each player states their character's immediate goals.</li>
+<li>Group discusses shared objectives or conflicts.</li>
+<li>GF notes potential story hooks and complications.</li>
+</ul>
+<hr />
+<h2 id="5-first-challenge-structure"><a class="header" href="#5-first-challenge-structure">5. First Challenge Structure</a></h2>
+<ul>
+<li>
+<p>GF frames an opening scene that:</p>
+<ul>
+<li>Engages at least one character goal</li>
+<li>Highlights a key setting element</li>
+<li>Introduces an immediate conflict or opportunity</li>
+</ul>
+</li>
+<li>
+<p>Use the Pool System:</p>
+<ol>
+<li>Players declare approach (Direct, Balanced, Cautious)</li>
+<li>Roll 3d6 and interpret results</li>
+<li>Apply assets and relationships</li>
+<li>Narrate outcomes using Dynamic Outcome Interpretation</li>
+</ol>
+</li>
+<li>
+<p>Record:</p>
+<ul>
+<li>Key outcomes</li>
+<li>New story elements</li>
+<li>Asset or relationship changes</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="notes--observations"><a class="header" href="#notes--observations">Notes &amp; Observations</a></h2>
+<ul>
+<li>What worked well in introductions and setting?</li>
+<li>Were relationships clear and engaging?</li>
+<li>Did goals create interesting dynamics?</li>
+<li>Was the first challenge effective?</li>
+<li>What needs adjustment for next session?</li>
+</ul>
+<hr />
+<p><em>Use this template to ensure a strong campaign foundation and to gather feedback for refining your Narrono experience.</em></p>
+<h1 id="standard-session-template"><a class="header" href="#standard-session-template">Standard Session Template</a></h1>
+<p>This template supports typical Narrono game sessions, focusing on scene planning, character development, relationship evolution, asset management, and narrative flow.</p>
+<hr />
+<h2 id="1-scene-planning-framework"><a class="header" href="#1-scene-planning-framework">1. Scene Planning Framework</a></h2>
+<ul>
+<li>
+<p>GF outlines upcoming scenes:</p>
+<ul>
+<li>Key conflicts or opportunities</li>
+<li>Relevant setting elements (Axes, factions, locations)</li>
+<li>Potential challenges or complications</li>
+<li>Opportunities for character goals</li>
+</ul>
+</li>
+<li>
+<p>Players discuss desired focus areas or spotlight moments.</p>
+</li>
+</ul>
+<hr />
+<h2 id="2-character-spotlight-tracking"><a class="header" href="#2-character-spotlight-tracking">2. Character Spotlight Tracking</a></h2>
+<ul>
+<li>
+<p>For each player:</p>
+<ul>
+<li>Identify scenes where their character can shine</li>
+<li>Note goals or conflicts to highlight</li>
+<li>Plan opportunities for trait and asset use</li>
+<li>Consider relationship development moments</li>
+</ul>
+</li>
+<li>
+<p>GF ensures balanced spotlight distribution.</p>
+</li>
+</ul>
+<hr />
+<h2 id="3-relationship-development"><a class="header" href="#3-relationship-development">3. Relationship Development</a></h2>
+<ul>
+<li>
+<p>Review current relationship states:</p>
+<ul>
+<li>Strong, Strained, Broken, Transformed</li>
+</ul>
+</li>
+<li>
+<p>Identify opportunities to:</p>
+<ul>
+<li>Deepen existing bonds</li>
+<li>Introduce new connections</li>
+<li>Resolve or escalate tensions</li>
+<li>Transform relationships</li>
+</ul>
+</li>
+<li>
+<p>Record any changes or new relationships formed during play.</p>
+</li>
+</ul>
+<hr />
+<h2 id="4-asset-state-management"><a class="header" href="#4-asset-state-management">4. Asset State Management</a></h2>
+<ul>
+<li>
+<p>Review key assets:</p>
+<ul>
+<li>Fresh, Degraded, Depleted</li>
+</ul>
+</li>
+<li>
+<p>Track:</p>
+<ul>
+<li>Assets risked or degraded during scenes</li>
+<li>Recovery opportunities</li>
+<li>New assets gained or created</li>
+<li>Strategic use of assets to influence outcomes</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="5-narrative-arc-structure"><a class="header" href="#5-narrative-arc-structure">5. Narrative Arc Structure</a></h2>
+<ul>
+<li>
+<p>Track the session's story flow:</p>
+<ol>
+<li><strong>Setup</strong>: Establish scene context and stakes</li>
+<li><strong>Rising Action</strong>: Escalate conflicts and challenges</li>
+<li><strong>Climax</strong>: Resolve key conflicts or make critical choices</li>
+<li><strong>Falling Action</strong>: Show immediate consequences</li>
+<li><strong>Resolution</strong>: Set up future story hooks and complications</li>
+</ol>
+</li>
+<li>
+<p>Note key outcomes, new story elements, and unresolved threads.</p>
+</li>
+</ul>
+<hr />
+<h2 id="notes--observations-1"><a class="header" href="#notes--observations-1">Notes &amp; Observations</a></h2>
+<ul>
+<li>Which scenes were most engaging?</li>
+<li>Did all characters get meaningful spotlight time?</li>
+<li>How did relationships evolve?</li>
+<li>Were assets used effectively?</li>
+<li>Did the narrative flow feel natural?</li>
+<li>What should be adjusted for next session?</li>
+</ul>
+<hr />
+<p><em>Use this template to structure engaging, balanced sessions and to gather insights for ongoing campaign development.</em></p>
+<h1 id="milestone-session-template"><a class="header" href="#milestone-session-template">Milestone Session Template</a></h1>
+<p>This template supports milestone sessions in Narrono campaigns, focusing on major character growth, setting evolution, relationship transformation, and campaign direction shifts.</p>
+<hr />
+<h2 id="1-character-development-framework"><a class="header" href="#1-character-development-framework">1. Character Development Framework</a></h2>
+<ul>
+<li>
+<p>Review each character's progress:</p>
+<ul>
+<li>Trait evolution (Origin, Drive, Goal)</li>
+<li>New abilities or assets gained</li>
+<li>Lessons learned from past sessions</li>
+<li>Unresolved personal conflicts</li>
+</ul>
+</li>
+<li>
+<p>Identify opportunities for:</p>
+<ul>
+<li>Trait changes or additions</li>
+<li>Asset upgrades or transformations</li>
+<li>New goals or motivations</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="2-setting-evolution-tracking"><a class="header" href="#2-setting-evolution-tracking">2. Setting Evolution Tracking</a></h2>
+<ul>
+<li>
+<p>Review recent story events affecting the setting:</p>
+<ul>
+<li>Faction changes</li>
+<li>Location developments</li>
+<li>Resource shifts</li>
+<li>Knowledge discoveries</li>
+</ul>
+</li>
+<li>
+<p>Determine if any <strong>internal axis shifts</strong> have occurred:</p>
+<ul>
+<li>Changes within current axis categories</li>
+<li>Adjustments to power structures, supernatural presence, technology, social dynamics, or conflict types</li>
+</ul>
+</li>
+<li>
+<p>Plan for potential <strong>axis transitions</strong>:</p>
+<ul>
+<li>Major changes to the setting's fundamental nature</li>
+<li>Catalyzing events required</li>
+<li>Expected consequences</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="3-relationship-transformation"><a class="header" href="#3-relationship-transformation">3. Relationship Transformation</a></h2>
+<ul>
+<li>
+<p>Review key relationships:</p>
+<ul>
+<li>Strong, Strained, Broken, Transformed</li>
+</ul>
+</li>
+<li>
+<p>Identify:</p>
+<ul>
+<li>Relationships deepening or deteriorating</li>
+<li>New connections formed</li>
+<li>Old conflicts resolved or escalated</li>
+<li>Opportunities for transformation</li>
+</ul>
+</li>
+<li>
+<p>Update the Relationship Web accordingly.</p>
+</li>
+</ul>
+<hr />
+<h2 id="4-goal-reassessment"><a class="header" href="#4-goal-reassessment">4. Goal Reassessment</a></h2>
+<ul>
+<li>
+<p>Each player reviews their character's goals:</p>
+<ul>
+<li>Achieved objectives</li>
+<li>New ambitions</li>
+<li>Conflicting motivations</li>
+<li>Group goals alignment</li>
+</ul>
+</li>
+<li>
+<p>Group discusses:</p>
+<ul>
+<li>Shared objectives moving forward</li>
+<li>Potential conflicts or alliances</li>
+<li>Story arcs to pursue</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="5-axis-shift-implementation"><a class="header" href="#5-axis-shift-implementation">5. Axis Shift Implementation</a></h2>
+<ul>
+<li>If a major axis transition is triggered:
+<ol>
+<li>Clearly define the new axis choice</li>
+<li>Discuss narrative reasons and consequences</li>
+<li>Adjust setting elements accordingly</li>
+<li>Update character options and relationships</li>
+<li>Plan upcoming storylines reflecting the change</li>
+</ol>
+</li>
+</ul>
+<hr />
+<h2 id="notes--observations-2"><a class="header" href="#notes--observations-2">Notes &amp; Observations</a></h2>
+<ul>
+<li>What major changes occurred this session?</li>
+<li>How did characters evolve?</li>
+<li>How did the setting shift?</li>
+<li>What new story opportunities emerged?</li>
+<li>What challenges or conflicts arose?</li>
+<li>What should be the focus for the next arc?</li>
+</ul>
+<hr />
+<p><em>Use this template to guide significant campaign milestones, ensuring impactful evolution of characters, relationships, and the setting.</em></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../appendices/relationship-guides.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../appendices/gf-screens.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../appendices/relationship-guides.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../appendices/gf-screens.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,814 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Chapter 5: Game Facilitator - Narrono Game Manual</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="A comprehensive role-playing game manual for Narrono">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../css/custom.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Narrono Game Manual</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="chapter-5-game-facilitator"><a class="header" href="#chapter-5-game-facilitator">Chapter 5: Game Facilitator</a></h1>
+<h2 id="the-art-of-facilitation"><a class="header" href="#the-art-of-facilitation">The Art of Facilitation</a></h2>
+<p>In the previous chapters, you've learned the core concepts of Narrono: how to create a setting using the Five Axes framework, how to develop characters with traits and assets, how to connect them through the Relationship Web, and how the detailed mechanics work together to create meaningful narrative moments. Now it's time to explore the role that brings all these elements together: the Game Facilitator.</p>
+<p>As a Game Facilitator (GF), you're not just a referee or storyteller—you're a collaborative partner in creating a dynamic, evolving narrative with your players. Your role is to facilitate the story that emerges from the intersection of setting elements, character choices, mechanical outcomes, and group dynamics. This chapter will show you how to create engaging scenes, manage narrative flow, and apply the mechanics effectively to create a satisfying gameplay experience for everyone at the table.</p>
+<p>Remember that in Narrono, facilitation isn't about controlling the story—it's about creating the conditions for a compelling collaborative narrative to emerge through play.</p>
+<h2 id="core-gf-responsibilities"><a class="header" href="#core-gf-responsibilities">Core GF Responsibilities</a></h2>
+<h3 id="setting-as-foundation"><a class="header" href="#setting-as-foundation">Setting as Foundation</a></h3>
+<p>Every element of play builds from your setting choices. As GF, you're responsible for bringing the setting to life and showing how it shapes the characters' experiences:</p>
+<ul>
+<li>Interpret mechanics through the setting lens</li>
+<li>Connect traits to setting elements</li>
+<li>Ensure assets match setting constraints</li>
+<li>Create appropriate complications</li>
+<li>Show how the Five Axes manifest in daily life</li>
+</ul>
+<p>The setting isn't just backdrop—it's an active participant in the story. When describing scenes, always reference relevant axis elements, show setting constraints, establish context, and present setting-specific details that make the world feel alive and consistent.</p>
+<blockquote>
+<p><strong>Example: Setting as Foundation</strong></p>
+<p>In a Merit-based, Advanced Tech setting with Social Conflict, the GF describes:</p>
+<p>"The corporate lobby's security scanners hum quietly as you enter. Your degraded Access Card flickers, struggling with the latest encryption update—a common problem for those without premium maintenance contracts. The head of HR, who rose from data entry to executive through demonstrated skill rather than connections, reviews applicant files nearby. She glances at you with professional curiosity, perhaps recognizing you from your mentor's social media posts."</p>
+<p>This description incorporates Merit-based elements (advancement through skill), Advanced Tech (security scanners, encryption), and Social Conflict (professional relationships, subtle recognition), making the setting tangible and immediate.</p>
+</blockquote>
+<h3 id="story-through-mechanics"><a class="header" href="#story-through-mechanics">Story Through Mechanics</a></h3>
+<p>In Narrono, every mechanical choice represents a narrative decision. As GF, you help players understand how their mechanical choices reflect their characters' approaches and personalities:</p>
+<ul>
+<li>Direct rolls represent embracing a trait</li>
+<li>Balanced rolls show careful navigation between traits</li>
+<li>Cautious rolls indicate acting against natural tendencies</li>
+<li>Asset usage reveals character priorities</li>
+<li>Relationship involvement shows character connections</li>
+</ul>
+<p>When players make mechanical choices, help them see the narrative implications. When they choose Direct method for a social challenge, it's not just about using the highest die—it's about their character confidently leveraging their noble upbringing or street smarts.</p>
+<blockquote>
+<p><strong>Example: Story Through Mechanics</strong></p>
+<p>Player: "I want to convince the guard to let us through. I'll use my 'Former Guard Captain' Origin and roll Direct."</p>
+<p>GF: "As you approach, you stand tall with the unmistakable bearing of command. Your words carry the weight of someone used to giving orders, and you seamlessly incorporate guard terminology that marks you as one of their own. The guard straightens instinctively in response."</p>
+<p>After the roll (Success - 6):</p>
+<p>GF: "The guard not only lets you pass but offers a respectful nod. However, his supervisor notices this special treatment from across the courtyard and makes a note—your success has created a ripple that might return later."</p>
+</blockquote>
+<h3 id="dynamic-outcome-interpretation"><a class="header" href="#dynamic-outcome-interpretation">Dynamic Outcome Interpretation</a></h3>
+<p>While dice determine the mechanical outcome of actions, as GF you shape how these outcomes manifest narratively, ensuring the story remains compelling regardless of the roll. This is one of your most important responsibilities. For detailed guidance and examples, see the Dynamic Outcome Interpretation Matrix in the GF Tools reference section.</p>
+<ul>
+<li>Honor the mechanical result</li>
+<li>Shape the narrative consequences</li>
+<li>Create new opportunities</li>
+<li>Maintain setting consistency</li>
+<li>Support character development</li>
+<li>Balance challenge and progress</li>
+</ul>
+<p>The Dynamic Outcome Interpretation framework (detailed in Chapter 4) provides guidelines for how outcomes manifest in the narrative:</p>
+<h4 id="success-5-6"><a class="header" href="#success-5-6">Success (5-6)</a></h4>
+<p><strong>Mechanical Result:</strong> Action succeeds<br />
+<strong>Your Role:</strong> Introduce future complications</p>
+<ul>
+<li>Create narrative hooks from the success</li>
+<li>Plant seeds for future challenges</li>
+<li>Establish new relationships or tensions</li>
+<li>Show how success changes the setting</li>
+</ul>
+<h4 id="partial-success-3-4"><a class="header" href="#partial-success-3-4">Partial Success (3-4)</a></h4>
+<p><strong>Mechanical Result:</strong> Action succeeds with cost<br />
+<strong>Your Role:</strong> Shape the nature of the cost</p>
+<ul>
+<li>Adjust cost severity based on story needs</li>
+<li>Create costs that drive character development</li>
+<li>Use costs to introduce new story elements</li>
+<li>Connect costs to existing complications</li>
+</ul>
+<h4 id="setback-1-2"><a class="header" href="#setback-1-2">Setback (1-2)</a></h4>
+<p><strong>Mechanical Result:</strong> Action fails<br />
+<strong>Your Role:</strong> Transform failure into opportunity</p>
+<ul>
+<li>Create alternative paths forward</li>
+<li>Reveal hidden information through failure</li>
+<li>Introduce unexpected allies or resources</li>
+<li>Use failure to highlight character growth opportunities</li>
+</ul>
+<blockquote>
+<p><strong>Example: Dynamic Outcome Interpretation</strong></p>
+<p><strong>Success Example:</strong>
+Player rolls a 6 when investigating a noble's suspicious activities.</p>
+<p>GF: "Your careful observation reveals clear evidence of the noble's smuggling operation. You identify key warehouses, contacts, and even shipment schedules. However, as you're documenting these details, you notice a familiar symbol in the records—one connected to your mentor. This success has uncovered a thread that leads uncomfortably close to home."</p>
+<p><strong>Partial Success Example:</strong>
+Player rolls a 3 when attempting to navigate treacherous mountain terrain.</p>
+<p>GF: "You find a path through the mountains, but the journey takes longer than expected. As night falls, you're forced to make camp in a narrow pass. The delay means you'll arrive after the meeting has started, and the difficult terrain has degraded your 'Survival Gear' asset—the straps are wearing thin and will need repair before your return journey."</p>
+<p><strong>Setback Example:</strong>
+Player rolls a 2 when trying to decode an encrypted message.</p>
+<p>GF: "Despite your best efforts, the encryption remains unbroken. However, your failed attempt reveals something interesting—this isn't standard corporate encryption. The patterns suggest military-grade security, which raises new questions about who sent this message and why they needed such extreme protection. This failure has revealed a deeper mystery."</p>
+</blockquote>
+<h3 id="the-compensation-principle"><a class="header" href="#the-compensation-principle">The Compensation Principle</a></h3>
+<p>When dice create extreme results (multiple successes or failures in a row), apply the Compensation Principle to maintain narrative momentum. For step-by-step guidance on implementing this principle effectively, see the Compensation Principle Flowchart in the GF Tools reference section.</p>
+<ol>
+<li>Acknowledge the mechanical outcome</li>
+<li>Consider the narrative momentum</li>
+<li>Introduce balancing elements</li>
+<li>Create new opportunities</li>
+</ol>
+<p>This doesn't negate the dice results but ensures the story remains engaging regardless of luck.</p>
+<h4 id="after-multiple-successes"><a class="header" href="#after-multiple-successes">After Multiple Successes</a></h4>
+<ul>
+<li>Introduce longer-term complications</li>
+<li>Create tension between different successes</li>
+<li>Show unintended consequences of victory</li>
+<li>Raise stakes for future challenges</li>
+</ul>
+<h4 id="after-multiple-setbacks"><a class="header" href="#after-multiple-setbacks">After Multiple Setbacks</a></h4>
+<ul>
+<li>Reveal new information through failure</li>
+<li>Create unexpected advantages</li>
+<li>Introduce helpful NPCs or resources</li>
+<li>Show character growth through adversity</li>
+</ul>
+<blockquote>
+<p><strong>Example: Compensation Principle</strong></p>
+<p><strong>After Multiple Successes:</strong>
+A player has succeeded at three consecutive social challenges, dominating court politics.</p>
+<p>GF: "Your political maneuvering has been masterful, securing your family's position and outmaneuvering several rivals. However, your rising influence has attracted the attention of the Royal Spymaster, who begins to investigate your sources of information. Your success creates a new, more dangerous opponent who operates in shadows rather than the familiar arena of court politics."</p>
+<p><strong>After Multiple Setbacks:</strong>
+A player has failed three consecutive attempts to navigate tribal politics.</p>
+<p>GF: "As you leave the council meeting after another frustrating rejection, you notice a pattern in the elder's objections. They're not dismissing your ideas directly—they're responding negatively to specific phrases you're using. This suggests someone has been working behind the scenes, poisoning the elders against border clan initiatives. This knowledge gives you a new target for your efforts and a different approach to consider."</p>
+</blockquote>
+<h3 id="asset-state-manipulation"><a class="header" href="#asset-state-manipulation">Asset State Manipulation</a></h3>
+<p>Use asset states as a balancing tool for narrative flow. For tools to help maintain mechanical balance while preserving narrative excitement, see the Balance Tracker in the GF Tools reference section.</p>
+<ul>
+<li>Expedite recovery of depleted assets when needed</li>
+<li>Create new degradation risks during success</li>
+<li>Offer temporary asset benefits during setbacks</li>
+<li>Use asset states to pace challenges</li>
+</ul>
+<blockquote>
+<p><strong>Example: Asset State Manipulation</strong></p>
+<p><strong>Supporting Struggling Players:</strong>
+A character with a Depleted "Security Clearance" asset is struggling to make progress.</p>
+<p>GF: "While your clearance is technically revoked, you notice the security system is undergoing maintenance. This creates a temporary window where your old credentials might work one more time before becoming permanently invalid."</p>
+<p><strong>Challenging Successful Players:</strong>
+A character with a Fresh "Trade Network" asset has been consistently successful.</p>
+<p>GF: "Your trade network secures another favorable deal, but rumors start spreading about how you achieve such exceptional terms. Your network remains effective but is showing signs of strain as key contacts become concerned about their association with you."</p>
+</blockquote>
+<h2 id="scene-creation"><a class="header" href="#scene-creation">Scene Creation</a></h2>
+<p>Creating engaging scenes is one of your primary responsibilities as GF. The Three-Layer Approach provides a framework for developing scenes that connect to the setting, character traits, and meaningful choices.</p>
+<h3 id="the-three-layer-approach"><a class="header" href="#the-three-layer-approach">The Three-Layer Approach</a></h3>
+<blockquote>
+<p>For detailed implementation guidance, templates, and examples, see the Three-Layer Scene Planner in the GF Tools reference section.</p>
+</blockquote>
+<h4 id="1-setting-layer"><a class="header" href="#1-setting-layer">1. Setting Layer</a></h4>
+<p>The foundation of every scene, connecting to your world's axis positions and current state.</p>
+<p><strong>Key Elements to Include:</strong></p>
+<ul>
+<li>Current axis states and their implications</li>
+<li>Environmental factors and physical context</li>
+<li>Active factions and their current goals</li>
+<li>Ongoing events and their ripple effects</li>
+<li>Relationship Web connections relevant to the location</li>
+</ul>
+<p><strong>Questions to Answer:</strong></p>
+<ul>
+<li>How does this location reflect the setting's axes?</li>
+<li>What sensory details make this setting distinctive?</li>
+<li>Which factions have influence or interest here?</li>
+<li>What recent events have affected this location?</li>
+<li>How does this place connect to the broader world?</li>
+</ul>
+<h4 id="2-character-layer"><a class="header" href="#2-character-layer">2. Character Layer</a></h4>
+<p>Connects the setting to the characters, showing how their traits, assets, and relationships interact with this specific location.</p>
+<p><strong>Key Elements to Include:</strong></p>
+<ul>
+<li>Relevant character traits for this situation</li>
+<li>Current asset states and their implications</li>
+<li>Active relationship dynamics</li>
+<li>Character goals and their connection to this scene</li>
+<li>Potential growth opportunities</li>
+</ul>
+<p><strong>Questions to Answer:</strong></p>
+<ul>
+<li>Which character traits are most relevant here?</li>
+<li>How do current asset states affect options?</li>
+<li>Which relationships might help or hinder?</li>
+<li>How does this scene connect to character goals?</li>
+<li>What growth opportunities exist in this situation?</li>
+</ul>
+<h4 id="3-options-layer"><a class="header" href="#3-options-layer">3. Options Layer</a></h4>
+<p>Presents multiple viable approaches that connect to traits, assets, and relationships while showing meaningful consequences.</p>
+<p><strong>Key Elements to Include:</strong></p>
+<ul>
+<li>Multiple distinct approaches</li>
+<li>Connection to different traits and methods</li>
+<li>Asset and relationship opportunities</li>
+<li>Immediate and long-term implications</li>
+<li>Meaningful stakes for each choice</li>
+</ul>
+<p><strong>Questions to Answer:</strong></p>
+<ul>
+<li>What Direct, Balanced, and Cautious approaches exist?</li>
+<li>How can different assets or relationships help?</li>
+<li>What are the potential consequences of each approach?</li>
+<li>How do choices connect to character development?</li>
+<li>What makes each option meaningfully different?</li>
+</ul>
+<blockquote>
+<p><strong>Example: Three-Layer Approach</strong></p>
+<p><strong>Setting Layer:</strong>
+"The 87th floor executive suite of Helix Corporation gleams with polished surfaces and subtle displays of wealth. Security cameras with advanced facial recognition sweep the corridors at regular intervals. The quarterly board meeting has drawn most executives away, leaving a skeleton crew of assistants and security personnel. Recent protests against Helix's new neural implant have put security on higher alert, but also distracted them from routine monitoring."</p>
+<p><strong>Character Layer:</strong>
+"Your 'Corporate Analyst' Origin gives you legitimate reason to be in the building, but your Drive to 'Expose Corporate Corruption' puts you at risk if discovered. Your 'Executive Access Badge' asset is Fresh but will trigger alerts if used in restricted areas. Your relationship with Maya, a disgruntled Helix programmer, gives you inside knowledge of security protocols. The data you seek could advance your Goal of 'Bringing Down the CEO' but also puts Maya at risk."</p>
+<p><strong>Options Layer:</strong>
+"You could:</p>
+<ul>
+<li>Use your Corporate Analyst credentials directly to request the files through official channels (Direct method, leveraging your Origin)</li>
+<li>Find a workstation and use your technical skills to access the network (Balanced method, moderate risk)</li>
+<li>Convince a distracted assistant that you're conducting an internal audit (Cautious method, going against your usual direct approach)</li>
+</ul>
+<p>Your Fresh Executive Access Badge could get you into the executive wing, but using it there would create a permanent record of your presence. Your relationship with Maya could provide remote assistance, but involving her further strains your already Strained relationship."</p>
+</blockquote>
+<h3 id="setting-specific-scenes"><a class="header" href="#setting-specific-scenes">Setting-Specific Scenes</a></h3>
+<p>Different axis positions require different approaches to scene creation. Consider how each axis affects the types of scenes you create:</p>
+<h4 id="power-scale-influence"><a class="header" href="#power-scale-influence">Power Scale Influence</a></h4>
+<ul>
+<li><strong>Personal:</strong> Focus on individual challenges and immediate relationships</li>
+<li><strong>Local:</strong> Create community-based scenes with neighborhood stakes</li>
+<li><strong>Regional:</strong> Develop faction conflicts and territory-spanning challenges</li>
+<li><strong>Global:</strong> Design scenes with far-reaching consequences and international elements</li>
+</ul>
+<h4 id="supernatural-level-influence"><a class="header" href="#supernatural-level-influence">Supernatural Level Influence</a></h4>
+<ul>
+<li><strong>None:</strong> Create purely mundane challenges with realistic constraints</li>
+<li><strong>Hidden:</strong> Develop scenes with subtle supernatural elements and ambiguity</li>
+<li><strong>Emerging:</strong> Design scenes where supernatural and mundane elements interact openly</li>
+<li><strong>Dominant:</strong> Create scenes where supernatural forces drive primary conflicts</li>
+</ul>
+<h4 id="technology-level-influence"><a class="header" href="#technology-level-influence">Technology Level Influence</a></h4>
+<ul>
+<li><strong>Limited:</strong> Focus on craftsmanship, natural resources, and physical challenges</li>
+<li><strong>Moderate:</strong> Create scenes involving specialized tools and institutional knowledge</li>
+<li><strong>Advanced:</strong> Develop scenes with digital systems, automation, and complex technology</li>
+<li><strong>Fantastic:</strong> Design scenes featuring cutting-edge or theoretical technologies</li>
+</ul>
+<h4 id="social-structure-influence"><a class="header" href="#social-structure-influence">Social Structure Influence</a></h4>
+<ul>
+<li><strong>Tribal:</strong> Create scenes emphasizing tradition, kinship, and group identity</li>
+<li><strong>Hierarchical:</strong> Develop scenes highlighting status differences and formal protocols</li>
+<li><strong>Merit-based:</strong> Design scenes where demonstrated abilities determine outcomes</li>
+<li><strong>Fluid:</strong> Create scenes featuring rapidly changing social dynamics and trends</li>
+</ul>
+<h4 id="conflict-type-influence"><a class="header" href="#conflict-type-influence">Conflict Type Influence</a></h4>
+<ul>
+<li><strong>Direct:</strong> Focus on physical confrontation and immediate threats</li>
+<li><strong>Social:</strong> Create scenes centered on reputation, influence, and relationships</li>
+<li><strong>Economic:</strong> Develop scenes involving resources, trade, and material advantage</li>
+<li><strong>Ideological:</strong> Design scenes highlighting beliefs, principles, and cultural values</li>
+</ul>
+<blockquote>
+<p><strong>Example: Setting-Specific Scene</strong></p>
+<p>In a setting with Regional Power Scale, Hidden Supernatural, Moderate Technology, Hierarchical Social Structure, and Social Conflict:</p>
+<p>"The provincial governor's autumn ball brings together nobles from across three territories, each with their own agendas and alliances. Security is present but discreet, with guards positioned at key points throughout the manor. Rumors of strange occurrences in the northern forests have reached some attendees, but most dismiss them as peasant superstitions. The governor's new mechanical clock tower—a marvel of modern engineering—chimes the hour, drawing appreciative comments from guests. Servants move efficiently through the crowd, their uniforms clearly marking their house affiliations and ranks. The real conflicts here happen through whispered conversations, strategic introductions, and carefully placed compliments or slights."</p>
+<p>This scene incorporates Regional elements (multiple territories), Hidden Supernatural (dismissed rumors), Moderate Technology (mechanical clock), Hierarchical structure (house affiliations and ranks), and Social Conflict (whispered conversations, strategic introductions).</p>
+</blockquote>
+<h3 id="character-focused-scenes"><a class="header" href="#character-focused-scenes">Character-Focused Scenes</a></h3>
+<p>Create scenes that highlight different aspects of character development:</p>
+<h4 id="origin-focused-scenes"><a class="header" href="#origin-focused-scenes">Origin-Focused Scenes</a></h4>
+<ul>
+<li>Put characters in situations where their background is relevant</li>
+<li>Create contrasts between different Origins</li>
+<li>Show how Origins connect to the Social Structure axis</li>
+<li>Provide opportunities to leverage Origin knowledge</li>
+<li>Create tensions between Origin and current goals</li>
+</ul>
+<h4 id="drive-focused-scenes"><a class="header" href="#drive-focused-scenes">Drive-Focused Scenes</a></h4>
+<ul>
+<li>Present moral choices connected to character motivations</li>
+<li>Create situations where Drives conflict with immediate goals</li>
+<li>Show how Drives connect to the Conflict Type axis</li>
+<li>Provide opportunities for Drive expression</li>
+<li>Create tensions between different characters' Drives</li>
+</ul>
+<h4 id="goal-focused-scenes"><a class="header" href="#goal-focused-scenes">Goal-Focused Scenes</a></h4>
+<ul>
+<li>Create progress opportunities toward character Goals</li>
+<li>Show how Goals connect to the Power Scale axis</li>
+<li>Present obstacles specifically challenging to Goals</li>
+<li>Provide opportunities to redefine or refine Goals</li>
+<li>Create tensions between different characters' Goals</li>
+</ul>
+<blockquote>
+<p><strong>Example: Character-Focused Scene</strong></p>
+<p><strong>Origin-Focused Scene:</strong>
+"The noble gathering falls silent as you enter. Your 'Clan Outsider' Origin is immediately apparent in your bearing and attire, drawing curious and sometimes hostile glances. The host, however, approaches with genuine interest—he's known for his unconventional views on clan integration. This scene presents an opportunity to either embrace your outsider perspective (Direct) or attempt to adopt local customs (Cautious), with each approach creating different relationship opportunities."</p>
+<p><strong>Drive-Focused Scene:</strong>
+"The information you seek is in the merchant's records, unguarded and easily accessible. However, as you approach, you see the merchant comforting his young daughter who helps in the shop. Your Drive to 'Expose Corruption' pushes you to take the evidence, but doing so would likely destroy this family. This creates a direct challenge to your Drive—do you pursue justice at any cost, or do you find another way?"</p>
+<p><strong>Goal-Focused Scene:</strong>
+"The council meeting represents a significant opportunity to advance your Goal of 'Reform Medical Practices.' Several influential members have expressed interest in your proposals, but the traditionalist faction has prepared strong counterarguments. Your recent successes have earned you a speaking position, but how you use it will determine whether you make progress or face a significant setback to your reforms."</p>
+</blockquote>
+<h2 id="running-sessions"><a class="header" href="#running-sessions">Running Sessions</a></h2>
+<h3 id="session-preparation"><a class="header" href="#session-preparation">Session Preparation</a></h3>
+<p>Effective session preparation creates the foundation for engaging play. Focus on these key areas:</p>
+<h4 id="1-review-setting-elements"><a class="header" href="#1-review-setting-elements">1. Review Setting Elements</a></h4>
+<ul>
+<li>Current axis states and recent changes</li>
+<li>Active factions and their goals</li>
+<li>Potential axis shifts on the horizon</li>
+<li>Setting tensions and conflicts</li>
+<li>Recent world events and developments</li>
+</ul>
+<h4 id="2-review-character-elements"><a class="header" href="#2-review-character-elements">2. Review Character Elements</a></h4>
+<ul>
+<li>Current trait situations and developments</li>
+<li>Asset conditions and recovery opportunities</li>
+<li>Active complications from previous sessions</li>
+<li>Relationship states and evolution possibilities</li>
+<li>Progress toward character goals</li>
+</ul>
+<h4 id="3-prepare-story-developments"><a class="header" href="#3-prepare-story-developments">3. Prepare Story Developments</a></h4>
+<ul>
+<li>Natural consequence chains from previous actions</li>
+<li>Setting evolution opportunities</li>
+<li>Asset restoration possibilities</li>
+<li>New relationship connections</li>
+<li>Potential complications and challenges</li>
+</ul>
+<blockquote>
+<p><strong>Example: Session Preparation Notes</strong></p>
+<p><strong>Setting Review:</strong></p>
+<ul>
+<li>Noble Quarter increasingly unstable after corruption revelations</li>
+<li>Merchant Guild gaining influence (shift toward Merit-based structure)</li>
+<li>Strange phenomena more frequent (shift toward Emerging supernatural)</li>
+<li>Tension between traditionalists and reformers growing</li>
+</ul>
+<p><strong>Character Review:</strong></p>
+<ul>
+<li>Mira's Network of Informants depleted, needs recovery opportunity</li>
+<li>Elara's Goal of medical reform gaining traction after successful treatment</li>
+<li>Karn's relationship with clan elder strained after last session</li>
+<li>Group has successfully exposed minor conspiracy, attracting attention</li>
+</ul>
+<p><strong>Story Developments:</strong></p>
+<ul>
+<li>Consequences of exposed corruption: noble families realigning</li>
+<li>Opportunity for Mira to restore network through new merchant contact</li>
+<li>Mysterious illness spreading could connect to supernatural elements</li>
+<li>Potential new ally in reform-minded noble house</li>
+</ul>
+</blockquote>
+<h3 id="active-facilitation"><a class="header" href="#active-facilitation">Active Facilitation</a></h3>
+<p>During play, your active facilitation keeps the session engaging and dynamic:</p>
+<h4 id="scene-description-checklist"><a class="header" href="#scene-description-checklist">Scene Description Checklist</a></h4>
+<p>Before presenting a scene, ensure you've included:</p>
+<ul>
+<li>References to relevant axes</li>
+<li>Clear setting constraints</li>
+<li>Asset opportunities</li>
+<li>Long-term consequence indications</li>
+<li>Choices connected to setting elements</li>
+</ul>
+<h4 id="managing-outcomes"><a class="header" href="#managing-outcomes">Managing Outcomes</a></h4>
+<p>Turn every roll result into story advancement:</p>
+<p><strong>Success (5-6):</strong></p>
+<ul>
+<li>Grant immediate intention</li>
+<li>Create future complication</li>
+<li>Strengthen setting position</li>
+<li>Add new story element</li>
+</ul>
+<p><strong>Partial Success (3-4):</strong></p>
+<ul>
+<li>Grant intention with cost</li>
+<li>Introduce immediate complication</li>
+<li>Force interesting choice</li>
+<li>Advance existing plot</li>
+</ul>
+<p><strong>Setback (1-2):</strong></p>
+<ul>
+<li>Miss intention</li>
+<li>Reveal hidden connection</li>
+<li>Create major complication</li>
+<li>Challenge setting assumptions</li>
+</ul>
+<h4 id="using-the-shared-story-pool-strategically"><a class="header" href="#using-the-shared-story-pool-strategically">Using the Shared Story Pool Strategically</a></h4>
+<p>Use your GM pool dice to:</p>
+<ol>
+<li>Add complexity when players are succeeding too easily</li>
+<li>Create opportunities when players are struggling</li>
+<li>Adjust scene difficulty dynamically</li>
+<li>Balance individual and group challenges</li>
+</ol>
+<p>For detailed guidance on managing the shared story pool effectively, see the Shared Story Pool Tracker in the GF Tools reference section.</p>
+<blockquote>
+<p><strong>Example: Strategic Pool Usage</strong></p>
+<p>GF: "I'll take a die from the pool to reveal that while your negotiation failed, the merchant's assistant slips you information about a different opportunity that might be even more valuable. This creates a new path forward despite the setback."</p>
+</blockquote>
+<h3 id="troubleshooting-common-issues"><a class="header" href="#troubleshooting-common-issues">Troubleshooting Common Issues</a></h3>
+<p>Even the best-planned sessions sometimes encounter challenges. Here are strategies for addressing common issues:</p>
+<h4 id="when-players-hesitate"><a class="header" href="#when-players-hesitate">When Players Hesitate</a></h4>
+<ul>
+<li>Reference setting elements to provide context</li>
+<li>Show clear asset opportunities</li>
+<li>Connect the situation to character goals</li>
+<li>Present immediate stakes to create urgency</li>
+<li>Offer a clear starting point for action</li>
+</ul>
+<p>For tools to evaluate and improve player engagement, see the Player Engagement Assessment in the GF Tools reference section.</p>
+<blockquote>
+<p><strong>Example: Addressing Hesitation</strong></p>
+<p>GF: "As you consider your options, you notice the guard rotation is about to change. Your 'Security Systems' asset would be particularly useful now, and successfully accessing the records would provide information directly related to your goal of exposing the conspiracy. If you don't act within the next few minutes, the opportunity will pass as the new guards arrive."</p>
+</blockquote>
+<h4 id="when-scenes-stall"><a class="header" href="#when-scenes-stall">When Scenes Stall</a></h4>
+<ul>
+<li>Introduce a setting complication</li>
+<li>Bring in a relationship connection</li>
+<li>Escalate existing tension</li>
+<li>Add time pressure</li>
+<li>Shift focus to a different aspect of the scene</li>
+</ul>
+<p>For a comprehensive guide to identifying and addressing scene stagnation, see the Scene Stagnation Checklist in the GF Tools reference section.</p>
+<blockquote>
+<p><strong>Example: Revitalizing a Stalled Scene</strong></p>
+<p>GF: "While you're discussing options, a messenger arrives with an urgent notice—the council meeting has been moved up to tomorrow morning. This gives you limited time to prepare your case. Additionally, you recognize the messenger as someone connected to Lord Darius, suggesting he might have influenced this schedule change."</p>
+</blockquote>
+<h4 id="when-choices-feel-meaningless"><a class="header" href="#when-choices-feel-meaningless">When Choices Feel Meaningless</a></h4>
+<ul>
+<li>Show setting implications for different options</li>
+<li>Connect choices to character traits</li>
+<li>Add asset considerations to decisions</li>
+<li>Reveal hidden stakes</li>
+<li>Create different risk/reward profiles for options</li>
+</ul>
+<blockquote>
+<p><strong>Example: Making Choices Meaningful</strong></p>
+<p>GF: "You have two potential approaches to the archives. The main entrance would require social finesse, playing to your noble background but risking recognition. The service entrance would require stealth, which isn't your strength, but would keep your presence completely secret. Your 'Noble Signet' asset would be particularly effective at the main entrance, while the service route would avoid putting your already Strained relationship with the archivist at further risk."</p>
+</blockquote>
+<h2 id="long-term-campaign-management"><a class="header" href="#long-term-campaign-management">Long-Term Campaign Management</a></h2>
+<h3 id="setting-evolution"><a class="header" href="#setting-evolution">Setting Evolution</a></h3>
+<p>Settings evolve through character actions and story events. As GF, you're responsible for tracking and implementing these changes. For a comprehensive framework to manage setting evolution, see the Setting Evolution Timeline tool in the GF Tools reference section.</p>
+<h4 id="tracking-evolution"><a class="header" href="#tracking-evolution">Tracking Evolution</a></h4>
+<ul>
+<li>Document significant character actions affecting the setting</li>
+<li>Note NPC or faction developments</li>
+<li>Record environmental or technological changes</li>
+<li>Track cultural or social shifts</li>
+<li>Identify potential future implications</li>
+</ul>
+<h4 id="evolution-assessment"><a class="header" href="#evolution-assessment">Evolution Assessment</a></h4>
+<p>Periodically assess:</p>
+<ul>
+<li>Cumulative impact of multiple minor changes</li>
+<li>Patterns suggesting axis movement</li>
+<li>Player engagement with setting elements</li>
+<li>Narrative opportunities from evolution</li>
+<li>Potential for major shifts</li>
+</ul>
+<h4 id="implementing-axis-shifts"><a class="header" href="#implementing-axis-shifts">Implementing Axis Shifts</a></h4>
+<p>When implementing an axis shift:</p>
+<ol>
+<li>Foreshadow the potential change</li>
+<li>Create narrative moments that mark the transition</li>
+<li>Involve characters directly in the shift</li>
+<li>Document the specific changes to setting elements</li>
+<li>Update relevant game materials</li>
+</ol>
+<blockquote>
+<p><strong>Example: Setting Evolution</strong></p>
+<p><strong>Initial Setting:</strong> Shadow Court (Local Power Scale, Hidden Supernatural, Moderate Technology, Hierarchical Social Structure, Social Conflict)</p>
+<p><strong>Evolution Events:</strong></p>
+<ul>
+<li>Characters expose corruption in noble houses (Sessions 3-7)</li>
+<li>Strange illness affects nobles, supernatural cause discovered (Sessions 8-12)</li>
+<li>Merchant Guild reforms create merit-based advancement (Sessions 13-15)</li>
+<li>Supernatural creatures publicly sighted during festival (Session 18)</li>
+</ul>
+<p><strong>Resulting Shifts:</strong></p>
+<ul>
+<li>Social Structure shifting from Hierarchical toward Merit-based</li>
+<li>Supernatural Level shifted from Hidden to Emerging</li>
+</ul>
+<p><strong>Implementation:</strong>
+"Following the public revelation of supernatural creatures at the Autumn Festival, the city has changed noticeably. Street vendors sell 'protective' charms, scholars openly discuss magical theories, and the City Watch has formed a special division for 'unusual occurrences.' Your previous need for secrecy about supernatural knowledge has diminished, but with it comes new challenges as various factions compete to control or exploit these forces."</p>
+</blockquote>
+<h3 id="character-development"><a class="header" href="#character-development">Character Development</a></h3>
+<p>Facilitating character growth creates satisfying long-term arcs. For detailed guidance on managing character progression, see the Character Development Path tool in the GF Tools reference section.</p>
+<h4 id="trait-evolution"><a class="header" href="#trait-evolution">Trait Evolution</a></h4>
+<p>Origins, Drives, and Goals can evolve when:</p>
+<ul>
+<li>Character achieves significant milestones</li>
+<li>Setting axes shift</li>
+<li>Character experiences profound failure</li>
+<li>Character integrates into new communities</li>
+<li>Character's understanding deepens</li>
+</ul>
+<h4 id="asset-expansion"><a class="header" href="#asset-expansion">Asset Expansion</a></h4>
+<p>Create opportunities for assets to:</p>
+<ul>
+<li>Improve through repeated use</li>
+<li>Adapt to new circumstances</li>
+<li>Incorporate new elements</li>
+<li>Specialize in specific applications</li>
+<li>Transform through story events</li>
+</ul>
+<h4 id="relationship-growth"><a class="header" href="#relationship-growth">Relationship Growth</a></h4>
+<p>Facilitate relationship development through:</p>
+<ul>
+<li>Shared challenges</li>
+<li>Conflicting interests</li>
+<li>Complementary skills</li>
+<li>Setting pressures</li>
+<li>Personal revelations</li>
+</ul>
+<blockquote>
+<p><strong>Example: Character Development</strong></p>
+<p><strong>Trait Evolution:</strong>
+"After successfully exposing the corruption and helping establish the new merit-based council, Mira's Origin evolves from 'Third Tier Noble of House Vayne' to 'Rising Power in House Vayne.' This reflects her changing status and influence, granting new social opportunities while creating tensions with traditionalists."</p>
+<p><strong>Asset Evolution:</strong>
+"Elara's 'Physician's Kit' asset evolves after her successful treatment of the supernatural illness. It now incorporates specialized tools and remedies for magical ailments, expanding its capabilities beyond conventional medicine and reflecting her growing expertise in this emerging field."</p>
+<p><strong>Relationship Evolution:</strong>
+"The relationship between Karn and Thana transforms from 'Uneasy Allies' to 'Blood Siblings' after they complete the clan ritual. This strengthens their mechanical support options and creates new story opportunities as Karn gains greater acceptance within the clan structure."</p>
+</blockquote>
+<h3 id="group-dynamics"><a class="header" href="#group-dynamics">Group Dynamics</a></h3>
+<p>Managing group dynamics ensures all players remain engaged and invested. For tools to help track and balance group interactions, see the Group Dynamics Assessment Chart in the GF Tools reference section.</p>
+<h4 id="balancing-spotlight-time"><a class="header" href="#balancing-spotlight-time">Balancing Spotlight Time</a></h4>
+<ul>
+<li>Track scene initiation and focus</li>
+<li>Create opportunities for less-featured characters</li>
+<li>Connect spotlight moments to character traits</li>
+<li>Ensure mechanical opportunities for all</li>
+<li>Develop side scenes when appropriate</li>
+</ul>
+<h4 id="creating-synergies"><a class="header" href="#creating-synergies">Creating Synergies</a></h4>
+<ul>
+<li>Highlight complementary traits</li>
+<li>Create situations requiring cooperation</li>
+<li>Develop asset combinations</li>
+<li>Build on established relationships</li>
+<li>Show how different approaches can work together</li>
+</ul>
+<h4 id="fostering-group-identity"><a class="header" href="#fostering-group-identity">Fostering Group Identity</a></h4>
+<ul>
+<li>Create naming opportunities</li>
+<li>Establish group reputation</li>
+<li>Develop shared resources</li>
+<li>Introduce group challenges</li>
+<li>Reinforce shared history</li>
+</ul>
+<blockquote>
+<p><strong>Example: Group Dynamics Management</strong></p>
+<p><strong>Spotlight Balance:</strong>
+"After noticing Karn had less focus in recent sessions, the GF introduces a clan hunter who recognizes his distinctive bow style. This creates a natural opportunity for Karn to share his background and demonstrate his skills, while still connecting to the group's current mission."</p>
+<p><strong>Character Synergy:</strong>
+"The locked vault presents a challenge requiring multiple approaches. Mira's social connections got you this far, Elara's knowledge identifies the lock mechanism, and Karn's physical skills will be needed for the actual break-in. This creates a situation where each character contributes their strengths to a shared goal."</p>
+<p><strong>Group Identity:</strong>
+"After your group successfully exposed the conspiracy, people begin referring to you collectively as 'The Truth Seekers.' This reputation creates new opportunities as those with secrets begin seeking you out, and gives your disparate characters a shared identity that transcends their individual differences."</p>
+</blockquote>
+<h2 id="facilitator-tools-and-resources"><a class="header" href="#facilitator-tools-and-resources">Facilitator Tools and Resources</a></h2>
+<p>To help you implement these techniques effectively, we've created a comprehensive set of tools and resources available in the GF Tools reference section. Each tool provides detailed guidance, templates, and examples to help you apply the concepts from this chapter in your games.</p>
+<h3 id="scene-creation-tools"><a class="header" href="#scene-creation-tools">Scene Creation Tools</a></h3>
+<ul>
+<li>Three-Layer Scene Planner: A detailed guide for creating engaging scenes using the three-layer approach, with templates and examples for different setting types.</li>
+<li>Setting-Specific Scene Templates: Frameworks for creating scenes that effectively incorporate your setting's axis positions.</li>
+<li>Character-Focused Scene Frameworks: Templates for designing scenes that highlight character traits and development opportunities.</li>
+</ul>
+<h3 id="outcome-management-tools"><a class="header" href="#outcome-management-tools">Outcome Management Tools</a></h3>
+<ul>
+<li>Dynamic Outcome Interpretation Matrix: A comprehensive guide to shaping narrative outcomes from mechanical results, with detailed examples for different situation types.</li>
+<li>Compensation Principle Flowchart: A step-by-step guide for maintaining narrative momentum when dice results create extreme situations.</li>
+<li>Shared Story Pool Tracker: Tools for managing and strategically using the shared story pool to enhance dramatic moments.</li>
+</ul>
+<h3 id="campaign-development-tools"><a class="header" href="#campaign-development-tools">Campaign Development Tools</a></h3>
+<ul>
+<li>Setting Evolution Timeline: A detailed framework for tracking and implementing setting changes over time, including axis shifts and their implications.</li>
+<li>Character Development Path: Guidelines and tools for managing character growth, trait evolution, and meaningful story arcs.</li>
+<li>Group Dynamics Assessment Chart: Templates for tracking and balancing group interactions, spotlight time, and character synergies.</li>
+</ul>
+<h3 id="troubleshooting-tools"><a class="header" href="#troubleshooting-tools">Troubleshooting Tools</a></h3>
+<ul>
+<li>Scene Stagnation Checklist: A practical guide for identifying and addressing common causes of scene stagnation.</li>
+<li>Player Engagement Assessment: Tools for evaluating and improving player involvement and investment.</li>
+<li>Mechanical Balance Tracker: Frameworks for maintaining mechanical balance while preserving narrative excitement.</li>
+</ul>
+<p>These tools provide structured frameworks for implementing the concepts discussed in this chapter. Each tool in the GF Tools reference section includes detailed implementation guides, practical examples, and customization options. They're designed to be practical aids rather than rigid requirements—adapt them to your group's specific needs and preferences.</p>
+<h2 id="conclusion-facilitation-in-service-of-story"><a class="header" href="#conclusion-facilitation-in-service-of-story">Conclusion: Facilitation in Service of Story</a></h2>
+<p>As Game Facilitator, your primary goal is to create the conditions for a compelling collaborative narrative to emerge through play. By applying the techniques and principles in this chapter, you'll create a game experience that honors player agency while maintaining narrative momentum and mechanical balance.</p>
+<p>Remember these key principles as you facilitate:</p>
+<ol>
+<li><strong>Setting as Foundation:</strong> Ground every scene in your world's unique characteristics.</li>
+<li><strong>Mechanics as Narrative:</strong> Help players see how mechanical choices reflect character approaches.</li>
+<li><strong>Dynamic Interpretation:</strong> Shape outcomes to create engaging narrative while honoring dice results.</li>
+<li><strong>Strategic Balance:</strong> Use the Compensation Principle and asset state manipulation to maintain momentum.</li>
+<li><strong>Character Development:</strong> Create opportunities for meaningful character growth and evolution.</li>
+<li><strong>Group Engagement:</strong> Ensure all players remain invested and involved in the unfolding story.</li>
+</ol>
+<p>In the next chapter, we'll explore optional rules and variants that can further customize your Narrono experience to suit your group's specific interests and preferences.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../chapters/ch04-detailed-mechanics.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../chapters/ch06-optional-rules.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../chapters/ch04-detailed-mechanics.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../chapters/ch06-optional-rules.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
