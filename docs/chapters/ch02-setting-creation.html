@@ -1,0 +1,1039 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Chapter 2: Setting Creation - Narrono Game Manual</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="A comprehensive role-playing game manual for Narrono">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../css/custom.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Narrono Game Manual</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="chapter-2-setting-creation"><a class="header" href="#chapter-2-setting-creation">Chapter 2: Setting Creation</a></h1>
+<h2 id="the-foundation-of-your-story"><a class="header" href="#the-foundation-of-your-story">The Foundation of Your Story</a></h2>
+<p>In Narrono, your setting isn't just a backdrop—it's the foundation from which characters, conflicts, and stories emerge. The choices you make about your world directly shape what traits are available to characters, what assets make sense, and what kinds of relationships form between them.</p>
+<p>This chapter guides you through creating a setting using the Five Axes framework—a system that helps you make clear, meaningful choices about your world's fundamental aspects. By the end, you'll have a rich, coherent setting that generates interesting character options and story possibilities.</p>
+<h2 id="the-five-axes-framework"><a class="header" href="#the-five-axes-framework">The Five Axes Framework</a></h2>
+<p>The Five Axes framework helps create unique settings by making clear choices about fundamental aspects of the world. Each axis presents distinct options that combine to create different possibilities. These aren't sliding scales—each choice brings certain elements into focus while pushing others to the background.</p>
+<h3 id="power-scale"><a class="header" href="#power-scale">Power Scale</a></h3>
+<p>The Power Scale axis determines the scope of meaningful action in your setting—what level of influence can characters realistically achieve?</p>
+<h4 id="personal"><a class="header" href="#personal">Personal</a></h4>
+<ul>
+<li><strong>Core Concept:</strong> Conflicts affect individuals and small groups</li>
+<li><strong>Character Impact:</strong> Success means changing immediate circumstances</li>
+<li><strong>Relationship Focus:</strong> Intimate and direct connections</li>
+<li><strong>Asset Types:</strong> Personal items, close bonds, individual skills</li>
+<li><strong>Story Implications:</strong> Narratives center on personal growth and local impact</li>
+</ul>
+<blockquote>
+<p><strong>Example: Personal Power Scale</strong></p>
+<p>In "Mountain Valley," a remote settlement cut off from wider civilization, conflicts revolve around family disputes, personal rivalries, and immediate survival challenges. Characters might become respected elders or skilled hunters, but their influence rarely extends beyond the valley itself. Relationships focus on direct bonds between individuals, and assets tend to be personal tools, shelters, and reputation among valley residents.</p>
+</blockquote>
+<h4 id="local"><a class="header" href="#local">Local</a></h4>
+<ul>
+<li><strong>Core Concept:</strong> Conflicts affect neighborhoods or communities</li>
+<li><strong>Character Impact:</strong> Success means influencing local dynamics</li>
+<li><strong>Relationship Focus:</strong> Community networks and organizations</li>
+<li><strong>Asset Types:</strong> Community resources, local reputation, group affiliations</li>
+<li><strong>Story Implications:</strong> Narratives involve community change and development</li>
+</ul>
+<blockquote>
+<p><strong>Example: Local Power Scale</strong></p>
+<p>In "Harbor Town," a bustling port city, characters can influence neighborhood politics, guild operations, or local trade. Success might mean becoming a guild master or neighborhood leader. Relationships span community networks like merchant associations or neighborhood watches. Assets include workshop ownership, crew loyalty, or standing in the harbor council.</p>
+</blockquote>
+<h4 id="regional"><a class="header" href="#regional">Regional</a></h4>
+<ul>
+<li><strong>Core Concept:</strong> Conflicts affect cities or nations</li>
+<li><strong>Character Impact:</strong> Success means shaping institutional policy</li>
+<li><strong>Relationship Focus:</strong> Organizational ties and political alliances</li>
+<li><strong>Asset Types:</strong> Significant resources, authority positions, influential networks</li>
+<li><strong>Story Implications:</strong> Narratives involve political maneuvering and large-scale change</li>
+</ul>
+<blockquote>
+<p><strong>Example: Regional Power Scale</strong></p>
+<p>In "The Seven Duchies," characters navigate the politics of rival noble houses and competing cities. Success means becoming a duke, high priest, or merchant prince with influence across multiple cities. Relationships include political alliances, trade partnerships, and institutional hierarchies. Assets represent major holdings, military commands, or religious authority.</p>
+</blockquote>
+<h4 id="global"><a class="header" href="#global">Global</a></h4>
+<ul>
+<li><strong>Core Concept:</strong> Conflicts affect the entire world</li>
+<li><strong>Character Impact:</strong> Success means changing history</li>
+<li><strong>Relationship Focus:</strong> International networks and world-spanning organizations</li>
+<li><strong>Asset Types:</strong> Major power structures, world-changing resources</li>
+<li><strong>Story Implications:</strong> Narratives involve world-altering events and historical shifts</li>
+</ul>
+<blockquote>
+<p><strong>Example: Global Power Scale</strong></p>
+<p>In "Nexus Earth," characters operate within international organizations that shape world events. Success means becoming a corporate CEO, nation leader, or head of a global movement. Relationships span international networks like diplomatic corps or multinational syndicates. Assets include control of rare resources, command of military forces, or leadership of global movements.</p>
+</blockquote>
+<h3 id="supernatural-level"><a class="header" href="#supernatural-level">Supernatural Level</a></h3>
+<p>The Supernatural Level axis defines how the impossible interacts with the possible—how much does magic or the supernatural influence your world?</p>
+<h4 id="none"><a class="header" href="#none">None</a></h4>
+<ul>
+<li><strong>Core Concept:</strong> No supernatural elements exist</li>
+<li><strong>Character Impact:</strong> Conflicts stem from human nature and natural forces</li>
+<li><strong>Knowledge Systems:</strong> Understanding comes through observation and reason</li>
+<li><strong>Asset Types:</strong> Purely mundane tools, skills, and resources</li>
+<li><strong>Story Implications:</strong> Narratives focus on human drama and realistic challenges</li>
+</ul>
+<blockquote>
+<p><strong>Example: No Supernatural</strong></p>
+<p>In "Steel &amp; Strategy," a historical setting based on Renaissance Italy, all events have natural explanations. Characters face purely human challenges—political intrigue, economic competition, and military conflict. Knowledge comes through study, observation, and experience. Assets are realistic tools, political positions, and social connections.</p>
+</blockquote>
+<h4 id="hidden"><a class="header" href="#hidden">Hidden</a></h4>
+<ul>
+<li><strong>Core Concept:</strong> Supernatural exists in shadows and secret places</li>
+<li><strong>Character Impact:</strong> Conflicts involve secrecy, revelation, and hidden power</li>
+<li><strong>Knowledge Systems:</strong> Occult knowledge is dangerous and protected</li>
+<li><strong>Asset Types:</strong> Secret lore, subtle supernatural tools, hidden sanctums</li>
+<li><strong>Story Implications:</strong> Narratives involve discovery, conspiracy, and hidden worlds</li>
+</ul>
+<blockquote>
+<p><strong>Example: Hidden Supernatural</strong></p>
+<p>In "Veiled Streets," supernatural forces operate beneath the surface of a modern city. Secret societies of practitioners guard ancient knowledge, while ordinary people remain unaware of the hidden battles around them. Knowledge of the supernatural is carefully guarded, passed through initiation or discovered through dangerous investigation. Assets might include subtle charms, secret hideouts, or forbidden texts.</p>
+</blockquote>
+<h4 id="open"><a class="header" href="#open">Open</a></h4>
+<ul>
+<li><strong>Core Concept:</strong> Supernatural is known but uncommon</li>
+<li><strong>Character Impact:</strong> Conflicts mix mundane and magical elements</li>
+<li><strong>Knowledge Systems:</strong> Supernatural knowledge is regulated or controlled</li>
+<li><strong>Asset Types:</strong> Licensed magical items, registered supernatural abilities</li>
+<li><strong>Story Implications:</strong> Narratives explore the integration of the extraordinary into ordinary life</li>
+</ul>
+<blockquote>
+<p><strong>Example: Open Supernatural</strong></p>
+<p>In "Arcane Republic," magic is a recognized but regulated force. Licensed practitioners serve in specialized roles, while magical creatures are classified and monitored. Knowledge of magic is taught in academies under government oversight. Assets include official magical licenses, registered artifacts, and certified familiar bonds.</p>
+</blockquote>
+<h4 id="dominant"><a class="header" href="#dominant">Dominant</a></h4>
+<ul>
+<li><strong>Core Concept:</strong> Supernatural forces shape society fundamentally</li>
+<li><strong>Character Impact:</strong> Conflicts center on supernatural forces and abilities</li>
+<li><strong>Knowledge Systems:</strong> Understanding the supernatural is crucial for daily life</li>
+<li><strong>Asset Types:</strong> Powerful magical tools, supernatural bonds, magical territories</li>
+<li><strong>Story Implications:</strong> Narratives explore the implications of a world defined by supernatural forces</li>
+</ul>
+<blockquote>
+<p><strong>Example: Dominant Supernatural</strong></p>
+<p>In "Elemental Domains," society is organized around magical affinities, with cities built from living elements and transportation achieved through dimensional folding. Understanding magical principles is as basic as literacy. Assets include elemental bonds, reality-shaping tools, and connections to magical lineages.</p>
+</blockquote>
+<h3 id="technology-level"><a class="header" href="#technology-level">Technology Level</a></h3>
+<p>The Technology Level axis establishes the tools and innovations available in your setting—what can people build and how does it shape their lives?</p>
+<h4 id="limited"><a class="header" href="#limited">Limited</a></h4>
+<ul>
+<li><strong>Core Concept:</strong> Pre-industrial technology</li>
+<li><strong>Character Impact:</strong> Conflicts emphasize personal skill and direct action</li>
+<li><strong>Information Flow:</strong> Knowledge travels slowly through oral tradition and manuscripts</li>
+<li><strong>Asset Types:</strong> Handcrafted tools, rare materials, inherited items</li>
+<li><strong>Story Implications:</strong> Narratives emphasize personal capability and resource scarcity</li>
+</ul>
+<blockquote>
+<p><strong>Example: Limited Technology</strong></p>
+<p>In "Coastal Kingdoms," technology resembles medieval Europe. Travel is by horse or sail, communication depends on messengers, and production relies on manual craftsmanship. Information travels slowly through manuscripts and oral tradition. Assets include well-crafted weapons, sturdy ships, and productive land.</p>
+</blockquote>
+<h4 id="moderate"><a class="header" href="#moderate">Moderate</a></h4>
+<ul>
+<li><strong>Core Concept:</strong> Industrial age capability</li>
+<li><strong>Character Impact:</strong> Conflicts balance traditional methods with emerging technologies</li>
+<li><strong>Information Flow:</strong> Printed materials and early telecommunications spread knowledge</li>
+<li><strong>Asset Types:</strong> Mass-produced goods, early industrial machinery, specialized equipment</li>
+<li><strong>Story Implications:</strong> Narratives explore changing societies and disrupted traditions</li>
+</ul>
+<blockquote>
+<p><strong>Example: Moderate Technology</strong></p>
+<p>In "Steam &amp; Smoke," technology resembles the late 19th century. Railways connect cities, telegraphs transmit messages, and factories produce standardized goods. Information spreads through newspapers, telegrams, and mass-printed books. Assets include steam-powered vehicles, precision firearms, and industrial facilities.</p>
+</blockquote>
+<h4 id="advanced"><a class="header" href="#advanced">Advanced</a></h4>
+<ul>
+<li><strong>Core Concept:</strong> Modern or near-future tech</li>
+<li><strong>Character Impact:</strong> Conflicts leverage technology for advantage</li>
+<li><strong>Information Flow:</strong> Digital networks enable instant global communication</li>
+<li><strong>Asset Types:</strong> Computerized systems, advanced vehicles, digital resources</li>
+<li><strong>Story Implications:</strong> Narratives explore the impact of technology on human connection</li>
+</ul>
+<blockquote>
+<p><strong>Example: Advanced Technology</strong></p>
+<p>In "Network Society," technology resembles our current world with some advancements. Smart devices connect everyone, automation handles routine tasks, and information flows instantly through global networks. Assets include cutting-edge devices, proprietary algorithms, and digital influence.</p>
+</blockquote>
+<h4 id="fantastic"><a class="header" href="#fantastic">Fantastic</a></h4>
+<ul>
+<li><strong>Core Concept:</strong> Beyond current scientific understanding</li>
+<li><strong>Character Impact:</strong> Conflicts shaped by technological innovation and control</li>
+<li><strong>Information Flow:</strong> Information is instantaneous and ubiquitous</li>
+<li><strong>Asset Types:</strong> Reality-altering devices, consciousness technology, matter manipulation</li>
+<li><strong>Story Implications:</strong> Narratives question the nature of reality and humanity</li>
+</ul>
+<blockquote>
+<p><strong>Example: Fantastic Technology</strong></p>
+<p>In "Quantum Horizons," technology has transcended current limitations. Matter can be restructured at will, consciousness can be transferred between bodies, and reality itself can be locally modified. Information exists in a collective dataspace accessible by thought. Assets include reality shaping devices, consciousness backups, and quantum entanglement networks.</p>
+</blockquote>
+<h3 id="social-structure"><a class="header" href="#social-structure">Social Structure</a></h3>
+<p>The Social Structure axis defines how people organize and relate to each other—how is society structured and how do people gain status?</p>
+<h4 id="tribal"><a class="header" href="#tribal">Tribal</a></h4>
+<ul>
+<li><strong>Core Concept:</strong> Society based on family and clan connections</li>
+<li><strong>Character Impact:</strong> Conflicts involve group loyalty and tradition</li>
+<li><strong>Status System:</strong> Position comes from tradition and lineage</li>
+<li><strong>Asset Types:</strong> Heritage items, clan territories, traditional knowledge</li>
+<li><strong>Story Implications:</strong> Narratives explore tradition, belonging, and group identity</li>
+</ul>
+<blockquote>
+<p><strong>Example: Tribal Structure</strong></p>
+<p>In "Nomad Clans," society organizes around extended family groups with strong traditions. Leadership passes through bloodlines or adoption into the clan. Status comes from upholding traditions and contributing to clan welfare. Assets include ancestral weapons, clan territories, and traditional knowledge passed through generations.</p>
+</blockquote>
+<h4 id="hierarchical"><a class="header" href="#hierarchical">Hierarchical</a></h4>
+<ul>
+<li><strong>Core Concept:</strong> Rigid class divisions with clear social levels</li>
+<li><strong>Character Impact:</strong> Conflicts span social levels and class boundaries</li>
+<li><strong>Status System:</strong> Position is primarily inherited or assigned at birth</li>
+<li><strong>Asset Types:</strong> Class markers, hereditary privileges, formal titles</li>
+<li><strong>Story Implications:</strong> Narratives explore class tension and social mobility challenges</li>
+</ul>
+<blockquote>
+<p><strong>Example: Hierarchical Structure</strong></p>
+<p>In "Imperial Domains," society divides into nobles, clergy, merchants, and commoners with strict rules governing interactions. Birth largely determines one's place, with limited mobility through marriage, exceptional service, or rare talent. Assets include noble titles, official positions, and class-specific privileges.</p>
+</blockquote>
+<h4 id="merit-based"><a class="header" href="#merit-based">Merit-based</a></h4>
+<ul>
+<li><strong>Core Concept:</strong> Achievement determines social position</li>
+<li><strong>Character Impact:</strong> Conflicts involve proving worth and demonstrating capability</li>
+<li><strong>Status System:</strong> Position must be earned through demonstrated ability</li>
+<li><strong>Asset Types:</strong> Credentials, proven achievements, recognized innovations</li>
+<li><strong>Story Implications:</strong> Narratives explore ambition, competition, and the meaning of merit</li>
+</ul>
+<blockquote>
+<p><strong>Example: Merit-based Structure</strong></p>
+<p>In "The Meritocracy," formal testing and demonstrated achievement determine social position. Leadership roles require specific qualifications and ongoing performance evaluation. Status comes from recognized accomplishments and certified skills. Assets include prestigious credentials, performance records, and innovation patents.</p>
+</blockquote>
+<h4 id="fluid"><a class="header" href="#fluid">Fluid</a></h4>
+<ul>
+<li><strong>Core Concept:</strong> Constantly changing social dynamics</li>
+<li><strong>Character Impact:</strong> Conflicts reshape social connections and groupings</li>
+<li><strong>Status System:</strong> Position is temporary and contextual</li>
+<li><strong>Asset Types:</strong> Adaptable resources, flexible networks, transferable skills</li>
+<li><strong>Story Implications:</strong> Narratives explore adaptation, reinvention, and impermanence</li>
+</ul>
+<blockquote>
+<p><strong>Example: Fluid Structure</strong></p>
+<p>In "Shift Society," social groupings form and dissolve based on immediate needs and opportunities. Leadership emerges contextually rather than through fixed positions. Status fluctuates based on current relevance and contribution. Assets include adaptable skills, flexible resources, and the ability to navigate changing social landscapes.</p>
+</blockquote>
+<h3 id="conflict-type"><a class="header" href="#conflict-type">Conflict Type</a></h3>
+<p>The Conflict Type axis establishes how problems are typically solved in your setting—what approaches do people use to resolve their differences?</p>
+<h4 id="direct"><a class="header" href="#direct">Direct</a></h4>
+<ul>
+<li><strong>Core Concept:</strong> Physical or military solutions predominate</li>
+<li><strong>Character Impact:</strong> Conflicts resolved through force or its threat</li>
+<li><strong>Consequence Pattern:</strong> Immediate and tangible results</li>
+<li><strong>Asset Types:</strong> Weapons, defensive capabilities, physical resources</li>
+<li><strong>Story Implications:</strong> Narratives feature clear confrontations and decisive actions</li>
+</ul>
+<blockquote>
+<p><strong>Example: Direct Conflict</strong></p>
+<p>In "Frontier Territories," disputes are commonly settled through physical confrontation or shows of force. Military strength determines regional control, and personal combat skills are highly valued. Consequences are immediate and visible—territory gained or lost, resources secured or surrendered. Assets include weapons, fortifications, and fighting forces.</p>
+</blockquote>
+<h4 id="social"><a class="header" href="#social">Social</a></h4>
+<ul>
+<li><strong>Core Concept:</strong> Status and influence determine outcomes</li>
+<li><strong>Character Impact:</strong> Conflicts require relationship navigation and reputation management</li>
+<li><strong>Consequence Pattern:</strong> Reputation has lasting impact beyond immediate situation</li>
+<li><strong>Asset Types:</strong> Social connections, status symbols, reputation capital</li>
+<li><strong>Story Implications:</strong> Narratives explore complex relationship webs and indirect influence</li>
+</ul>
+<blockquote>
+<p><strong>Example: Social Conflict</strong></p>
+<p>In "Court of Whispers," conflicts play out through rumors, alliances, and social maneuvering. Influence networks and reputation determine outcomes more than direct confrontation. Consequences ripple through social circles, affecting future opportunities and connections. Assets include social standing, secret knowledge, and relationship networks.</p>
+</blockquote>
+<h4 id="economic"><a class="header" href="#economic">Economic</a></h4>
+<ul>
+<li><strong>Core Concept:</strong> Resources and trade determine power</li>
+<li><strong>Character Impact:</strong> Conflicts follow patterns of supply, demand, and resource control</li>
+<li><strong>Consequence Pattern:</strong> Financial impacts cascade through connected systems</li>
+<li><strong>Asset Types:</strong> Valuable commodities, trade routes, production capabilities</li>
+<li><strong>Story Implications:</strong> Narratives explore resource competition and wealth's influence</li>
+</ul>
+<blockquote>
+<p><strong>Example: Economic Conflict</strong></p>
+<p>In "Trade Empires," competition for resources and markets drives conflict. Control of trade routes, production facilities, and rare commodities determines power. Consequences manifest as wealth gained or lost, markets opened or closed. Assets include trade fleets, resource claims, and production facilities.</p>
+</blockquote>
+<h4 id="ideological"><a class="header" href="#ideological">Ideological</a></h4>
+<ul>
+<li><strong>Core Concept:</strong> Beliefs and values drive action</li>
+<li><strong>Character Impact:</strong> Conflicts center on competing worldviews and principles</li>
+<li><strong>Consequence Pattern:</strong> Ideas have lasting impact beyond immediate situation</li>
+<li><strong>Asset Types:</strong> Philosophical frameworks, cultural symbols, narrative control</li>
+<li><strong>Story Implications:</strong> Narratives explore competing truths and value systems</li>
+</ul>
+<blockquote>
+<p><strong>Example: Ideological Conflict</strong></p>
+<p>In "Doctrine Realms," societies organize around competing philosophical systems. Conflicts center on whose ideas will shape culture, education, and governance. Consequences include shifts in public opinion, cultural practices, and institutional policies. Assets include compelling narratives, symbolic positions, and control of information channels.</p>
+</blockquote>
+<h2 id="creating-your-setting"><a class="header" href="#creating-your-setting">Creating Your Setting</a></h2>
+<p>Now that you understand the Five Axes, let's walk through the process of creating a setting for your game. This is typically a collaborative process involving all players and the Game Master.</p>
+<h3 id="step-1-discuss-themes-and-tone"><a class="header" href="#step-1-discuss-themes-and-tone">Step 1: Discuss Themes and Tone</a></h3>
+<p>Before selecting specific axis positions, have a conversation about the themes and tone you want to explore:</p>
+<ul>
+<li>What kinds of stories interest your group?</li>
+<li>What genres do you enjoy?</li>
+<li>What themes would you like to explore?</li>
+<li>What tone feels right—gritty realism, hopeful adventure, dark intrigue?</li>
+</ul>
+<blockquote>
+<p><strong>Example: Theme Discussion</strong></p>
+<p>The group discusses their interests and decides they want to explore themes of tradition versus progress in a setting where supernatural elements are emerging into a previously mundane world. They're interested in personal stories with significant community impact, and they want a tone that balances hope with tension.</p>
+</blockquote>
+<h3 id="step-2-select-axis-positions"><a class="header" href="#step-2-select-axis-positions">Step 2: Select Axis Positions</a></h3>
+<p>Work through each axis, discussing the options and selecting the position that best supports your desired themes and tone. Remember that each choice influences the others, so consider how they interact.</p>
+<blockquote>
+<p><strong>Example: Axis Selection</strong></p>
+<p>Based on their theme discussion, the group makes these choices:</p>
+<ul>
+<li><strong>Power Scale:</strong> Local (community-level impact)</li>
+<li><strong>Supernatural:</strong> Hidden (emerging supernatural elements)</li>
+<li><strong>Technology:</strong> Moderate (industrial age with traditional elements)</li>
+<li><strong>Social Structure:</strong> Hierarchical (tradition versus progress)</li>
+<li><strong>Conflict Type:</strong> Social (emphasis on relationships and influence)</li>
+</ul>
+<p>They name their setting "Shadowtide Harbor."</p>
+</blockquote>
+<h3 id="step-3-explore-implications-and-connections"><a class="header" href="#step-3-explore-implications-and-connections">Step 3: Explore Implications and Connections</a></h3>
+<p>Once you've selected your axis positions, discuss how they interact and what implications they create:</p>
+<ul>
+<li>How does the Power Scale affect what supernatural elements exist?</li>
+<li>How does Technology interact with Social Structure?</li>
+<li>How does Conflict Type shape relationships between groups?</li>
+</ul>
+<p>Document these connections to create a coherent world.</p>
+<blockquote>
+<p><strong>Example: Exploring Connections</strong></p>
+<p>The group explores connections in Shadowtide Harbor:</p>
+<ul>
+<li>The Hidden Supernatural means magical abilities are emerging among people from all social classes, disrupting the Hierarchical structure</li>
+<li>Moderate Technology creates tension between traditional crafts and industrial methods</li>
+<li>Local Power Scale means supernatural events affect neighborhoods differently</li>
+<li>Social Conflict means that influence and alliances determine how supernatural elements are handled</li>
+</ul>
+<p>They note that the harbor's old aristocratic families are losing influence as supernatural abilities emerge among common people, creating new power dynamics.</p>
+</blockquote>
+<h3 id="step-4-develop-key-setting-elements"><a class="header" href="#step-4-develop-key-setting-elements">Step 4: Develop Key Setting Elements</a></h3>
+<p>With your axis choices and their implications understood, develop specific elements that will feature in your setting:</p>
+<h4 id="organizations-and-factions"><a class="header" href="#organizations-and-factions">Organizations and Factions</a></h4>
+<p>Identify the major groups that shape your setting, considering:</p>
+<ul>
+<li>What is their purpose or goal?</li>
+<li>How do they relate to the axes?</li>
+<li>Who leads them and how?</li>
+<li>What resources do they control?</li>
+</ul>
+<blockquote>
+<p><strong>Example: Organizations in Shadowtide Harbor</strong></p>
+<ul>
+<li><strong>The Harbor Council:</strong> Traditional aristocratic families trying to maintain control</li>
+<li><strong>The Mechanics Guild:</strong> Working-class organization embracing industrial progress</li>
+<li><strong>The Twilight Circle:</strong> Secret society of those with emerging supernatural abilities</li>
+<li><strong>The Merchant Consortium:</strong> Wealthy traders navigating changing power dynamics</li>
+</ul>
+</blockquote>
+<h4 id="locations"><a class="header" href="#locations">Locations</a></h4>
+<p>Develop the important places in your setting:</p>
+<ul>
+<li>How do they reflect your axis choices?</li>
+<li>What conflicts center around them?</li>
+<li>Who controls or inhabits them?</li>
+<li>What resources or opportunities do they provide?</li>
+</ul>
+<blockquote>
+<p><strong>Example: Locations in Shadowtide Harbor</strong></p>
+<ul>
+<li><strong>Old Harbor District:</strong> Traditional area controlled by aristocratic families</li>
+<li><strong>Factory Quarter:</strong> Industrial zone where working classes live and work</li>
+<li><strong>Mist Market:</strong> Hidden marketplace where supernatural items are traded</li>
+<li><strong>Council Spire:</strong> Center of traditional governance, now contested</li>
+</ul>
+</blockquote>
+<h4 id="resources-and-assets"><a class="header" href="#resources-and-assets">Resources and Assets</a></h4>
+<p>Identify what people value and compete for:</p>
+<ul>
+<li>What resources are scarce or valuable?</li>
+<li>What assets provide advantage?</li>
+<li>How do these connect to your axis choices?</li>
+<li>Who controls these resources?</li>
+</ul>
+<blockquote>
+<p><strong>Example: Resources in Shadowtide Harbor</strong></p>
+<ul>
+<li><strong>Shadowcoal:</strong> Rare fuel that enhances both machines and supernatural abilities</li>
+<li><strong>Harbor Access:</strong> Control of docking rights and shipping lanes</li>
+<li><strong>Family Grimoires:</strong> Ancient books containing supernatural knowledge</li>
+<li><strong>Factory Deeds:</strong> Ownership of industrial production facilities</li>
+</ul>
+</blockquote>
+<h4 id="cultural-elements"><a class="header" href="#cultural-elements">Cultural Elements</a></h4>
+<p>Define the cultural aspects that make your setting unique:</p>
+<ul>
+<li>What traditions exist?</li>
+<li>What values do people hold?</li>
+<li>How do people mark status?</li>
+<li>What celebrations or rituals matter?</li>
+</ul>
+<blockquote>
+<p><strong>Example: Cultural Elements in Shadowtide Harbor</strong></p>
+<ul>
+<li><strong>Tide Ceremonies:</strong> Traditional rituals marking harbor cycles</li>
+<li><strong>Guild Initiations:</strong> Ceremonies for entering professional organizations</li>
+<li><strong>Shadow Marks:</strong> Emerging physical signs of supernatural ability</li>
+<li><strong>Class Signifiers:</strong> Clothing and speech patterns that indicate social position</li>
+</ul>
+</blockquote>
+<h3 id="step-5-identify-conflicts-and-tensions"><a class="header" href="#step-5-identify-conflicts-and-tensions">Step 5: Identify Conflicts and Tensions</a></h3>
+<p>Based on your axis choices and setting elements, identify the central conflicts and tensions that will drive stories:</p>
+<ul>
+<li>What groups are in opposition?</li>
+<li>What resources are contested?</li>
+<li>What changes are occurring?</li>
+<li>What traditions are threatened?</li>
+</ul>
+<blockquote>
+<p><strong>Example: Conflicts in Shadowtide Harbor</strong></p>
+<ul>
+<li><strong>Tradition vs. Progress:</strong> Old families resist industrial and supernatural changes</li>
+<li><strong>Class Struggle:</strong> Working classes gain power through industry and supernatural abilities</li>
+<li><strong>Knowledge Control:</strong> Competition to discover and control supernatural knowledge</li>
+<li><strong>Resource Competition:</strong> Conflict over shadowcoal and other valuable resources</li>
+<li><strong>Identity Crisis:</strong> People with emerging abilities struggle with changing identity</li>
+</ul>
+</blockquote>
+<h2 id="setting-character-integration"><a class="header" href="#setting-character-integration">Setting-Character Integration</a></h2>
+<p>One of Narrono's core principles is that characters emerge from their settings. The axis choices you've made directly shape what character traits, assets, and relationships make sense.</p>
+<h3 id="character-traits"><a class="header" href="#character-traits">Character Traits</a></h3>
+<p>Remember that character traits connect directly to setting elements:</p>
+<ul>
+<li><strong>Origin:</strong> Shaped by Social Structure</li>
+<li><strong>Drive:</strong> Shaped by Conflict Type</li>
+<li><strong>Goal:</strong> Shaped by Power Scale</li>
+</ul>
+<blockquote>
+<p><strong>Example: Traits in Shadowtide Harbor</strong></p>
+<p><strong>Origin options</strong> (based on Hierarchical Social Structure):</p>
+<ul>
+<li>Harbor Aristocrat</li>
+<li>Guild Artisan</li>
+<li>Factory Worker</li>
+<li>Merchant Family</li>
+</ul>
+<p><strong>Drive options</strong> (based on Social Conflict Type):</p>
+<ul>
+<li>Preserve Tradition</li>
+<li>Gain Recognition</li>
+<li>Forge Alliances</li>
+<li>Uncover Secrets</li>
+</ul>
+<p><strong>Goal options</strong> (based on Local Power Scale):</p>
+<ul>
+<li>Control Harbor District</li>
+<li>Lead Guild Operations</li>
+<li>Unite Working Classes</li>
+<li>Establish New Order</li>
+</ul>
+</blockquote>
+<h3 id="available-assets"><a class="header" href="#available-assets">Available Assets</a></h3>
+<p>Your axis choices determine what assets make sense in your setting:</p>
+<ul>
+<li>Technology Level influences what tools and equipment exist</li>
+<li>Supernatural Level determines what magical or extraordinary items are available</li>
+<li>Social Structure shapes what status symbols and positions exist</li>
+<li>Power Scale affects what resources can be controlled</li>
+</ul>
+<blockquote>
+<p><strong>Example: Assets in Shadowtide Harbor</strong></p>
+<p><strong>Physical Assets:</strong></p>
+<ul>
+<li>Steam-powered devices (Moderate Technology)</li>
+<li>Family heirlooms (Hierarchical Society)</li>
+<li>Shadowcoal reserves (Valuable Resource)</li>
+<li>Hidden sanctums (Hidden Supernatural)</li>
+</ul>
+<p><strong>Social Assets:</strong></p>
+<ul>
+<li>Guild membership (Professional Organization)</li>
+<li>Family name (Hierarchical Status)</li>
+<li>Neighborhood influence (Local Power)</li>
+<li>Secret society position (Hidden Supernatural)</li>
+</ul>
+</blockquote>
+<h3 id="relationship-types"><a class="header" href="#relationship-types">Relationship Types</a></h3>
+<p>Your axis choices also determine what relationship types are common:</p>
+<ul>
+<li>Social Structure influences family and community connections</li>
+<li>Conflict Type shapes professional and adversarial relationships</li>
+<li>Power Scale affects the scope and nature of obligations</li>
+<li>Supernatural Level determines special or unusual connections</li>
+</ul>
+<blockquote>
+<p><strong>Example: Relationships in Shadowtide Harbor</strong></p>
+<p><strong>Relationship Types:</strong></p>
+<ul>
+<li>Family Alliances (Hierarchical Society)</li>
+<li>Guild Mentorships (Professional Connections)</li>
+<li>Class Solidarity (Social Conflict)</li>
+<li>Supernatural Bonds (Hidden Supernatural)</li>
+<li>Neighborhood Ties (Local Power)</li>
+<li>Trade Partnerships (Economic Elements)</li>
+</ul>
+</blockquote>
+<h2 id="setting-evolution"><a class="header" href="#setting-evolution">Setting Evolution</a></h2>
+<p>Settings in Narrono aren't static—they evolve through play as characters affect their world. Understanding how settings change helps you create dynamic, responsive worlds.</p>
+<h3 id="understanding-change"><a class="header" href="#understanding-change">Understanding Change</a></h3>
+<p>Changes happen at three levels:</p>
+<h4 id="1-element-changes"><a class="header" href="#1-element-changes">1. Element Changes</a></h4>
+<p>These are shifts within the current axis positions:</p>
+<ul>
+<li>New factions emerge within existing structures</li>
+<li>Relationships between groups shift</li>
+<li>Resources become available or scarce</li>
+<li>Knowledge spreads or becomes restricted</li>
+</ul>
+<blockquote>
+<p><strong>Example: Element Changes in Shadowtide Harbor</strong></p>
+<ul>
+<li>A new faction forms within the Harbor Council</li>
+<li>The relationship between the Mechanics Guild and Twilight Circle shifts from hostile to cooperative</li>
+<li>A new vein of shadowcoal is discovered</li>
+<li>Knowledge of a specific supernatural ability becomes more widespread</li>
+</ul>
+</blockquote>
+<h4 id="2-internal-axis-shifts"><a class="header" href="#2-internal-axis-shifts">2. Internal Axis Shifts</a></h4>
+<p>These are changes within an axis choice that don't jump to a new category:</p>
+<ul>
+<li>Power structures reorganize within their scale</li>
+<li>Supernatural forces find new expressions</li>
+<li>Technology develops within its level</li>
+<li>Social structures adapt while maintaining their nature</li>
+<li>Conflict patterns evolve within their type</li>
+</ul>
+<blockquote>
+<p><strong>Example: Internal Shifts in Shadowtide Harbor</strong></p>
+<ul>
+<li>The Harbor Council reforms its leadership structure (within Hierarchical)</li>
+<li>New types of supernatural abilities emerge (within Hidden)</li>
+<li>Advanced steam technology develops (within Moderate)</li>
+<li>Social influence tactics evolve (within Social Conflict)</li>
+</ul>
+</blockquote>
+<h4 id="3-axis-transitions"><a class="header" href="#3-axis-transitions">3. Axis Transitions</a></h4>
+<p>These are major changes that move from one axis choice to another:</p>
+<ul>
+<li>Require significant story events</li>
+<li>Should feel earned through play</li>
+<li>Create lasting consequences</li>
+<li>Usually happen gradually</li>
+</ul>
+<blockquote>
+<p><strong>Example: Potential Axis Transition in Shadowtide Harbor</strong></p>
+<p>After many sessions of play, the characters' actions lead to supernatural abilities becoming publicly known and acknowledged, shifting the Supernatural Level from Hidden to Open. This creates cascading effects across the setting:</p>
+<ul>
+<li>New regulations for supernatural abilities</li>
+<li>Public institutions for supernatural training</li>
+<li>Changed social dynamics as abilities become status markers</li>
+<li>Evolved conflict patterns as supernatural elements enter public discourse</li>
+</ul>
+</blockquote>
+<h3 id="managing-evolution"><a class="header" href="#managing-evolution">Managing Evolution</a></h3>
+<h4 id="gradual-change"><a class="header" href="#gradual-change">Gradual Change</a></h4>
+<p>Most evolution should happen slowly:</p>
+<ol>
+<li>Establish current state clearly</li>
+<li>Show signs of potential change</li>
+<li>Create opportunities for character influence</li>
+<li>Let consequences ripple outward</li>
+</ol>
+<blockquote>
+<p><strong>Example: Gradual Change</strong></p>
+<p>The transition from Hidden to Open Supernatural might follow this progression:</p>
+<ol>
+<li>Rumors of strange abilities begin to circulate</li>
+<li>Public incidents become harder to cover up</li>
+<li>Characters have opportunities to reveal or conceal supernatural events</li>
+<li>Based on their choices, public awareness grows or is suppressed</li>
+<li>Eventually, a tipping point is reached where denial is no longer possible</li>
+</ol>
+</blockquote>
+<h4 id="sudden-shifts"><a class="header" href="#sudden-shifts">Sudden Shifts</a></h4>
+<p>Sometimes dramatic events force rapid change:</p>
+<ul>
+<li>Should be rare and significant</li>
+<li>Must emerge from character actions</li>
+<li>Create immediate problems</li>
+<li>Require adaptation</li>
+</ul>
+<blockquote>
+<p><strong>Example: Sudden Shift</strong></p>
+<p>A catastrophic event at the harbor—perhaps a massive supernatural manifestation during a public ceremony—could force an immediate shift from Hidden to Open Supernatural, creating:</p>
+<ul>
+<li>Immediate panic and confusion</li>
+<li>Rapid policy responses</li>
+<li>Social upheaval</li>
+<li>New threats and opportunities</li>
+</ul>
+</blockquote>
+<h2 id="example-settings"><a class="header" href="#example-settings">Example Settings</a></h2>
+<p>To help illustrate how the Five Axes framework creates diverse settings, here are three fully developed examples:</p>
+<h3 id="shadow-court"><a class="header" href="#shadow-court">"Shadow Court"</a></h3>
+<ul>
+<li><strong>Power Scale:</strong> Local</li>
+<li><strong>Supernatural:</strong> Hidden</li>
+<li><strong>Technology:</strong> Moderate</li>
+<li><strong>Social Structure:</strong> Hierarchical</li>
+<li><strong>Conflict Type:</strong> Social</li>
+</ul>
+<h4 id="setting-overview"><a class="header" href="#setting-overview">Setting Overview</a></h4>
+<p>An ancient nobility secretly rules through supernatural power, while maintaining a facade of modern democratic institutions. The city appears to be a normal industrial-age metropolis, but beneath the surface, aristocratic families with hidden magical abilities manipulate events through social influence.</p>
+<h4 id="key-elements"><a class="header" href="#key-elements">Key Elements</a></h4>
+<ul>
+<li><strong>Organizations:</strong> Ancient Noble Houses, Public Government, Secret Enforcers, Unaware Reform Movements</li>
+<li><strong>Locations:</strong> Public Assembly Hall, Secret Court Chambers, Industrial Districts, Noble Estates</li>
+<li><strong>Resources:</strong> Family Grimoires, Bloodline Purity, Public Opinion, Industrial Wealth</li>
+<li><strong>Conflicts:</strong> Democracy vs. Hidden Rule, Ancient Traditions vs. Modern Needs, Inter-family Rivalries</li>
+</ul>
+<h4 id="character-integration"><a class="header" href="#character-integration">Character Integration</a></h4>
+<ul>
+<li><strong>Origin Examples:</strong> Minor Noble, Unaware Official, Secret Enforcer, Reform Advocate</li>
+<li><strong>Drive Examples:</strong> Preserve Tradition, Expose Secrets, Gain Recognition, Reform System</li>
+<li><strong>Goal Examples:</strong> Control District Politics, Advance Family Interests, Reveal Truth, Change Power Structure</li>
+<li><strong>Asset Examples:</strong> Family Artifacts, Secret Knowledge, Social Connections, Hidden Sanctums</li>
+<li><strong>Relationship Examples:</strong> Family Alliances, Master-Servant Bonds, Political Partnerships, Secret Identities</li>
+</ul>
+<h3 id="frontier-clans"><a class="header" href="#frontier-clans">"Frontier Clans"</a></h3>
+<ul>
+<li><strong>Power Scale:</strong> Regional</li>
+<li><strong>Supernatural:</strong> None</li>
+<li><strong>Technology:</strong> Limited</li>
+<li><strong>Social Structure:</strong> Tribal</li>
+<li><strong>Conflict Type:</strong> Direct</li>
+</ul>
+<h4 id="setting-overview-1"><a class="header" href="#setting-overview-1">Setting Overview</a></h4>
+<p>Rival clans vie for territory and resources in a harsh frontier. Traditional ways clash with the need for expansion. Without supernatural elements or advanced technology, conflicts are resolved through direct confrontation, and society organizes around extended family groups with strong traditions.</p>
+<h4 id="key-elements-1"><a class="header" href="#key-elements-1">Key Elements</a></h4>
+<ul>
+<li><strong>Organizations:</strong> Warrior Clans, Hunter Guilds, Elder Councils, Trading Caravans</li>
+<li><strong>Locations:</strong> Clan Territories, Contested Borderlands, Sacred Meeting Grounds, Trading Posts</li>
+<li><strong>Resources:</strong> Hunting Grounds, Water Sources, Defensible Positions, Ancient Crafting Knowledge</li>
+<li><strong>Conflicts:</strong> Territory Disputes, Resource Competition, Traditional Ways vs. Adaptation, Inter-clan Rivalries</li>
+</ul>
+<h4 id="character-integration-1"><a class="header" href="#character-integration-1">Character Integration</a></h4>
+<ul>
+<li><strong>Origin Examples:</strong> Clan Warrior, Borderland Scout, Caravan Trader, Clan Outcast</li>
+<li><strong>Drive Examples:</strong> Defend Territory, Prove Strength, Uphold Traditions, Forge New Path</li>
+<li><strong>Goal Examples:</strong> Lead Clan, Control Trade Routes, Unify Clans, Discover New Lands</li>
+<li><strong>Asset Examples:</strong> Ancestral Weapons, Clan Territory, Traditional Knowledge, Loyal Warriors</li>
+<li><strong>Relationship Examples:</strong> Blood Ties, Warrior Bonds, Trading Partnerships, Rival Clan Connections</li>
+</ul>
+<h3 id="corporate-wars"><a class="header" href="#corporate-wars">"Corporate Wars"</a></h3>
+<ul>
+<li><strong>Power Scale:</strong> Global</li>
+<li><strong>Supernatural:</strong> None</li>
+<li><strong>Technology:</strong> Advanced</li>
+<li><strong>Social Structure:</strong> Merit</li>
+<li><strong>Conflict Type:</strong> Economic</li>
+</ul>
+<h4 id="setting-overview-2"><a class="header" href="#setting-overview-2">Setting Overview</a></h4>
+<p>Mega-corporations compete for market dominance in a world where economic power has supplanted traditional governance. Individual merit determines corporate rank, but economic warfare affects billions. Advanced technology enables global operations, while conflicts play out through resource control and market manipulation.</p>
+<h4 id="key-elements-2"><a class="header" href="#key-elements-2">Key Elements</a></h4>
+<ul>
+<li><strong>Organizations:</strong> Global Corporations, Regulatory Bodies, Underground Networks, Consumer Blocs</li>
+<li><strong>Locations:</strong> Corporate Headquarters, Digital Marketplaces, Manufacturing Hubs, Resource Extraction Sites</li>
+<li><strong>Resources:</strong> Rare Materials, Proprietary Algorithms, Market Share, Talent Pools</li>
+<li><strong>Conflicts:</strong> Corporate Rivalry, Resource Control, Regulation vs. Freedom, Innovation Race</li>
+</ul>
+<h4 id="character-integration-2"><a class="header" href="#character-integration-2">Character Integration</a></h4>
+<ul>
+<li><strong>Origin Examples:</strong> Corporate Executive, Technical Specialist, Market Analyst, Underground Operator</li>
+<li><strong>Drive Examples:</strong> Maximize Profit, Innovate Solutions, Control Markets, Expose Corruption</li>
+<li><strong>Goal Examples:</strong> Lead Corporation, Control Global Resources, Reshape Economic System, Balance Power</li>
+<li><strong>Asset Examples:</strong> Proprietary Technology, Market Intelligence, Elite Teams, Global Networks</li>
+<li><strong>Relationship Examples:</strong> Corporate Hierarchies, Professional Rivalries, Mentor-Protégé Bonds, Strategic Alliances</li>
+</ul>
+<h2 id="setting-creation-tools"><a class="header" href="#setting-creation-tools">Setting Creation Tools</a></h2>
+<p>To help you create your own settings, here are some practical tools and techniques:</p>
+<h3 id="collaborative-discussion-framework"><a class="header" href="#collaborative-discussion-framework">Collaborative Discussion Framework</a></h3>
+<p>Use these questions to guide your group discussion:</p>
+<ol>
+<li>
+<p><strong>Theme Exploration</strong></p>
+<ul>
+<li>What themes interest us?</li>
+<li>What kinds of stories do we want to tell?</li>
+<li>What tone feels right for our game?</li>
+</ul>
+</li>
+<li>
+<p><strong>Axis Selection</strong></p>
+<ul>
+<li>For each axis, which option best supports our themes?</li>
+<li>How do our choices interact with each other?</li>
+<li>Are there any contradictions we need to resolve?</li>
+</ul>
+</li>
+<li>
+<p><strong>Element Development</strong></p>
+<ul>
+<li>What organizations would exist in this setting?</li>
+<li>What locations are important?</li>
+<li>What resources do people value?</li>
+<li>What cultural elements define the world?</li>
+</ul>
+</li>
+<li>
+<p><strong>Conflict Identification</strong></p>
+<ul>
+<li>What tensions naturally arise from our choices?</li>
+<li>What groups would be in opposition?</li>
+<li>What changes are occurring in the setting?</li>
+<li>What personal conflicts might characters face?</li>
+</ul>
+</li>
+</ol>
+<h3 id="setting-worksheet"><a class="header" href="#setting-worksheet">Setting Worksheet</a></h3>
+<p>Use this worksheet to document your setting:</p>
+<pre><code>SETTING NAME: ______________________
+
+AXIS CHOICES:
+- Power Scale: ______________________
+- Supernatural Level: ______________________
+- Technology Level: ______________________
+- Social Structure: ______________________
+- Conflict Type: ______________________
+
+KEY IMPLICATIONS:
+- How Power and Supernatural interact: ______________________
+- How Technology and Social Structure interact: ______________________
+- How Conflict Type shapes relationships: ______________________
+
+ORGANIZATIONS:
+1. Name: ______________________
+   Purpose: ______________________
+   Leadership: ______________________
+   Resources: ______________________
+
+2. Name: ______________________
+   Purpose: ______________________
+   Leadership: ______________________
+   Resources: ______________________
+
+LOCATIONS:
+1. Name: ______________________
+   Description: ______________________
+   Control: ______________________
+   Significance: ______________________
+
+2. Name: ______________________
+   Description: ______________________
+   Control: ______________________
+   Significance: ______________________
+
+RESOURCES:
+1. Name: ______________________
+   Value: ______________________
+   Control: ______________________
+   Conflicts: ______________________
+
+2. Name: ______________________
+   Value: ______________________
+   Control: ______________________
+   Conflicts: ______________________
+
+CULTURAL ELEMENTS:
+1. Name: ______________________
+   Description: ______________________
+   Significance: ______________________
+
+2. Name: ______________________
+   Description: ______________________
+   Significance: ______________________
+
+CENTRAL CONFLICTS:
+1. ______________________
+2. ______________________
+3. ______________________
+
+CHARACTER OPTIONS:
+- Origin examples: ______________________
+- Drive examples: ______________________
+- Goal examples: ______________________
+- Asset examples: ______________________
+- Relationship examples: ______________________
+</code></pre>
+<h3 id="random-generation"><a class="header" href="#random-generation">Random Generation</a></h3>
+<p>If you want inspiration or a starting point, try this random generation approach:</p>
+<ol>
+<li>
+<p>Roll a d6 for each axis (or use a random number generator):</p>
+<ul>
+<li>1-2: First option</li>
+<li>3-4: Second option</li>
+<li>5-6: Third option</li>
+<li>Reroll 5-6 for Conflict Type (which has only four options)</li>
+</ul>
+</li>
+<li>
+<p>Analyze the combination for coherence</p>
+<ul>
+<li>Does it make logical sense?</li>
+<li>Are there interesting tensions?</li>
+<li>What themes emerge?</li>
+</ul>
+</li>
+<li>
+<p>Adjust as needed</p>
+<ul>
+<li>Change one axis if the combination seems contradictory</li>
+<li>Emphasize interesting connections</li>
+<li>Build on emergent themes</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><strong>Example: Random Generation</strong></p>
+<p>Rolling for each axis:</p>
+<ul>
+<li>Power Scale: 5 = Regional</li>
+<li>Supernatural: 2 = Hidden</li>
+<li>Technology: 3 = Moderate</li>
+<li>Social Structure: 1 = Tribal</li>
+<li>Conflict Type: 4 = Ideological</li>
+</ul>
+<p>This creates an interesting combination: tribal societies with regional influence, hidden supernatural elements, moderate (industrial) technology, and ideological conflicts. This might suggest a setting where tribal societies have grown to control regions through industrial resources, while secretly using supernatural powers, and competing based on different belief systems.</p>
+</blockquote>
+<h3 id="ai-assistance"><a class="header" href="#ai-assistance">AI Assistance</a></h3>
+<p>Narrono includes an AI Setting Generation Agent that can help you develop setting ideas. The AI can:</p>
+<ul>
+<li>Generate random settings based on axis combinations</li>
+<li>Analyze the implications of your chosen axes</li>
+<li>Suggest organizations, locations, and conflicts</li>
+<li>Help identify potential contradictions</li>
+<li>Offer character trait and asset examples</li>
+</ul>
+<p>To use the AI Setting Generation Agent, provide your desired axis choices or ask for a random generation. The AI will analyze the combination and provide detailed setting elements based on the Five Axes framework.</p>
+<blockquote>
+<p><strong>Example: AI Setting Generation</strong></p>
+<p>A player might ask the AI: "Generate a setting with Hidden Supernatural, Advanced Technology, and Merit-based Social Structure. Let the AI choose the other axes."</p>
+<p>The AI would analyze this combination, select complementary options for the remaining axes, and generate a complete setting with organizations, locations, conflicts, and character options.</p>
+</blockquote>
+<p>Remember that the AI is a tool to inspire and assist, not replace your group's creativity. Use its suggestions as starting points that you can modify, expand, or completely reimagine based on your group's interests.</p>
+<h2 id="conclusion-your-setting-your-story"><a class="header" href="#conclusion-your-setting-your-story">Conclusion: Your Setting, Your Story</a></h2>
+<p>The Five Axes framework provides a structured approach to creating settings that generate interesting character options and story possibilities. By making clear choices about your world's fundamental aspects, you create a foundation for rich, coherent storytelling.</p>
+<p>Remember these key principles as you create and evolve your setting:</p>
+<ol>
+<li>
+<p><strong>Settings Shape Characters:</strong> The choices you make about your world directly influence what character traits, assets, and relationships make sense.</p>
+</li>
+<li>
+<p><strong>Coherence Creates Depth:</strong> When your axis choices interact logically, they create a world that feels real and lived-in.</p>
+</li>
+<li>
+<p><strong>Conflicts Drive Stories:</strong> The tensions that naturally emerge from your axis choices provide the fuel for compelling narratives.</p>
+</li>
+<li>
+<p><strong>Settings Evolve:</strong> Your world will change through play as characters influence their environment and respond to events.</p>
+</li>
+<li>
+<p><strong>Collaboration Enhances Creativity:</strong> Creating a setting together ensures everyone has a stake in the world and understands its possibilities.</p>
+</li>
+</ol>
+<p>In the next chapter, we'll explore how to create characters deeply connected to your setting, with traits, assets, and relationships that emerge naturally from the world you've built.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../chapters/ch01-introduction.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../chapters/ch03-core-rules.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../chapters/ch01-introduction.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../chapters/ch03-core-rules.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

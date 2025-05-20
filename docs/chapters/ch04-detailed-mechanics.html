@@ -1,0 +1,1244 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Chapter 4: Detailed Mechanics - Narrono Game Manual</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="A comprehensive role-playing game manual for Narrono">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../css/custom.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Narrono Game Manual</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="chapter-4-detailed-mechanics"><a class="header" href="#chapter-4-detailed-mechanics">Chapter 4: Detailed Mechanics</a></h1>
+<h2 id="beyond-the-basics"><a class="header" href="#beyond-the-basics">Beyond the Basics</a></h2>
+<p>In the previous chapters, you've learned the core concepts of Narrono: how to create a setting using the Five Axes framework, how to develop characters with traits and assets, and how to connect them through the Relationship Web. Now it's time to explore how these elements work together in play through the detailed mechanics of the game.</p>
+<p>This chapter builds on the Pool System introduced in Chapter 1, showing how your character's traits, assets, and relationships influence your mechanical choices and create meaningful narrative moments. You'll learn advanced resolution techniques, strategic asset management, relationship dynamics, and how to handle special circumstances that arise during play.</p>
+<p>Remember that in Narrono, mechanics aren't just about determining success or failure—they're tools for collaborative storytelling that create dramatic moments, interesting choices, and evolving narratives.</p>
+<h2 id="advanced-resolution-mechanics"><a class="header" href="#advanced-resolution-mechanics">Advanced Resolution Mechanics</a></h2>
+<h3 id="the-pool-system-revisited"><a class="header" href="#the-pool-system-revisited">The Pool System Revisited</a></h3>
+<p>At its core, Narrono uses the Pool System for resolving significant actions:</p>
+<ol>
+<li>Form a pool of three six-sided dice (3d6)</li>
+<li>Roll all dice in your pool</li>
+<li>Choose which result to use based on your method (Direct, Balanced, or Cautious)</li>
+<li>Apply any asset or relationship effects</li>
+<li>Determine the outcome level (Success, Partial Success, or Setback)</li>
+</ol>
+<p>While this basic framework remains consistent, the strategic depth comes from understanding when and how to use different methods, how to leverage assets and relationships, and how to interpret outcomes in narratively satisfying ways.</p>
+<h3 id="strategic-method-selection"><a class="header" href="#strategic-method-selection">Strategic Method Selection</a></h3>
+<p>Your choice of resolution method—Direct, Balanced, or Cautious—should be a strategic decision based on your character's traits, the situation, and your narrative goals.</p>
+<h4 id="direct-method-highest-die"><a class="header" href="#direct-method-highest-die">Direct Method (Highest Die)</a></h4>
+<p>The Direct method represents confident, straightforward action aligned with your character's traits. When you choose Direct, you're taking decisive action in an area where your character excels.</p>
+<p><strong>When to Use Direct:</strong></p>
+<ul>
+<li>Your traits strongly support the action</li>
+<li>You need a high probability of full success</li>
+<li>You can handle potential complications</li>
+<li>The narrative impact of failure could be interesting</li>
+<li>Asset or relationship support can mitigate the risk</li>
+</ul>
+<p><strong>Strategic Considerations:</strong></p>
+<ul>
+<li>Direct offers the highest chance of Success (55.6%)</li>
+<li>But also has a significant chance of Setback (25.9%)</li>
+<li>Creates stronger narrative impact in both success and failure</li>
+<li>Best used when you've positioned your assets and relationships to handle potential setbacks</li>
+</ul>
+<blockquote>
+<p><strong>Example: Direct Method in Action</strong></p>
+<p>Mira needs to extract information from a rival noble at a court gathering. She chooses the Direct method because:</p>
+<ul>
+<li>Her Origin as "Third Tier Noble of House Vayne" aligns perfectly with court interaction</li>
+<li>She has her "Network of Informants" asset Fresh and ready to provide support</li>
+<li>Her relationship with Elara is Strong and can help if complications arise</li>
+<li>Even a Setback would create interesting narrative possibilities</li>
+</ul>
+<p>Mira rolls her pool: [2, 4, 6]
+Using Direct, she selects the highest die: 6
+Result: Success</p>
+<p>The GF describes how Mira skillfully navigates the conversation, using her noble upbringing and subtle hints about information she already knows to extract the secrets she seeks. Her success strengthens her position in court but also creates a future complication as the rival begins to suspect her motives.</p>
+</blockquote>
+<h4 id="balanced-method-middle-die"><a class="header" href="#balanced-method-middle-die">Balanced Method (Middle Die)</a></h4>
+<p>The Balanced method represents measured, careful action where no single trait strongly applies. When you choose Balanced, you're taking a moderate approach that balances different aspects of your character.</p>
+<p><strong>When to Use Balanced:</strong></p>
+<ul>
+<li>Multiple traits have mixed relevance</li>
+<li>Consistency is more important than peak success</li>
+<li>You want to preserve assets and relationships</li>
+<li>The situation requires careful navigation</li>
+<li>You need to maintain multiple options</li>
+</ul>
+<p><strong>Strategic Considerations:</strong></p>
+<ul>
+<li>Balanced offers the highest chance of Partial Success (44.4%)</li>
+<li>Has equal chances of Success and Setback (27.8% each)</li>
+<li>Creates moderate narrative impact</li>
+<li>Best used when building toward larger goals where consistency matters</li>
+</ul>
+<blockquote>
+<p><strong>Example: Balanced Method in Action</strong></p>
+<p>Karn needs to negotiate with a merchant from a rival clan. He chooses the Balanced method because:</p>
+<ul>
+<li>His Origin as "Exiled Hunter" doesn't directly help with negotiation</li>
+<li>His Drive to "Reclaim Honor Through Proven Strength" isn't fully applicable</li>
+<li>He wants to avoid risking his "Blood-Price Token" asset</li>
+<li>The situation requires navigating unfamiliar social territory</li>
+</ul>
+<p>Karn rolls his pool: [1, 3, 5]
+Using Balanced, he selects the middle die: 3
+Result: Partial Success</p>
+<p>The GF describes how Karn manages to secure the trade agreement but at a higher cost than hoped. The merchant agrees to the terms but demands immediate payment rather than the credit Karn had hoped for. This creates a new complication—Karn must now find resources to fulfill his end of the bargain—but keeps the negotiation moving forward.</p>
+</blockquote>
+<h4 id="cautious-method-lowest-die"><a class="header" href="#cautious-method-lowest-die">Cautious Method (Lowest Die)</a></h4>
+<p>The Cautious method represents careful handling of unfamiliar situations or actions that go against your character's traits. When you choose Cautious, you're acknowledging the challenge but taking a measured approach to minimize risk.</p>
+<p><strong>When to Use Cautious:</strong></p>
+<ul>
+<li>Acting against trait tendencies</li>
+<li>Failure would be catastrophic</li>
+<li>Assets or relationships are already strained</li>
+<li>You need to preserve resources</li>
+<li>The situation requires subtle action</li>
+</ul>
+<p><strong>Strategic Considerations:</strong></p>
+<ul>
+<li>Cautious has the highest chance of Setback (55.6%)</li>
+<li>But also has a significant chance of Partial Success (44.4%)</li>
+<li>Creates subtle narrative impact</li>
+<li>Best used when control matters more than immediate success</li>
+</ul>
+<blockquote>
+<p><strong>Example: Cautious Method in Action</strong></p>
+<p>Elara needs to infiltrate a noble's private study to examine suspicious documents. She chooses the Cautious method because:</p>
+<ul>
+<li>Her Origin as "Royal Academy Graduate" doesn't prepare her for stealth</li>
+<li>Her Goal to "Reform Medical Practices" doesn't align with breaking and entering</li>
+<li>Failure could completely compromise her position at court</li>
+<li>Her "Court Appointment" asset would be at serious risk if caught</li>
+</ul>
+<p>Elara rolls her pool: [2, 4, 6]
+Using Cautious, she selects the lowest die: 2
+Result: Setback</p>
+<p>The GF describes how Elara's attempt to access the study is interrupted by a servant. However, using the Dynamic Outcome Interpretation framework, the GF transforms this failure into an opportunity: the servant reveals they've noticed strange behavior from their master and offers to help Elara if she can provide medical treatment for their sick child. This creates a new path forward despite the mechanical Setback.</p>
+</blockquote>
+<h3 id="method-decision-framework"><a class="header" href="#method-decision-framework">Method Decision Framework</a></h3>
+<p>When deciding which method to use, consider this decision framework:</p>
+<pre><code class="language-mermaid">graph TD
+    A[Consider Action] --&gt; B{Trait Alignment?}
+    B --&gt;|Strong Alignment| C[Consider Direct]
+    B --&gt;|Mixed Alignment| D[Consider Balanced]
+    B --&gt;|Against Traits| E[Consider Cautious]
+    
+    C --&gt; F{Risk Assessment}
+    D --&gt; F
+    E --&gt; F
+    
+    F --&gt;|Can Handle Risk| G[Direct]
+    F --&gt;|Moderate Risk| H[Balanced]
+    F --&gt;|High Risk| I[Cautious]
+    
+    G --&gt; J[Highest Die]
+    H --&gt; K[Middle Die]
+    I --&gt; L[Lowest Die]
+</code></pre>
+<p>This framework helps you make strategic decisions based on your character's traits, the situation, and your narrative goals. Remember that there's rarely a single "correct" method—different approaches create different narrative possibilities and reflect different aspects of your character.</p>
+<h3 id="complex-action-resolution"><a class="header" href="#complex-action-resolution">Complex Action Resolution</a></h3>
+<p>Many situations involve multiple traits, assets, and relationships working together. In these complex actions, consider how different elements interact and support each other.</p>
+<h4 id="multiple-trait-consideration"><a class="header" href="#multiple-trait-consideration">Multiple Trait Consideration</a></h4>
+<p>When an action involves multiple traits with different levels of relevance:</p>
+<ol>
+<li>Identify which trait is most directly applicable</li>
+<li>Consider how other traits might support or hinder the action</li>
+<li>Choose your method based on the overall alignment</li>
+<li>Describe how different aspects of your character come into play</li>
+</ol>
+<blockquote>
+<p><strong>Example: Multiple Trait Consideration</strong></p>
+<p>Mira needs to convince the Harbor Council to support her family's trade proposal. This action involves:</p>
+<ul>
+<li>Her Origin as "Third Tier Noble" (strong alignment)</li>
+<li>Her Drive to "Secure Power Through Secret Knowledge" (mixed alignment)</li>
+<li>Her Goal to "Reshape House Influence in Harbor District" (strong alignment)</li>
+</ul>
+<p>With two traits strongly aligned and one with mixed relevance, Mira chooses the Direct method. She describes how she leverages both her noble status and her goal-driven focus on the Harbor District, while using her knowledge of secrets strategically rather than overtly.</p>
+<p>Mira rolls her pool: [3, 3, 5]
+Using Direct, she selects the highest die: 5
+Result: Success</p>
+<p>The GF describes how Mira's presentation impresses the Council, securing their support while also revealing her growing influence in the district.</p>
+</blockquote>
+<h4 id="asset-and-relationship-support"><a class="header" href="#asset-and-relationship-support">Asset and Relationship Support</a></h4>
+<p>Assets and relationships can provide mechanical support for actions when they're relevant to the situation:</p>
+<ol>
+<li>Identify which assets or relationships could help</li>
+<li>Ensure they're in the appropriate state (Fresh/Strong)</li>
+<li>Describe how they provide support</li>
+<li>Add one die to your pool for each supporting element</li>
+<li>Drop the lowest die before applying your method</li>
+</ol>
+<blockquote>
+<p><strong>Example: Asset and Relationship Support</strong></p>
+<p>Karn needs to track a rival clan's hunting party through difficult terrain. He has:</p>
+<ul>
+<li>"Master-Crafted Hunting Bow" asset (Fresh)</li>
+<li>Strong relationship with Thana, who has knowledge of the territory</li>
+</ul>
+<p>Both elements are relevant to tracking, so Karn adds two dice to his pool (one for each supporting element). He describes how the bow's craftsmanship helps him identify subtle signs of passage and how Thana's knowledge helps him anticipate the rival clan's movements.</p>
+<p>Karn rolls his expanded pool: [1, 2, 3, 4, 5]
+He drops the lowest two dice: [3, 4, 5]
+Using Direct (as tracking aligns with his hunter background), he selects the highest die: 5
+Result: Success</p>
+<p>The GF describes how Karn successfully tracks the hunting party to their camp, positioning himself perfectly for his next move.</p>
+</blockquote>
+<h4 id="shared-story-pool-integration"><a class="header" href="#shared-story-pool-integration">Shared Story Pool Integration</a></h4>
+<p>The Shared Story Pool provides additional options for complex actions:</p>
+<ol>
+<li>Take a die from the Shared Story Pool</li>
+<li>Describe how you're adding complexity, establishing relationships, creating opportunities, or enhancing your roll</li>
+<li>Add the die to your pool or use it for its narrative effect</li>
+<li>Consider how this affects the broader story</li>
+</ol>
+<blockquote>
+<p><strong>Example: Shared Story Pool Integration</strong></p>
+<p>Elara is researching a mysterious illness affecting noble families. She decides to use the Shared Story Pool to create a new opportunity.</p>
+<p>Elara takes a die from the Shared Story Pool and describes how she discovers an old medical text that mentions similar symptoms in a historical outbreak. This creates a new research direction and potential solution.</p>
+<p>For her research roll, Elara now has:</p>
+<ul>
+<li>Her basic pool: [2, 3, 6]</li>
+<li>The die from the Shared Story Pool: [4]</li>
+</ul>
+<p>Using Balanced (as research involves both her medical training and supernatural investigation), she selects the middle die from her expanded pool: 4
+Result: Partial Success</p>
+<p>The GF describes how Elara's research reveals a potential treatment but requires a rare ingredient that will be difficult to obtain, creating both a solution and a new challenge.</p>
+</blockquote>
+<h3 id="dynamic-outcome-interpretation"><a class="header" href="#dynamic-outcome-interpretation">Dynamic Outcome Interpretation</a></h3>
+<p>While dice determine the mechanical outcome of actions, the GF shapes how these outcomes manifest narratively, ensuring the story remains compelling regardless of the roll.</p>
+<h4 id="enhanced-outcome-framework"><a class="header" href="#enhanced-outcome-framework">Enhanced Outcome Framework</a></h4>
+<p>The Dynamic Outcome Interpretation framework provides guidelines for how outcomes manifest in the narrative:</p>
+<h5 id="success-5-6"><a class="header" href="#success-5-6">Success (5-6)</a></h5>
+<p><strong>Mechanical Result:</strong> Action succeeds<br />
+<strong>GF's Role:</strong> Introduce future complications</p>
+<ul>
+<li>Create narrative hooks from the success</li>
+<li>Plant seeds for future challenges</li>
+<li>Establish new relationships or tensions</li>
+<li>Show how success changes the setting</li>
+</ul>
+<h5 id="partial-success-3-4"><a class="header" href="#partial-success-3-4">Partial Success (3-4)</a></h5>
+<p><strong>Mechanical Result:</strong> Action succeeds with cost<br />
+<strong>GF's Role:</strong> Shape the nature of the cost</p>
+<ul>
+<li>Adjust cost severity based on story needs</li>
+<li>Create costs that drive character development</li>
+<li>Use costs to introduce new story elements</li>
+<li>Connect costs to existing complications</li>
+</ul>
+<h5 id="setback-1-2"><a class="header" href="#setback-1-2">Setback (1-2)</a></h5>
+<p><strong>Mechanical Result:</strong> Action fails<br />
+<strong>GF's Role:</strong> Transform failure into opportunity</p>
+<ul>
+<li>Create alternative paths forward</li>
+<li>Reveal hidden information through failure</li>
+<li>Introduce unexpected allies or resources</li>
+<li>Use failure to highlight character growth opportunities</li>
+</ul>
+<blockquote>
+<p><strong>Example: Dynamic Outcome Interpretation</strong></p>
+<p><strong>Success Example:</strong>
+Mira successfully uncovers information about a rival family's secret dealings.</p>
+<p>The GF honors this success but adds a future complication: "Your informants deliver detailed records of House Krell's smuggling operation. However, as you review the documents, you notice references to a mutual business partner who might now see your family as a threat if this information becomes public."</p>
+<p><strong>Partial Success Example:</strong>
+Karn partially succeeds in convincing a clan elder to support his cause.</p>
+<p>The GF shapes the cost: "The elder agrees to speak on your behalf at the council, but demands you first complete a dangerous hunt to prove your worth to the clan. This not only delays your plans but puts you at personal risk."</p>
+<p><strong>Setback Example:</strong>
+Elara fails to create an effective remedy for a patient's condition.</p>
+<p>The GF transforms this failure: "Your treatment doesn't work as expected, but the unusual reaction reveals that the patient's illness isn't natural—there are traces of a rare poison. This gives you a new direction for investigation and treatment."</p>
+</blockquote>
+<h4 id="the-compensation-principle"><a class="header" href="#the-compensation-principle">The Compensation Principle</a></h4>
+<p>When dice create extreme results (multiple successes or failures in a row), the GF should apply the Compensation Principle to maintain narrative momentum:</p>
+<ol>
+<li>Acknowledge the mechanical outcome</li>
+<li>Consider the narrative momentum</li>
+<li>Introduce balancing elements</li>
+<li>Create new opportunities</li>
+</ol>
+<blockquote>
+<p><strong>Example: Compensation Principle in Action</strong></p>
+<p><strong>After Multiple Successes:</strong>
+Mira has succeeded at three consecutive social challenges, dominating court politics.</p>
+<p>The GF applies compensation: "Your political maneuvering has been masterful, securing your family's position. However, your rising influence has attracted the attention of the Royal Spymaster, who begins to investigate your sources of information. Your success creates a new, more dangerous opponent."</p>
+<p><strong>After Multiple Setbacks:</strong>
+Karn has failed three consecutive attempts to navigate tribal politics.</p>
+<p>The GF applies compensation: "Your frustrating failures in the council have revealed something important—there's an underlying pattern to the opposition. You realize that someone is working behind the scenes to block all border clan initiatives. This knowledge gives you a new target for your efforts."</p>
+</blockquote>
+<h4 id="compensation-principle-decision-guide"><a class="header" href="#compensation-principle-decision-guide">Compensation Principle Decision Guide</a></h4>
+<pre><code class="language-mermaid">graph TD
+    A[Assess Situation] --&gt; B{Multiple Successes?}
+    A --&gt; C{Multiple Setbacks?}
+    
+    B --&gt;|Yes| D[Honor Success]
+    D --&gt; E[Consider Story Momentum]
+    E --&gt; F[Introduce Future Complications]
+    F --&gt; G[Create New Challenges]
+    
+    C --&gt;|Yes| H[Honor Setback]
+    H --&gt; I[Consider Player Engagement]
+    I --&gt; J[Reveal New Information]
+    J --&gt; K[Create Alternative Path]
+</code></pre>
+<p>This decision guide helps GFs apply the Compensation Principle effectively, maintaining narrative momentum while honoring mechanical outcomes.</p>
+<h2 id="asset-management-system"><a class="header" href="#asset-management-system">Asset Management System</a></h2>
+<p>Assets represent your character's equipment, resources, special abilities, and advantages. Managing these assets strategically creates both mechanical benefits and narrative opportunities.</p>
+<h3 id="strategic-asset-use"><a class="header" href="#strategic-asset-use">Strategic Asset Use</a></h3>
+<p>Assets exist in three states that reflect their condition and availability:</p>
+<ul>
+<li><strong>Fresh:</strong> Providing full benefits and support</li>
+<li><strong>Degraded:</strong> Creating complications but still usable</li>
+<li><strong>Depleted:</strong> Temporarily unusable until restored</li>
+</ul>
+<p>Your strategic decisions about when and how to use assets, when to risk degradation, and how to manage recovery create meaningful choices throughout play.</p>
+<h4 id="when-to-use-fresh-assets"><a class="header" href="#when-to-use-fresh-assets">When to Use Fresh Assets</a></h4>
+<p>Fresh assets provide their full benefits without complications. Consider using them when:</p>
+<ul>
+<li>The action is critically important</li>
+<li>You need the highest probability of success</li>
+<li>The narrative justifies their use</li>
+<li>You have clear recovery options if they degrade</li>
+</ul>
+<blockquote>
+<p><strong>Example: Strategic Fresh Asset Use</strong></p>
+<p>Mira needs to gain access to a restricted noble gathering. She decides to use her "Ancestral Signet Ring" asset (currently Fresh) to support her attempt.</p>
+<p>She describes how the ring's family crest grants her legitimate access to the event. This adds a die to her pool, increasing her chances of success in this critical moment.</p>
+<p>Mira rolls her expanded pool: [2, 3, 4, 5]
+She drops the lowest die: [3, 4, 5]
+Using Direct (as social navigation aligns with her noble background), she selects the highest die: 5
+Result: Success</p>
+<p>The GF describes how the guards recognize the ancient symbol of House Vayne and admit Mira without question, positioning her perfectly for her next move.</p>
+</blockquote>
+<h4 id="risk-assessment"><a class="header" href="#risk-assessment">Risk Assessment</a></h4>
+<p>When considering whether to risk an asset's degradation for additional benefits, assess:</p>
+<ol>
+<li>
+<p><strong>Current State</strong></p>
+<ul>
+<li>Fresh assets can be degraded to Degraded</li>
+<li>Degraded assets can be degraded to Depleted</li>
+<li>Depleted assets cannot be used until restored</li>
+</ul>
+</li>
+<li>
+<p><strong>Recovery Opportunities</strong></p>
+<ul>
+<li>Known restoration methods</li>
+<li>Upcoming story possibilities</li>
+<li>Group resource availability</li>
+<li>Relationship support options</li>
+</ul>
+</li>
+<li>
+<p><strong>Strategic Value</strong></p>
+<ul>
+<li>Short-term utility</li>
+<li>Long-term importance</li>
+<li>Narrative significance</li>
+<li>Connection implications</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><strong>Example: Asset Risk Assessment</strong></p>
+<p>Karn is tracking a dangerous beast and has already used his "Master-Crafted Hunting Bow" asset (currently Degraded) to support his initial tracking roll. He's now faced with a difficult shot to bring down the creature.</p>
+<p>He considers risking further degradation:</p>
+<ul>
+<li>Current State: Degraded (would become Depleted if risked)</li>
+<li>Recovery Opportunities: Limited in the wilderness</li>
+<li>Strategic Value: High for current situation, but also needed later</li>
+</ul>
+<p>Weighing these factors, Karn decides the risk is worth it. He describes pushing his bow to its limits, risking damage to make the perfect shot.</p>
+<p>Karn chooses to reroll his lowest die, describing how he's pushing his bow beyond its current capabilities.
+Original roll: [1, 3, 5]
+Rerolled die: [4]
+New pool: [3, 4, 5]
+Using Direct, he selects the highest die: 5
+Result: Success</p>
+<p>The GF describes how Karn makes a perfect shot, bringing down the beast. However, the strain causes his bow's string to snap and a crack to form in the wood. The asset is now Depleted and unusable until repaired.</p>
+</blockquote>
+<h4 id="asset-recovery-methods"><a class="header" href="#asset-recovery-methods">Asset Recovery Methods</a></h4>
+<p>Depleted assets require narrative resolution to restore. Recovery methods include:</p>
+<ol>
+<li>
+<p><strong>Narrative Opportunities</strong></p>
+<ul>
+<li>Finding appropriate resources</li>
+<li>Meeting specialists who can help</li>
+<li>Creating time for repair or restoration</li>
+<li>Discovering alternative solutions</li>
+</ul>
+</li>
+<li>
+<p><strong>Resource Allocation</strong></p>
+<ul>
+<li>Spending group resources</li>
+<li>Trading for needed materials</li>
+<li>Sacrificing other advantages</li>
+<li>Investing time and effort</li>
+</ul>
+</li>
+<li>
+<p><strong>Relationship Support</strong></p>
+<ul>
+<li>Calling on connections for help</li>
+<li>Trading favors for assistance</li>
+<li>Strengthening bonds through need</li>
+<li>Creating new relationships</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><strong>Example: Asset Recovery</strong></p>
+<p>Karn needs to restore his Depleted "Master-Crafted Hunting Bow" before the upcoming clan hunt. He identifies several recovery options:</p>
+<ol>
+<li>Narrative Opportunity: Seek out the forest hermit known for bowcraft</li>
+<li>Resource Allocation: Trade valuable pelts for repair materials</li>
+<li>Relationship Support: Ask Thana to introduce him to her clan's weaponsmith</li>
+</ol>
+<p>Karn chooses to pursue the relationship support option, strengthening his connection with Thana while solving his practical problem.</p>
+<p>The GF describes a scene where Karn approaches Thana for help, creating both a character moment and a practical solution. Thana's introduction to the weaponsmith not only restores Karn's bow to Fresh status but also establishes a new NPC connection that might be valuable in the future.</p>
+</blockquote>
+<h3 id="asset-state-tracking"><a class="header" href="#asset-state-tracking">Asset State Tracking</a></h3>
+<p>Tracking asset states creates both mechanical effects and narrative opportunities:</p>
+<h4 id="fresh-assets"><a class="header" href="#fresh-assets">Fresh Assets</a></h4>
+<ul>
+<li>Provide full mechanical benefits</li>
+<li>Can be used for support (+1 die)</li>
+<li>Create narrative opportunities</li>
+<li>Can be degraded for rerolls</li>
+</ul>
+<h4 id="degraded-assets"><a class="header" href="#degraded-assets">Degraded Assets</a></h4>
+<ul>
+<li>Still usable but with complications</li>
+<li>Create narrative tension</li>
+<li>May have limited effectiveness</li>
+<li>Can be further degraded to Depleted</li>
+</ul>
+<h4 id="depleted-assets"><a class="header" href="#depleted-assets">Depleted Assets</a></h4>
+<ul>
+<li>Temporarily unusable</li>
+<li>Require narrative resolution to restore</li>
+<li>Create recovery story opportunities</li>
+<li>Force adaptation and alternative approaches</li>
+</ul>
+<blockquote>
+<p><strong>Example: Asset State Narrative Integration</strong></p>
+<p><strong>Fresh → Degraded:</strong>
+Mira's "Network of Informants" becomes Degraded after she pushes them for particularly sensitive information. The GF describes how some informants become nervous and less reliable, creating both mechanical limitations (less effective information gathering) and narrative opportunities (how will Mira reassure her sources?).</p>
+<p><strong>Degraded → Depleted:</strong>
+Mira later risks her already Degraded network to uncover information about a royal scandal. The network becomes Depleted as key informants are discovered and removed from their positions. This creates both a mechanical limitation (network unusable) and a significant story opportunity (how will Mira rebuild her information sources?).</p>
+<p><strong>Depleted → Fresh:</strong>
+Through careful narrative resolution—establishing new contacts, creating cover identities, and leveraging her relationship with Lord Darius—Mira eventually restores her network to Fresh status. This recovery process created multiple engaging scenes and strengthened her character connections.</p>
+</blockquote>
+<h3 id="asset-evolution"><a class="header" href="#asset-evolution">Asset Evolution</a></h3>
+<p>Assets aren't static—they evolve through use and story events:</p>
+<h4 id="improvement-through-use"><a class="header" href="#improvement-through-use">Improvement Through Use</a></h4>
+<ul>
+<li>Expanded capabilities</li>
+<li>New applications</li>
+<li>Enhanced effectiveness</li>
+<li>Specialized functions</li>
+</ul>
+<h4 id="modification-based-on-events"><a class="header" href="#modification-based-on-events">Modification Based on Events</a></h4>
+<ul>
+<li>Adaptation to challenges</li>
+<li>Incorporation of new elements</li>
+<li>Transformation through story</li>
+<li>Response to setting changes</li>
+</ul>
+<h4 id="setting-influenced-changes"><a class="header" href="#setting-influenced-changes">Setting-Influenced Changes</a></h4>
+<ul>
+<li>Technology level shifts</li>
+<li>Social structure evolution</li>
+<li>Supernatural integration</li>
+<li>Conflict type adaptation</li>
+</ul>
+<blockquote>
+<p><strong>Example: Asset Evolution</strong></p>
+<p><strong>Improvement Through Use:</strong>
+Elara's "Physician's Kit" evolves as she incorporates new treatments and techniques. After successfully treating several unusual cases, she adds specialized tools and remedies, expanding the asset's capabilities to include treatment of supernatural ailments.</p>
+<p><strong>Modification Based on Events:</strong>
+After a dramatic confrontation with a rival noble who attempted to steal her research, Elara modifies her "Hidden Laboratory" asset to include new security measures and a secret escape route, reflecting the narrative events in mechanical changes.</p>
+<p><strong>Setting-Influenced Changes:</strong>
+As the "Shadow Court" setting evolves and supernatural elements become more prominent (shifting on the Supernatural Level axis), Elara's "Court Appointment" asset evolves to include official recognition of her expertise in unusual cases, reflecting the setting's changing nature.</p>
+</blockquote>
+<h2 id="relationship-mechanics"><a class="header" href="#relationship-mechanics">Relationship Mechanics</a></h2>
+<p>The Relationship Web connects characters to each other and to the setting, creating both narrative bonds and mechanical support systems. Understanding how relationships function mechanically allows you to leverage these connections effectively.</p>
+<h3 id="relationship-support"><a class="header" href="#relationship-support">Relationship Support</a></h3>
+<p>Strong relationships provide mechanical support similar to assets:</p>
+<ol>
+<li>Identify a relevant Strong relationship</li>
+<li>Describe how the relationship provides support</li>
+<li>Add one die to your pool</li>
+<li>Drop the lowest die before applying your method</li>
+</ol>
+<blockquote>
+<p><strong>Example: Relationship Support</strong></p>
+<p>Mira needs to navigate a dangerous political situation. She calls on her Strong relationship with Elara for support.</p>
+<p>She describes how Elara's medical knowledge helps her identify signs of poison at a noble gathering, warning her away from compromised food and drink. This adds a die to her pool, increasing her chances of success.</p>
+<p>Mira rolls her expanded pool: [1, 3, 4, 6]
+She drops the lowest die: [3, 4, 6]
+Using Direct (as political navigation aligns with her noble background), she selects the highest die: 6
+Result: Success</p>
+<p>The GF describes how Mira successfully navigates the gathering, avoiding the poison while gathering valuable information. Her relationship with Elara has provided both practical help and strengthened their narrative bond.</p>
+</blockquote>
+<h3 id="relationship-state-changes"><a class="header" href="#relationship-state-changes">Relationship State Changes</a></h3>
+<p>Like assets, relationships exist in multiple states that can change through play:</p>
+<h4 id="strong-relationships"><a class="header" href="#strong-relationships">Strong Relationships</a></h4>
+<ul>
+<li>Provide full support benefits</li>
+<li>Create narrative opportunities</li>
+<li>Enable special actions</li>
+<li>Can be strained for additional benefits</li>
+</ul>
+<h4 id="strained-relationships"><a class="header" href="#strained-relationships">Strained Relationships</a></h4>
+<ul>
+<li>Provide limited benefits</li>
+<li>Create narrative tension</li>
+<li>Require careful management</li>
+<li>Can be broken through further strain</li>
+</ul>
+<h4 id="broken-relationships"><a class="header" href="#broken-relationships">Broken Relationships</a></h4>
+<ul>
+<li>Temporarily unusable</li>
+<li>Require significant resolution</li>
+<li>Create major story opportunities</li>
+<li>Force alternative approaches</li>
+</ul>
+<h4 id="transformed-relationships"><a class="header" href="#transformed-relationships">Transformed Relationships</a></h4>
+<ul>
+<li>Changed into new relationship types</li>
+<li>Reflect significant narrative development</li>
+<li>Create new mechanical options</li>
+<li>Demonstrate character evolution</li>
+</ul>
+<blockquote>
+<p><strong>Example: Relationship State Changes</strong></p>
+<p><strong>Strong → Strained:</strong>
+Karn's "Blood Brothers" relationship with Thana becomes Strained when he pursues a course of action that endangers her clan. The GF describes how Thana's loyalty is tested, creating both mechanical limitations (reduced effectiveness of support) and narrative tension (how will they resolve this conflict?).</p>
+<p><strong>Strained → Broken:</strong>
+If Karn later betrays Thana's trust completely, perhaps by revealing clan secrets to outsiders, the relationship could become Broken. This creates both a mechanical limitation (relationship unusable) and a major story opportunity (can this bond ever be repaired?).</p>
+<p><strong>Broken → Transformed:</strong>
+Through significant narrative resolution—perhaps a life-threatening situation where Karn sacrifices his safety for Thana's clan—the relationship might be Transformed from "Blood Brothers" to "Clan Champion," reflecting how their bond has evolved through conflict and resolution.</p>
+</blockquote>
+<h3 id="relationship-state-transition-diagram"><a class="header" href="#relationship-state-transition-diagram">Relationship State Transition Diagram</a></h3>
+<pre><code class="language-mermaid">graph TD
+    A[Strong] --&gt;|Strain| B[Strained]
+    B --&gt;|Further Strain| C[Broken]
+    B --&gt;|Resolution| A
+    C --&gt;|Significant Resolution| A
+    C --&gt;|Evolution| D[Transformed]
+    A --&gt;|Evolution| D
+    B --&gt;|Evolution| D
+</code></pre>
+<p>This diagram illustrates how relationships can transition between states through play, creating both mechanical effects and narrative developments.</p>
+<h3 id="relationship-web-dynamics"><a class="header" href="#relationship-web-dynamics">Relationship Web Dynamics</a></h3>
+<p>The complete Relationship Web creates a complex network of support options and potential complications:</p>
+<h4 id="group-relationship-interactions"><a class="header" href="#group-relationship-interactions">Group Relationship Interactions</a></h4>
+<ul>
+<li>Multiple relationships affecting single actions</li>
+<li>Conflicting relationship pressures</li>
+<li>Shared relationship benefits</li>
+<li>Network-wide impacts</li>
+</ul>
+<h4 id="conflicting-relationships"><a class="header" href="#conflicting-relationships">Conflicting Relationships</a></h4>
+<ul>
+<li>Opposing obligations</li>
+<li>Divided loyalties</li>
+<li>Forced choices</li>
+<li>Character development opportunities</li>
+</ul>
+<h4 id="web-evolution"><a class="header" href="#web-evolution">Web Evolution</a></h4>
+<ul>
+<li>New connections forming</li>
+<li>Existing relationships changing</li>
+<li>Network-wide shifts</li>
+<li>Setting influence on relationships</li>
+</ul>
+<blockquote>
+<p><strong>Example: Relationship Web Dynamics</strong></p>
+<p><strong>Group Interaction:</strong>
+Mira, Elara, and Lord Darius all have Strong relationships with each other, creating a powerful support network. When facing a major political challenge, all three characters can coordinate their efforts, with each relationship providing different benefits based on their nature.</p>
+<p><strong>Conflicting Relationships:</strong>
+Karn has a Strong relationship with Thana (Blood Brothers) but a Strained relationship with Lord Darius (Uneasy Alliance). When Thana and Darius come into conflict over border territory, Karn faces divided loyalties that create both mechanical challenges (which relationship to leverage?) and character development opportunities (how to resolve this conflict?).</p>
+<p><strong>Web Evolution:</strong>
+As the "Shadow Court" setting evolves through play, perhaps with increasing supernatural elements or shifting power dynamics, the entire Relationship Web adapts. New connections form based on emerging threats, existing relationships transform to reflect changing circumstances, and the overall network shifts to accommodate the evolving narrative.</p>
+</blockquote>
+<h2 id="special-circumstances"><a class="header" href="#special-circumstances">Special Circumstances</a></h2>
+<p>Beyond the standard resolution mechanics, several special circumstances create unique challenges and opportunities during play.</p>
+<h3 id="favorable-and-unfavorable-conditions"><a class="header" href="#favorable-and-unfavorable-conditions">Favorable and Unfavorable Conditions</a></h3>
+<p>External circumstances can create advantages or disadvantages beyond your character's traits and assets:</p>
+<h4 id="favorable-conditions"><a class="header" href="#favorable-conditions">Favorable Conditions</a></h4>
+<p>When circumstances clearly advantage you:</p>
+<ul>
+<li>Add one die to pool</li>
+<li>Drop lowest before applying method</li>
+<li>Describe advantage in setting terms</li>
+<li>May involve environmental benefits</li>
+</ul>
+<h4 id="unfavorable-conditions"><a class="header" href="#unfavorable-conditions">Unfavorable Conditions</a></h4>
+<p>When circumstances clearly hinder you:</p>
+<ul>
+<li>Remove one die from pool</li>
+<li>Must use remaining dice</li>
+<li>Describe hindrance in setting terms</li>
+<li>May involve environmental challenges</li>
+</ul>
+<blockquote>
+<p><strong>Example: Favorable and Unfavorable Conditions</strong></p>
+<p><strong>Favorable Conditions:</strong>
+Mira attempts to gather information at a masquerade ball, where anonymity creates a favorable condition for her inquiries. This adds a die to her pool, increasing her chances of success.</p>
+<p>Mira rolls her expanded pool: [2, 3, 5, 6]
+She drops the lowest die: [3, 5, 6]
+Using Direct, she selects the highest die: 6
+Result: Success</p>
+<p><strong>Unfavorable Conditions:</strong>
+Karn attempts to track prey during a heavy rainstorm, which creates unfavorable conditions by washing away signs of passage. This removes a die from his pool, decreasing his chances of success.</p>
+<p>Karn rolls his reduced pool: [2, 5]
+Using Direct, he selects the highest die: 5
+Result: Success (but with fewer options than normal)</p>
+</blockquote>
+<h3 id="extended-challenges"><a class="header" href="#extended-challenges">Extended Challenges</a></h3>
+<p>Some significant actions require multiple steps or sustained effort to complete:</p>
+<ol>
+<li>Break the challenge into connected steps</li>
+<li>Establish the required number of successes</li>
+<li>Determine the consequence of setbacks</li>
+<li>Track progress toward completion</li>
+</ol>
+<blockquote>
+<p><strong>Example: Extended Challenge</strong></p>
+<p>Elara attempts to develop a cure for a mysterious illness affecting multiple noble houses. The GF establishes this as an extended challenge requiring three successes to complete, with setbacks creating additional complications rather than resetting progress.</p>
+<p><strong>Step 1: Research</strong>
+Elara rolls for research: [1, 3, 6]
+Using Direct (as medical research aligns with her training), she selects the highest die: 6
+Result: Success (1 of 3 required)</p>
+<p><strong>Step 2: Experimentation</strong>
+Elara rolls for experimentation: [2, 2, 4]
+Using Balanced (as this involves both medical knowledge and intuition), she selects the middle die: 2
+Result: Setback</p>
+<p>The GF describes how Elara's experiment fails, creating a complication: one of her samples is contaminated, and she develops mild symptoms herself. This creates urgency but doesn't reset her progress.</p>
+<p><strong>Step 3: Revised Experimentation</strong>
+Elara rolls again: [3, 4, 5]
+Using Balanced, she selects the middle die: 4
+Result: Partial Success (2 of 3 required)</p>
+<p><strong>Step 4: Final Synthesis</strong>
+Elara rolls for the final step: [2, 5, 6]
+Using Direct, she selects the highest die: 6
+Result: Success (3 of 3 required)</p>
+<p>The GF describes how Elara successfully develops the cure, incorporating the insights gained from her own symptoms into the final formula. The extended challenge created a narrative arc with rising tension and a satisfying resolution.</p>
+</blockquote>
+<h3 id="group-actions"><a class="header" href="#group-actions">Group Actions</a></h3>
+<p>When multiple characters work together toward a shared goal:</p>
+<ol>
+<li>Establish a primary actor</li>
+<li>Determine how others provide support</li>
+<li>Add dice for relevant supporting actions</li>
+<li>Apply the primary actor's method</li>
+<li>Describe how the group coordinates</li>
+</ol>
+<blockquote>
+<p><strong>Example: Group Action</strong></p>
+<p>Mira, Karn, and Elara work together to infiltrate a rival noble's estate. They establish Mira as the primary actor (using her social skills to gain entry), with Karn providing security assessment and Elara creating a medical emergency as a distraction.</p>
+<p>Mira's base pool: [2, 3, 5]
+Support from Karn: [6]
+Support from Elara: [4]
+Combined pool: [2, 3, 4, 5, 6]</p>
+<p>Dropping the lowest two dice: [4, 5, 6]
+Using Direct (as social manipulation aligns with Mira's traits), she selects the highest die: 6
+Result: Success</p>
+<p>The GF describes how the group's coordinated effort succeeds brilliantly: Elara's medical distraction draws guards away, Karn's security assessment identifies the perfect entry point, and Mira's social skills convince the remaining staff that they have legitimate business at the estate.</p>
+</blockquote>
+<h3 id="dynamic-asset-and-relationship-management"><a class="header" href="#dynamic-asset-and-relationship-management">Dynamic Asset and Relationship Management</a></h3>
+<p>GFs can use asset and relationship states as balancing tools for narrative flow:</p>
+<h4 id="asset-state-manipulation"><a class="header" href="#asset-state-manipulation">Asset State Manipulation</a></h4>
+<ul>
+<li>Expedite recovery of depleted assets when needed</li>
+<li>Create new degradation risks during success</li>
+<li>Offer temporary asset benefits during setbacks</li>
+<li>Use asset states to pace challenges</li>
+</ul>
+<h4 id="relationship-state-adjustments"><a class="header" href="#relationship-state-adjustments">Relationship State Adjustments</a></h4>
+<ul>
+<li>Strengthen bonds after shared challenges</li>
+<li>Create strain during periods of success</li>
+<li>Offer reconciliation opportunities during setbacks</li>
+<li>Use relationship dynamics to drive character development</li>
+</ul>
+<blockquote>
+<p><strong>Example: Dynamic Management</strong></p>
+<p><strong>Supporting Struggling Players:</strong>
+After Karn experiences multiple setbacks trying to navigate clan politics, the GF expedites the recovery of his Depleted "Blood-Price Token" asset. The GF describes how a sympathetic elder recognizes Karn's sincere efforts despite his failures and offers to restore the token's significance through a simple ceremony rather than requiring a lengthy quest.</p>
+<p><strong>Challenging Successful Players:</strong>
+After Mira experiences multiple successes in court politics, the GF introduces a new risk to her Fresh "Network of Informants" asset. The GF describes how Mira's rising influence has made her informants more visible, creating a risk of exposure that she must manage carefully to avoid degradation.</p>
+</blockquote>
+<h2 id="mechanical-evolution-through-campaign-play"><a class="header" href="#mechanical-evolution-through-campaign-play">Mechanical Evolution Through Campaign Play</a></h2>
+<p>As your campaign progresses, the mechanics evolve to reflect character development, setting changes, and narrative progression. Understanding how mechanics change over time helps you plan for long-term play and create satisfying character arcs.</p>
+<h3 id="character-development-impact"><a class="header" href="#character-development-impact">Character Development Impact</a></h3>
+<p>As characters evolve, their mechanical options expand and change:</p>
+<h4 id="trait-evolution"><a class="header" href="#trait-evolution">Trait Evolution</a></h4>
+<ul>
+<li>Origins may shift as social status changes</li>
+<li>Drives may transform as motivations evolve</li>
+<li>Goals may expand or focus as ambitions change</li>
+<li>New trait connections may form through play</li>
+</ul>
+<h4 id="asset-expansion"><a class="header" href="#asset-expansion">Asset Expansion</a></h4>
+<ul>
+<li>New assets acquired through narrative</li>
+<li>Existing assets improved or modified</li>
+<li>Specialized applications discovered</li>
+<li>Setting-appropriate enhancements</li>
+</ul>
+<h4 id="relationship-growth"><a class="header" href="#relationship-growth">Relationship Growth</a></h4>
+<ul>
+<li>New relationships formed through play</li>
+<li>Existing relationships deepened or transformed</li>
+<li>Relationship Web complexity increased</li>
+<li>Strategic support options expanded</li>
+</ul>
+<blockquote>
+<p><strong>Example: Character Development Impact</strong></p>
+<p><strong>Trait Evolution:</strong>
+As Mira's influence in court grows, her Origin evolves from "Third Tier Noble of House Vayne" to "Rising Power in House Vayne," reflecting her changing status. This evolution expands her mechanical options in social situations, allowing her to interact with higher-tier nobles as an equal rather than a subordinate.</p>
+<p><strong>Asset Expansion:</strong>
+Through play, Mira acquires a new asset: "Court Spy Network," which complements her existing "Network of Informants" but focuses specifically on court politics. This expansion gives her more specialized options for gathering information in different contexts.</p>
+<p><strong>Relationship Growth:</strong>
+Mira's relationship with Lord Darius transforms from "Debt and Obligation" to "Political Alliance" as they work together to address court corruption. This transformation changes the nature of their mechanical support, focusing more on coordinated political action rather than personal favors.</p>
+</blockquote>
+<h3 id="setting-evolution-effects"><a class="header" href="#setting-evolution-effects">Setting Evolution Effects</a></h3>
+<p>As your setting evolves on the Five Axes, the mechanical landscape changes:</p>
+<h4 id="power-scale-shifts"><a class="header" href="#power-scale-shifts">Power Scale Shifts</a></h4>
+<ul>
+<li>Expanding scope of actions</li>
+<li>New asset types becoming available</li>
+<li>Relationship implications changing</li>
+<li>Resolution stakes increasing</li>
+</ul>
+<h4 id="supernatural-level-changes"><a class="header" href="#supernatural-level-changes">Supernatural Level Changes</a></h4>
+<ul>
+<li>New asset categories emerging</li>
+<li>Resolution methods adapting</li>
+<li>Special circumstances evolving</li>
+<li>Risk/reward calculations shifting</li>
+</ul>
+<h4 id="technology-level-advancement"><a class="header" href="#technology-level-advancement">Technology Level Advancement</a></h4>
+<ul>
+<li>Asset capabilities expanding</li>
+<li>Recovery methods changing</li>
+<li>New support options appearing</li>
+<li>Environmental conditions shifting</li>
+</ul>
+<h4 id="social-structure-transformation"><a class="header" href="#social-structure-transformation">Social Structure Transformation</a></h4>
+<ul>
+<li>Origin trait implications changing</li>
+<li>Relationship types evolving</li>
+<li>Asset access transforming</li>
+<li>Group dynamics shifting</li>
+</ul>
+<h4 id="conflict-type-evolution"><a class="header" href="#conflict-type-evolution">Conflict Type Evolution</a></h4>
+<ul>
+<li>Drive trait applications changing</li>
+<li>Resolution method effectiveness shifting</li>
+<li>Asset risk profiles adapting</li>
+<li>Relationship strain triggers evolving</li>
+</ul>
+<blockquote>
+<p><strong>Example: Setting Evolution Effects</strong></p>
+<p><strong>Power Scale Shift:</strong>
+As the "Shadow Court" setting evolves from Local to Regional Power Scale, the scope of actions expands. Mira's political maneuvers now affect multiple districts rather than just the Harbor District, increasing both the stakes and potential rewards of her actions.</p>
+<p><strong>Supernatural Level Change:</strong>
+As supernatural elements become more prominent in "Shadow Court," moving from Hidden to Emerging on the Supernatural Level axis, new asset categories become available. Elara's medical research can now openly incorporate supernatural elements, creating new mechanical options for healing and investigation.</p>
+<p><strong>Social Structure Transformation:</strong>
+As the rigid Hierarchical structure of "Shadow Court" begins to show cracks, moving toward a more Merit-based system, the implications of Origin traits change. Karn's status as an outsider becomes less of a hindrance, allowing him to leverage his skills more effectively in social situations.</p>
+</blockquote>
+<h3 id="campaign-arc-integration"><a class="header" href="#campaign-arc-integration">Campaign Arc Integration</a></h3>
+<p>Mechanics should evolve to support your campaign's narrative arc:</p>
+<h4 id="early-campaign"><a class="header" href="#early-campaign">Early Campaign</a></h4>
+<ul>
+<li>Focus on basic trait applications</li>
+<li>Simple asset management</li>
+<li>Relationship establishment</li>
+<li>Core resolution methods</li>
+</ul>
+<h4 id="mid-campaign"><a class="header" href="#mid-campaign">Mid Campaign</a></h4>
+<ul>
+<li>Complex trait interactions</li>
+<li>Strategic asset risk</li>
+<li>Relationship Web dynamics</li>
+<li>Advanced resolution techniques</li>
+</ul>
+<h4 id="late-campaign"><a class="header" href="#late-campaign">Late Campaign</a></h4>
+<ul>
+<li>Evolved trait applications</li>
+<li>Asset specialization and combination</li>
+<li>Transformed relationships</li>
+<li>Setting-changing actions</li>
+</ul>
+<blockquote>
+<p><strong>Example: Campaign Arc Integration</strong></p>
+<p><strong>Early Campaign:</strong>
+In the first few sessions of "Shadow Court," players focus on establishing their characters' positions and relationships. Mechanics emphasize basic trait applications and simple asset use as characters navigate their initial challenges.</p>
+<p><strong>Mid Campaign:</strong>
+As the conspiracy at the heart of "Shadow Court" becomes clear, mechanics shift to emphasize strategic asset risk and Relationship Web dynamics. Characters must carefully manage their resources and connections to uncover the truth without exposing themselves.</p>
+<p><strong>Late Campaign:</strong>
+In the final arc of "Shadow Court," mechanics support setting-changing actions as characters work to expose the conspiracy and reshape the power structure. Evolved traits, specialized assets, and transformed relationships provide the mechanical support for these climactic moments.</p>
+</blockquote>
+<h3 id="mechanical-evolution-tracking"><a class="header" href="#mechanical-evolution-tracking">Mechanical Evolution Tracking</a></h3>
+<p>To manage mechanical evolution effectively:</p>
+<ol>
+<li>
+<p><strong>Document Changes</strong></p>
+<ul>
+<li>Note trait evolutions on character sheets</li>
+<li>Track asset modifications and improvements</li>
+<li>Record relationship transformations</li>
+<li>Document setting axis shifts</li>
+</ul>
+</li>
+<li>
+<p><strong>Create Evolution Opportunities</strong></p>
+<ul>
+<li>Establish narrative moments for trait evolution</li>
+<li>Provide asset improvement opportunities</li>
+<li>Create relationship transformation scenes</li>
+<li>Signal setting axis shifts through events</li>
+</ul>
+</li>
+<li>
+<p><strong>Balance Evolution Across Characters</strong></p>
+<ul>
+<li>Ensure all characters have evolution opportunities</li>
+<li>Create balanced mechanical growth</li>
+<li>Connect individual evolution to group dynamics</li>
+<li>Tie personal development to setting changes</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><strong>Example: Evolution Tracking</strong></p>
+<p>The "Shadow Court" group maintains a shared document tracking their mechanical evolution:</p>
+<p><strong>Mira's Evolution:</strong></p>
+<ul>
+<li>Origin evolved from "Third Tier Noble" to "Rising Power" (Session 12)</li>
+<li>"Network of Informants" expanded to include court connections (Session 8)</li>
+<li>Relationship with Elara transformed from "Secret Partners" to "Public Allies" (Session 15)</li>
+</ul>
+<p><strong>Setting Evolution:</strong></p>
+<ul>
+<li>Supernatural Level shifted from Hidden to Emerging (Session 10)</li>
+<li>Social Structure showing cracks in hierarchy (Session 14)</li>
+<li>Conflict Type intensifying from Social to Social/Ideological (Session 16)</li>
+</ul>
+<p>This tracking helps the group maintain narrative consistency while embracing mechanical evolution.</p>
+</blockquote>
+<h2 id="setting-influence-on-mechanics"><a class="header" href="#setting-influence-on-mechanics">Setting Influence on Mechanics</a></h2>
+<p>Your setting's position on the Five Axes directly influences how mechanics function in play. Understanding these influences helps you make mechanically appropriate choices that reinforce your setting's unique characteristics.</p>
+<h3 id="power-scale-influence"><a class="header" href="#power-scale-influence">Power Scale Influence</a></h3>
+<p>The Power Scale axis affects the scope and impact of mechanical choices:</p>
+<h4 id="personal-power-scale"><a class="header" href="#personal-power-scale">Personal Power Scale</a></h4>
+<ul>
+<li>Individual-focused assets</li>
+<li>Intimate relationship mechanics</li>
+<li>Localized action consequences</li>
+<li>Personal stake resolution</li>
+</ul>
+<h4 id="local-power-scale"><a class="header" href="#local-power-scale">Local Power Scale</a></h4>
+<ul>
+<li>Community-based assets</li>
+<li>Group relationship dynamics</li>
+<li>Neighborhood-level consequences</li>
+<li>Local authority involvement</li>
+</ul>
+<h4 id="regional-power-scale"><a class="header" href="#regional-power-scale">Regional Power Scale</a></h4>
+<ul>
+<li>Territory-spanning assets</li>
+<li>Faction relationship mechanics</li>
+<li>Multi-community consequences</li>
+<li>Regional power structure impact</li>
+</ul>
+<h4 id="global-power-scale"><a class="header" href="#global-power-scale">Global Power Scale</a></h4>
+<ul>
+<li>World-affecting assets</li>
+<li>International relationship dynamics</li>
+<li>Far-reaching consequences</li>
+<li>Global authority involvement</li>
+</ul>
+<blockquote>
+<p><strong>Example: Power Scale Influence</strong></p>
+<p>In "Shadow Court" (Local Power Scale), assets like Mira's "Network of Informants" are limited to the city, relationships primarily connect to local power players, and actions affect neighborhood-level politics.</p>
+<p>In "Frontier Clans" (Regional Power Scale), Karn's "Border Maps" asset covers multiple territories, relationships connect to different clan leaders, and actions have consequences that ripple through the entire border region.</p>
+<p>In "Corporate Wars" (Global Power Scale), Vex's "Global Contact Network" spans multiple continents, relationships connect to international power brokers, and actions can affect worldwide markets and power structures.</p>
+</blockquote>
+<h3 id="supernatural-level-influence"><a class="header" href="#supernatural-level-influence">Supernatural Level Influence</a></h3>
+<p>The Supernatural Level axis determines what kinds of assets and actions are possible:</p>
+<h4 id="none-supernatural-level"><a class="header" href="#none-supernatural-level">None Supernatural Level</a></h4>
+<ul>
+<li>Purely mundane assets</li>
+<li>Reality-bound resolution</li>
+<li>No supernatural relationship types</li>
+<li>Physical limitation constraints</li>
+</ul>
+<h4 id="hidden-supernatural-level"><a class="header" href="#hidden-supernatural-level">Hidden Supernatural Level</a></h4>
+<ul>
+<li>Subtle supernatural assets</li>
+<li>Ambiguous resolution interpretation</li>
+<li>Secret supernatural relationships</li>
+<li>Plausible deniability constraints</li>
+</ul>
+<h4 id="emerging-supernatural-level"><a class="header" href="#emerging-supernatural-level">Emerging Supernatural Level</a></h4>
+<ul>
+<li>Overt supernatural assets</li>
+<li>Mixed mundane/supernatural resolution</li>
+<li>Open supernatural relationships</li>
+<li>Partial integration constraints</li>
+</ul>
+<h4 id="dominant-supernatural-level"><a class="header" href="#dominant-supernatural-level">Dominant Supernatural Level</a></h4>
+<ul>
+<li>Primarily supernatural assets</li>
+<li>Supernatural-focused resolution</li>
+<li>Supernatural-defined relationships</li>
+<li>Magical society constraints</li>
+</ul>
+<blockquote>
+<p><strong>Example: Supernatural Level Influence</strong></p>
+<p>In "Frontier Clans" (None Supernatural Level), all assets are mundane items like weapons, tools, and knowledge. Resolution is bound by physical reality, and relationships are purely social or political.</p>
+<p>In "Shadow Court" (Hidden Supernatural Level), supernatural elements exist but remain subtle. Elara's "Hidden Laboratory" might include some magical components, but they're disguised as scientific instruments. Supernatural relationships remain secret.</p>
+<p>In a "Magical Academy" setting (Dominant Supernatural Level), most assets would be overtly magical, resolution would frequently involve supernatural elements, and relationships would be defined by magical affinities and abilities.</p>
+</blockquote>
+<h3 id="technology-level-influence"><a class="header" href="#technology-level-influence">Technology Level Influence</a></h3>
+<p>The Technology Level axis shapes what assets are available and how they function:</p>
+<h4 id="limited-technology-level"><a class="header" href="#limited-technology-level">Limited Technology Level</a></h4>
+<ul>
+<li>Simple, durable assets</li>
+<li>Craft-based recovery methods</li>
+<li>Physical relationship tokens</li>
+<li>Environmental challenge focus</li>
+</ul>
+<h4 id="moderate-technology-level"><a class="header" href="#moderate-technology-level">Moderate Technology Level</a></h4>
+<ul>
+<li>Specialized, refined assets</li>
+<li>Expert-based recovery methods</li>
+<li>Institutional relationship markers</li>
+<li>Technical challenge focus</li>
+</ul>
+<h4 id="advanced-technology-level"><a class="header" href="#advanced-technology-level">Advanced Technology Level</a></h4>
+<ul>
+<li>Complex, efficient assets</li>
+<li>Specialist-based recovery methods</li>
+<li>Digital relationship tracking</li>
+<li>Systemic challenge focus</li>
+</ul>
+<h4 id="fantastic-technology-level"><a class="header" href="#fantastic-technology-level">Fantastic Technology Level</a></h4>
+<ul>
+<li>Reality-bending assets</li>
+<li>Unique recovery methods</li>
+<li>Abstract relationship concepts</li>
+<li>Conceptual challenge focus</li>
+</ul>
+<blockquote>
+<p><strong>Example: Technology Level Influence</strong></p>
+<p>In "Frontier Clans" (Limited Technology Level), Karn's "Master-Crafted Hunting Bow" is a simple but effective asset, recovery requires traditional crafting skills, and relationships are marked by physical tokens like blood-price markers.</p>
+<p>In "Shadow Court" (Moderate Technology Level), Elara's "Physician's Kit" contains specialized medical tools, recovery often requires expert assistance, and relationships are marked by institutional recognition like court appointments.</p>
+<p>In "Corporate Wars" (Advanced Technology Level), Vex's "Cutting-Edge Security Suite" includes complex digital tools, recovery requires technical specialists, and relationships are tracked through digital networks and corporate databases.</p>
+</blockquote>
+<h3 id="social-structure-influence"><a class="header" href="#social-structure-influence">Social Structure Influence</a></h3>
+<p>The Social Structure axis determines how relationships function and what assets are accessible:</p>
+<h4 id="tribal-social-structure"><a class="header" href="#tribal-social-structure">Tribal Social Structure</a></h4>
+<ul>
+<li>Clan-based assets</li>
+<li>Kinship relationship mechanics</li>
+<li>Tradition-bound resolution</li>
+<li>Group identity focus</li>
+</ul>
+<h4 id="hierarchical-social-structure"><a class="header" href="#hierarchical-social-structure">Hierarchical Social Structure</a></h4>
+<ul>
+<li>Status-defined assets</li>
+<li>Vertical relationship mechanics</li>
+<li>Protocol-bound resolution</li>
+<li>Position maintenance focus</li>
+</ul>
+<h4 id="merit-based-social-structure"><a class="header" href="#merit-based-social-structure">Merit-based Social Structure</a></h4>
+<ul>
+<li>Skill-defined assets</li>
+<li>Achievement relationship mechanics</li>
+<li>Competence-bound resolution</li>
+<li>Advancement focus</li>
+</ul>
+<h4 id="fluid-social-structure"><a class="header" href="#fluid-social-structure">Fluid Social Structure</a></h4>
+<ul>
+<li>Adaptable assets</li>
+<li>Network relationship mechanics</li>
+<li>Innovation-bound resolution</li>
+<li>Trend navigation focus</li>
+</ul>
+<blockquote>
+<p><strong>Example: Social Structure Influence</strong></p>
+<p>In "Frontier Clans" (Tribal Social Structure), assets are often clan-specific like Karn's "Blood-Price Token," relationships emphasize kinship and tradition, and resolution often involves respecting tribal customs.</p>
+<p>In "Shadow Court" (Hierarchical Social Structure), assets reflect social status like Mira's "Ancestral Signet Ring," relationships follow strict vertical patterns, and resolution often involves navigating complex social protocols.</p>
+<p>In "Corporate Wars" (Merit-based Social Structure), assets reflect proven skills like Vex's "Corporate Clearance," relationships form based on achievement, and resolution emphasizes demonstrating competence.</p>
+</blockquote>
+<h3 id="conflict-type-influence"><a class="header" href="#conflict-type-influence">Conflict Type Influence</a></h3>
+<p>The Conflict Type axis shapes how resolution methods are applied and what assets are most valuable:</p>
+<h4 id="direct-conflict-type"><a class="header" href="#direct-conflict-type">Direct Conflict Type</a></h4>
+<ul>
+<li>Combat-focused assets</li>
+<li>Confrontational relationship dynamics</li>
+<li>Physical resolution emphasis</li>
+<li>Immediate consequence focus</li>
+</ul>
+<h4 id="social-conflict-type"><a class="header" href="#social-conflict-type">Social Conflict Type</a></h4>
+<ul>
+<li>Influence-focused assets</li>
+<li>Manipulative relationship dynamics</li>
+<li>Interpersonal resolution emphasis</li>
+<li>Reputation consequence focus</li>
+</ul>
+<h4 id="economic-conflict-type"><a class="header" href="#economic-conflict-type">Economic Conflict Type</a></h4>
+<ul>
+<li>Resource-focused assets</li>
+<li>Transactional relationship dynamics</li>
+<li>Material resolution emphasis</li>
+<li>Wealth consequence focus</li>
+</ul>
+<h4 id="ideological-conflict-type"><a class="header" href="#ideological-conflict-type">Ideological Conflict Type</a></h4>
+<ul>
+<li>Belief-focused assets</li>
+<li>Principled relationship dynamics</li>
+<li>Conceptual resolution emphasis</li>
+<li>Conviction consequence focus</li>
+</ul>
+<blockquote>
+<p><strong>Example: Conflict Type Influence</strong></p>
+<p>In "Frontier Clans" (Direct Conflict Type), valuable assets include weapons and armor, relationships often form through shared combat experiences, and resolution frequently involves physical confrontation.</p>
+<p>In "Shadow Court" (Social Conflict Type), valuable assets include information networks and social connections, relationships involve complex social maneuvering, and resolution emphasizes reputation management and influence.</p>
+<p>In "Corporate Wars" (Economic Conflict Type), valuable assets include financial resources and market access, relationships are often transactional, and resolution emphasizes resource control and material advantage.</p>
+</blockquote>
+<h2 id="conclusion-mechanics-in-service-of-story"><a class="header" href="#conclusion-mechanics-in-service-of-story">Conclusion: Mechanics in Service of Story</a></h2>
+<p>The detailed mechanics of Narrono aren't just rules for determining success or failure—they're tools for collaborative storytelling that create dramatic moments, interesting choices, and evolving narratives. By understanding how traits, assets, relationships, and resolution methods work together, you can create a rich, engaging gameplay experience that serves your group's unique story.</p>
+<p>Remember these key principles as you apply the mechanics:</p>
+<ol>
+<li>
+<p><strong>Method Choice Matters:</strong> Your choice of resolution method (Direct, Balanced, or Cautious) should reflect both your character's traits and your narrative goals.</p>
+</li>
+<li>
+<p><strong>Assets Create Opportunities:</strong> Assets aren't just mechanical bonuses—they're story elements that create both advantages and complications through their use and potential degradation.</p>
+</li>
+<li>
+<p><strong>Relationships Drive Narrative:</strong> The Relationship Web connects characters in meaningful ways, providing both support and tension that drives the narrative forward.</p>
+</li>
+<li>
+<p><strong>Outcomes Shape Story:</strong> Through Dynamic Outcome Interpretation and the Compensation Principle, even mechanical setbacks can create compelling narrative moments.</p>
+</li>
+<li>
+<p><strong>Setting Defines Options:</strong> Your setting's position on the Five Axes directly influences what mechanical choices make sense and how they function in play.</p>
+</li>
+<li>
+<p><strong>Evolution Creates Arcs:</strong> As characters, assets, relationships, and settings evolve through play, the mechanics adapt to support satisfying long-term narrative arcs.</p>
+</li>
+</ol>
+<p>In the next chapter, we'll explore the Game Facilitator's role in Narrono, showing how to create engaging scenes, manage narrative flow, and apply the mechanics effectively to create a satisfying gameplay experience for everyone at the table.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../chapters/ch03-core-rules.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../chapters/ch05-game-facilitator.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../chapters/ch03-core-rules.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../chapters/ch05-game-facilitator.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

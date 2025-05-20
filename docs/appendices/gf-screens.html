@@ -1,0 +1,856 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>GF Screens - Narrono Game Manual</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="A comprehensive role-playing game manual for Narrono">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../css/custom.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Narrono Game Manual</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="game-facilitator-screens"><a class="header" href="#game-facilitator-screens">Game Facilitator Screens</a></h1>
+<h1 id="core-rules-panel"><a class="header" href="#core-rules-panel">Core Rules Panel</a></h1>
+<div class="panel-header">
+# Narrono Core Rules Reference
+</div>
+<div class="panel-section">
+## Resolution Methods
+<div class="table-wrapper"><table><thead><tr><th>Method</th><th>Die Used</th><th>When to Use</th><th>Effect</th></tr></thead><tbody>
+<tr><td><strong>Direct</strong></td><td>Highest</td><td>When acting in alignment with a trait</td><td>Higher chance of success but greater risk</td></tr>
+<tr><td><strong>Balanced</strong></td><td>Middle</td><td>When no traits strongly apply</td><td>Most consistent results</td></tr>
+<tr><td><strong>Cautious</strong></td><td>Lowest</td><td>When acting against trait tendencies</td><td>Lower chance of success but reduced risk</td></tr>
+</tbody></table>
+</div>
+<h3 id="method-selection-guidelines"><a class="header" href="#method-selection-guidelines">Method Selection Guidelines</a></h3>
+<ul>
+<li><strong>Direct</strong>: Use when the action clearly aligns with character traits</li>
+<li><strong>Balanced</strong>: Use when multiple traits have mixed relevance</li>
+<li><strong>Cautious</strong>: Use when going against character tendencies or in unfamiliar territory</li>
+</ul>
+</div>
+<div class="panel-section">
+## Understanding Results
+<div class="table-wrapper"><table><thead><tr><th>Result</th><th>Value</th><th>Outcome</th></tr></thead><tbody>
+<tr><td><strong>Success</strong></td><td>5-6</td><td>Achieve intention, strengthen position, add beneficial story element</td></tr>
+<tr><td><strong>Partial Success</strong></td><td>3-4</td><td>Achieve intention with cost, face minor complication, create mixed opportunity</td></tr>
+<tr><td><strong>Setback</strong></td><td>1-2</td><td>Miss intention, face major complication, create significant story impact</td></tr>
+</tbody></table>
+</div>
+<h3 id="dynamic-outcome-interpretation"><a class="header" href="#dynamic-outcome-interpretation">Dynamic Outcome Interpretation</a></h3>
+<p><strong>After Success (5-6):</strong></p>
+<ul>
+<li>Grant the intention</li>
+<li>Create future complications</li>
+<li>Plant seeds for future challenges</li>
+<li>Show how success changes the setting</li>
+</ul>
+<p><strong>After Partial Success (3-4):</strong></p>
+<ul>
+<li>Grant intention with meaningful cost</li>
+<li>Shape costs to drive character development</li>
+<li>Use costs to introduce new story elements</li>
+<li>Connect costs to existing complications</li>
+</ul>
+<p><strong>After Setback (1-2):</strong></p>
+<ul>
+<li>Acknowledge the mechanical failure</li>
+<li>Transform failure into opportunity</li>
+<li>Reveal hidden information through failure</li>
+<li>Create alternative paths forward</li>
+</ul>
+</div>
+<div class="panel-section">
+## The Compensation Principle
+<p>When dice create extreme results (multiple successes or failures in a row):</p>
+<ol>
+<li>Acknowledge the mechanical outcome</li>
+<li>Consider the narrative momentum</li>
+<li>Introduce balancing elements</li>
+<li>Create new opportunities</li>
+</ol>
+<p><strong>After Multiple Successes:</strong></p>
+<ul>
+<li>Introduce longer-term complications</li>
+<li>Create tension between different successes</li>
+<li>Show unintended consequences of victory</li>
+<li>Raise stakes for future challenges</li>
+</ul>
+<p><strong>After Multiple Setbacks:</strong></p>
+<ul>
+<li>Reveal new information through failure</li>
+<li>Create unexpected advantages</li>
+<li>Introduce helpful NPCs or resources</li>
+<li>Show character growth through adversity</li>
+</ul>
+</div>
+<div class="panel-section">
+## Asset States
+<div class="table-wrapper"><table><thead><tr><th>State</th><th>Effect</th><th>Recovery</th></tr></thead><tbody>
+<tr><td><strong>Fresh</strong></td><td>Full benefits</td><td>-</td></tr>
+<tr><td><strong>Degraded</strong></td><td>Limited use with complications</td><td>Minor narrative action</td></tr>
+<tr><td><strong>Depleted</strong></td><td>Temporarily unusable</td><td>Significant narrative action</td></tr>
+</tbody></table>
+</div>
+<h3 id="common-degradation-triggers"><a class="header" href="#common-degradation-triggers">Common Degradation Triggers</a></h3>
+<ul>
+<li>Multiple uses in same scene</li>
+<li>Using against asset nature</li>
+<li>Failed high-stakes action</li>
+<li>Environmental damage</li>
+</ul>
+<h3 id="recovery-requirements"><a class="header" href="#recovery-requirements">Recovery Requirements</a></h3>
+<ul>
+<li><strong>Fresh → Degraded</strong>: Basic maintenance</li>
+<li><strong>Degraded → Depleted</strong>: Major repair</li>
+<li><strong>Depleted → Fresh</strong>: Complete overhaul</li>
+</ul>
+</div>
+<div class="panel-section">
+## Relationship States
+<div class="table-wrapper"><table><thead><tr><th>State</th><th>Effect</th><th>Recovery</th></tr></thead><tbody>
+<tr><td><strong>Strong</strong></td><td>Full benefits and support</td><td>-</td></tr>
+<tr><td><strong>Strained</strong></td><td>Limited benefits with complications</td><td>Minor positive interaction</td></tr>
+<tr><td><strong>Broken</strong></td><td>Temporarily unusable</td><td>Major story event</td></tr>
+<tr><td><strong>Transformed</strong></td><td>Changed into new type</td><td>Significant narrative development</td></tr>
+</tbody></table>
+</div>
+<h3 id="strain-points-0-5"><a class="header" href="#strain-points-0-5">Strain Points (0-5)</a></h3>
+<ul>
+<li><strong>0-2 points</strong>: Strained but Functional</li>
+<li><strong>3-4 points</strong>: Severely Strained</li>
+<li><strong>5+ points</strong>: Breaking Point</li>
+</ul>
+<h3 id="strain-triggers"><a class="header" href="#strain-triggers">Strain Triggers</a></h3>
+<ul>
+<li>Direct betrayal: +2 points</li>
+<li>Opposing actions: +1 point</li>
+<li>Failed support: +1 point</li>
+<li>Secret revealed: +1-2 points (based on severity)</li>
+</ul>
+</div>
+<div class="panel-section">
+## Shared Story Pool
+<h3 id="setup"><a class="header" href="#setup">Setup</a></h3>
+<ul>
+<li>Each player adds one d6</li>
+<li>GF adds two d6s</li>
+<li>Place dice where all can reach</li>
+</ul>
+<h3 id="usage-options"><a class="header" href="#usage-options">Usage Options</a></h3>
+<p>Players can use dice from pool to:</p>
+<ul>
+<li><strong>Add Complexity</strong>: Introduce complication</li>
+<li><strong>Establish Relationships</strong>: Create connection</li>
+<li><strong>Create Opportunities</strong>: Add story element</li>
+<li><strong>Enhance Rolls</strong>: Add die to personal pool</li>
+</ul>
+<h3 id="gf-usage"><a class="header" href="#gf-usage">GF Usage</a></h3>
+<p>Use pool dice to:</p>
+<ul>
+<li>Add complexity when players are succeeding too easily</li>
+<li>Create opportunities when players are struggling</li>
+<li>Adjust scene difficulty dynamically</li>
+<li>Balance individual and group challenges</li>
+</ul>
+</div>
+<div class="panel-footer">
+*Narrono RPG Core Rules Panel - Print for table reference*
+</div>
+# Setting Management Panel
+<div class="panel-header">
+# Narrono Setting Management Reference
+</div>
+<div class="panel-section">
+## Five Axes Quick Reference
+<div class="table-wrapper"><table><thead><tr><th>Axis</th><th>Options</th><th>Influences</th></tr></thead><tbody>
+<tr><td><strong>Power Scale</strong></td><td>Personal, Local, Regional, Global</td><td>Scope of action, relationship reach, asset scale</td></tr>
+<tr><td><strong>Supernatural</strong></td><td>None, Hidden, Open, Dominant</td><td>Knowledge sources, conflict types, asset nature</td></tr>
+<tr><td><strong>Technology</strong></td><td>Limited, Moderate, Advanced, Fantastic</td><td>Information flow, asset capabilities, conflict resolution</td></tr>
+<tr><td><strong>Social Structure</strong></td><td>Tribal, Hierarchical, Merit, Fluid</td><td>Relationship types, status dynamics, asset access</td></tr>
+<tr><td><strong>Conflict Type</strong></td><td>Direct, Social, Economic, Ideological</td><td>Resolution methods, relationship tensions, asset usage</td></tr>
+</tbody></table>
+</div>
+<h3 id="axis-interactions"><a class="header" href="#axis-interactions">Axis Interactions</a></h3>
+<ul>
+<li><strong>Power + Social</strong>: Determines authority structures</li>
+<li><strong>Supernatural + Technology</strong>: Shapes knowledge systems</li>
+<li><strong>Conflict + Power</strong>: Defines resolution scope</li>
+<li><strong>Social + Conflict</strong>: Creates relationship dynamics</li>
+<li><strong>Technology + Power</strong>: Establishes communication patterns</li>
+</ul>
+</div>
+<div class="panel-section">
+## Setting Evolution Tracking
+<h3 id="element-changes"><a class="header" href="#element-changes">Element Changes</a></h3>
+<p>Track these ongoing developments:</p>
+<ul>
+<li>New groups emerging within existing structures</li>
+<li>Relationships between factions shifting</li>
+<li>Resources becoming available or scarce</li>
+<li>Knowledge spreading or becoming restricted</li>
+</ul>
+<h3 id="internal-axis-shifts"><a class="header" href="#internal-axis-shifts">Internal Axis Shifts</a></h3>
+<p>Changes within an axis choice:</p>
+<ul>
+<li>Power structures reorganizing within their scale</li>
+<li>Supernatural forces finding new expressions</li>
+<li>Technology developing within its level</li>
+<li>Social structures adapting while maintaining their nature</li>
+<li>Conflict patterns evolving within their type</li>
+</ul>
+<h3 id="axis-transitions"><a class="header" href="#axis-transitions">Axis Transitions</a></h3>
+<p>Major changes moving from one axis choice to another:</p>
+<ul>
+<li>Require significant story events</li>
+<li>Should feel earned through play</li>
+<li>Create lasting consequences</li>
+<li>Usually happen gradually</li>
+</ul>
+</div>
+<div class="panel-section">
+## Setting Evolution Triggers
+<h3 id="minor-triggers-element-changes"><a class="header" href="#minor-triggers-element-changes">Minor Triggers (Element Changes)</a></h3>
+<ul>
+<li>Character actions affecting local power</li>
+<li>Discovery of limited resources</li>
+<li>Formation of new relationships</li>
+<li>Development of specialized knowledge</li>
+<li>Creation of new assets</li>
+</ul>
+<h3 id="major-triggers-axis-shifts"><a class="header" href="#major-triggers-axis-shifts">Major Triggers (Axis Shifts)</a></h3>
+<ul>
+<li>Multiple minor changes accumulating</li>
+<li>Critical story events</li>
+<li>Group decisions with far-reaching impact</li>
+<li>Significant resource discoveries/depletions</li>
+<li>Technological breakthroughs</li>
+<li>Social upheavals</li>
+<li>Supernatural manifestations</li>
+</ul>
+</div>
+<div class="panel-section">
+## Faction Management
+<h3 id="faction-tracking"><a class="header" href="#faction-tracking">Faction Tracking</a></h3>
+<p>For each significant faction, track:</p>
+<ul>
+<li><strong>Power Base</strong>: Resources, territory, influence</li>
+<li><strong>Key Relationships</strong>: Allies, rivals, dependencies</li>
+<li><strong>Goals</strong>: Short-term and long-term objectives</li>
+<li><strong>Methods</strong>: How they pursue their goals</li>
+<li><strong>Assets</strong>: What they control or can access</li>
+</ul>
+<h3 id="faction-evolution"><a class="header" href="#faction-evolution">Faction Evolution</a></h3>
+<ul>
+<li><strong>Growth</strong>: Expanding influence or resources</li>
+<li><strong>Decline</strong>: Losing power or territory</li>
+<li><strong>Transformation</strong>: Changing methods or goals</li>
+<li><strong>Alliance</strong>: Forming new relationships</li>
+<li><strong>Conflict</strong>: Developing new rivalries</li>
+</ul>
+</div>
+<div class="panel-section">
+## Location Management
+<h3 id="location-elements"><a class="header" href="#location-elements">Location Elements</a></h3>
+<p>For each significant location, track:</p>
+<ul>
+<li><strong>Axis Expression</strong>: How each axis manifests</li>
+<li><strong>Power Centers</strong>: Who controls what</li>
+<li><strong>Resources</strong>: What's available or scarce</li>
+<li><strong>Tensions</strong>: Ongoing conflicts or issues</li>
+<li><strong>Opportunities</strong>: Potential developments</li>
+</ul>
+<h3 id="location-evolution"><a class="header" href="#location-evolution">Location Evolution</a></h3>
+<ul>
+<li><strong>Physical Changes</strong>: Environmental developments</li>
+<li><strong>Social Changes</strong>: Population or cultural shifts</li>
+<li><strong>Power Changes</strong>: Authority transitions</li>
+<li><strong>Resource Changes</strong>: Availability fluctuations</li>
+<li><strong>Connection Changes</strong>: Access or isolation</li>
+</ul>
+</div>
+<div class="panel-section">
+## Axis Shift Implementation
+<h3 id="gradual-change-process"><a class="header" href="#gradual-change-process">Gradual Change Process</a></h3>
+<ol>
+<li>Establish current state clearly</li>
+<li>Show signs of potential change</li>
+<li>Create opportunities for character influence</li>
+<li>Let consequences ripple outward</li>
+</ol>
+<h3 id="sudden-shift-process"><a class="header" href="#sudden-shift-process">Sudden Shift Process</a></h3>
+<ol>
+<li>Identify the catalyzing event</li>
+<li>Determine immediate consequences</li>
+<li>Create adaptation challenges</li>
+<li>Establish new status quo</li>
+<li>Track ripple effects</li>
+</ol>
+<h3 id="shift-documentation"><a class="header" href="#shift-documentation">Shift Documentation</a></h3>
+<p>For each axis shift, record:</p>
+<ul>
+<li><strong>Previous State</strong>: The starting position</li>
+<li><strong>Catalyzing Events</strong>: What triggered the change</li>
+<li><strong>New State</strong>: The resulting position</li>
+<li><strong>Immediate Effects</strong>: Direct consequences</li>
+<li><strong>Long-term Implications</strong>: Future developments</li>
+</ul>
+</div>
+<div class="panel-footer">
+*Narrono RPG Setting Management Panel - Print for table reference*
+</div>
+# Character Management Panel
+<div class="panel-header">
+# Narrono Character Management Reference
+</div>
+<div class="panel-section">
+## Trait Development Guidelines
+<h3 id="origin-social-structure"><a class="header" href="#origin-social-structure">Origin (Social Structure)</a></h3>
+<p>Development paths:</p>
+<ul>
+<li>Develop new connections within social framework</li>
+<li>Navigate changing status and position</li>
+<li>Face challenges to traditional roles</li>
+<li>Build or strain relationships</li>
+</ul>
+<h3 id="drive-conflict-type"><a class="header" href="#drive-conflict-type">Drive (Conflict Type)</a></h3>
+<p>Development paths:</p>
+<ul>
+<li>Adapt methods to new challenges</li>
+<li>Discover alternative approaches</li>
+<li>Face conflicting motivations</li>
+<li>Evolve goals and methods</li>
+</ul>
+<h3 id="goal-power-scale"><a class="header" href="#goal-power-scale">Goal (Power Scale)</a></h3>
+<p>Development paths:</p>
+<ul>
+<li>Expand or focus ambitions</li>
+<li>Deal with changing scope</li>
+<li>Navigate new power dynamics</li>
+<li>Adjust to achieved objectives</li>
+</ul>
+</div>
+<div class="panel-section">
+## Trait Expansion Opportunities
+<h3 id="origin-enhancement"><a class="header" href="#origin-enhancement">Origin Enhancement</a></h3>
+<ul>
+<li>Add new relationships within original context</li>
+<li>Develop specialized knowledge or authority</li>
+<li>Create sub-groups or factions</li>
+</ul>
+<p><strong>Example:</strong> A "Mountain Clan Warrior" might develop "Voice of the Eastern Peaks"</p>
+<h3 id="drive-refinement"><a class="header" href="#drive-refinement">Drive Refinement</a></h3>
+<ul>
+<li>Specify particular methods or approaches</li>
+<li>Add secondary objectives</li>
+<li>Connect to new conflict types</li>
+</ul>
+<p><strong>Example:</strong> "Control Trade Routes" might refine to "Master of the Silk Road"</p>
+<h3 id="goal-development"><a class="header" href="#goal-development">Goal Development</a></h3>
+<ul>
+<li>Shift between power scales</li>
+<li>Add intermediate objectives</li>
+<li>Create parallel pursuits</li>
+</ul>
+<p><strong>Example:</strong> "Unite the Clans" might develop "Through Ancient Traditions"</p>
+</div>
+<div class="panel-section">
+## Asset Recovery Methods
+<h3 id="physical-assets"><a class="header" href="#physical-assets">Physical Assets</a></h3>
+<ul>
+<li><strong>Fresh → Degraded</strong>: Basic maintenance, cleaning, minor repairs</li>
+<li><strong>Degraded → Depleted</strong>: Major repair, significant resources, specialist help</li>
+<li><strong>Depleted → Fresh</strong>: Complete overhaul, replacement, rare materials</li>
+</ul>
+<h3 id="social-assets"><a class="header" href="#social-assets">Social Assets</a></h3>
+<ul>
+<li><strong>Fresh → Degraded</strong>: Minor reputation management, small favors, token gestures</li>
+<li><strong>Degraded → Depleted</strong>: Social damage control, public amends, significant favors</li>
+<li><strong>Depleted → Fresh</strong>: Complete social reset, major status change, transformative action</li>
+</ul>
+<h3 id="knowledge-assets"><a class="header" href="#knowledge-assets">Knowledge Assets</a></h3>
+<ul>
+<li><strong>Fresh → Degraded</strong>: Update needed, minor research, consultation</li>
+<li><strong>Degraded → Depleted</strong>: Major revision required, significant study, expert guidance</li>
+<li><strong>Depleted → Fresh</strong>: Complete relearning, fundamental discovery, paradigm shift</li>
+</ul>
+<h3 id="supernatural-assets"><a class="header" href="#supernatural-assets">Supernatural Assets</a></h3>
+<ul>
+<li><strong>Fresh → Degraded</strong>: Power recharge, minor ritual, energy source</li>
+<li><strong>Degraded → Depleted</strong>: Ritual restoration, significant sacrifice, power source</li>
+<li><strong>Depleted → Fresh</strong>: Major supernatural event, fundamental transformation, cosmic alignment</li>
+</ul>
+</div>
+<div class="panel-section">
+## Relationship Evolution
+<h3 id="state-changes"><a class="header" href="#state-changes">State Changes</a></h3>
+<ul>
+<li><strong>Strong → Strengthened</strong>: Through shared successes, mutual support, aligned goals</li>
+<li><strong>Strained → Tested</strong>: By conflicts, competing interests, external pressures</li>
+<li><strong>Broken → Damaged</strong>: By major betrayals, fundamental disagreements, opposing actions</li>
+<li><strong>Transformed → Changed</strong>: Into new relationship types through significant events</li>
+</ul>
+<h3 id="recovery-methods"><a class="header" href="#recovery-methods">Recovery Methods</a></h3>
+<ul>
+<li><strong>Minor recovery (-1 strain)</strong>: Successful joint action, small personal sacrifice, public support</li>
+<li><strong>Major recovery (-2 strain)</strong>: Significant personal risk, major resource commitment, critical story support</li>
+<li><strong>Complete reset (clear all strain)</strong>: Relationship transformation, life-changing event, setting-scale impact</li>
+</ul>
+<h3 id="development-paths"><a class="header" href="#development-paths">Development Paths</a></h3>
+<ul>
+<li>Deepening existing bonds through shared experiences</li>
+<li>Forming new connections through story opportunities</li>
+<li>Resolving old conflicts through narrative resolution</li>
+<li>Transforming relationships through character growth</li>
+</ul>
+</div>
+<div class="panel-section">
+## Character Goal Tracking
+<h3 id="short-term-goals"><a class="header" href="#short-term-goals">Short-term Goals</a></h3>
+<ul>
+<li>Tied to immediate story arcs</li>
+<li>Achievable within 1-3 sessions</li>
+<li>Connected to character traits</li>
+<li>Create immediate story opportunities</li>
+</ul>
+<h3 id="medium-term-goals"><a class="header" href="#medium-term-goals">Medium-term Goals</a></h3>
+<ul>
+<li>Span multiple story arcs</li>
+<li>Achievable within a story phase</li>
+<li>Develop character traits</li>
+<li>Create ongoing narrative tension</li>
+</ul>
+<h3 id="long-term-goals"><a class="header" href="#long-term-goals">Long-term Goals</a></h3>
+<ul>
+<li>Span entire campaigns</li>
+<li>Represent character's ultimate aims</li>
+<li>May evolve through play</li>
+<li>Create major story developments</li>
+</ul>
+<h3 id="goal-integration"><a class="header" href="#goal-integration">Goal Integration</a></h3>
+<ul>
+<li>Connect to setting elements</li>
+<li>Involve other characters</li>
+<li>Utilize assets and relationships</li>
+<li>Create meaningful choices</li>
+</ul>
+</div>
+<div class="panel-section">
+## Group Dynamics Management
+<h3 id="balance-spotlight-time"><a class="header" href="#balance-spotlight-time">Balance Spotlight Time</a></h3>
+<ul>
+<li>Track active participation</li>
+<li>Create opportunities for quiet players</li>
+<li>Connect character moments to group goals</li>
+<li>Use relationship dynamics to involve multiple characters</li>
+</ul>
+<h3 id="create-trait-synergies"><a class="header" href="#create-trait-synergies">Create Trait Synergies</a></h3>
+<ul>
+<li>Identify complementary traits</li>
+<li>Create situations requiring multiple approaches</li>
+<li>Highlight how different traits address the same problem</li>
+<li>Show how traits can support each other</li>
+</ul>
+<h3 id="encourage-asset-sharing"><a class="header" href="#encourage-asset-sharing">Encourage Asset Sharing</a></h3>
+<ul>
+<li>Create situations where assets complement each other</li>
+<li>Show benefits of pooling resources</li>
+<li>Create recovery opportunities through cooperation</li>
+<li>Develop shared assets through joint actions</li>
+</ul>
+<h3 id="build-group-narrative"><a class="header" href="#build-group-narrative">Build Group Narrative</a></h3>
+<ul>
+<li>Create shared goals that require all characters</li>
+<li>Develop interconnected relationship webs</li>
+<li>Show how individual actions affect the group</li>
+<li>Create situations that highlight group identity</li>
+</ul>
+</div>
+<div class="panel-footer">
+*Narrono RPG Character Management Panel - Print for table reference*
+</div>
+# Session Management Panel
+<div class="panel-header">
+# Narrono Session Management Reference
+</div>
+<div class="panel-section">
+## Scene Creation Framework
+<h3 id="the-three-layer-approach"><a class="header" href="#the-three-layer-approach">The Three-Layer Approach</a></h3>
+<h4 id="1-setting-layer"><a class="header" href="#1-setting-layer">1. Setting Layer</a></h4>
+<p>Establish the context:</p>
+<ul>
+<li>Reference relevant axis elements</li>
+<li>Show setting constraints</li>
+<li>Establish scene context</li>
+<li>Present setting-specific details</li>
+</ul>
+<p><strong>Example:</strong> <em>"In this Merit-based, Advanced Tech setting, the corporate lobby's security scanners hum quietly. Your degraded Access Card flickers, struggling with the latest encryption update."</em></p>
+<h4 id="2-character-integration"><a class="header" href="#2-character-integration">2. Character Integration</a></h4>
+<p>Connect to characters:</p>
+<ul>
+<li>Link to relevant traits</li>
+<li>Show how complications manifest</li>
+<li>Present growth opportunities</li>
+<li>Connect to character goals</li>
+</ul>
+<p><strong>Example:</strong> <em>"As a former Security Specialist, you recognize the system's weaknesses, but your Corporate Outcast status makes official access tricky."</em></p>
+<h4 id="3-options-layer"><a class="header" href="#3-options-layer">3. Options Layer</a></h4>
+<p>Present meaningful choices:</p>
+<ul>
+<li>Multiple viable approaches</li>
+<li>Connect choices to traits and assets</li>
+<li>Show immediate and long-term implications</li>
+<li>Make each choice meaningful</li>
+</ul>
+<p><strong>Example:</strong> <em>"You could use your security expertise directly (Direct roll, but risks recognition), try standard corporate protocols (Balanced roll), or rely on social engineering (Cautious roll)."</em></p>
+</div>
+<div class="panel-section">
+## Session Pacing Guidelines
+<h3 id="session-structure"><a class="header" href="#session-structure">Session Structure</a></h3>
+<p>A well-paced session typically includes:</p>
+<ul>
+<li><strong>Opening Scene</strong>: Establish situation and immediate goals</li>
+<li><strong>Rising Action</strong>: 2-3 scenes of increasing complexity</li>
+<li><strong>Turning Point</strong>: A major decision or revelation</li>
+<li><strong>Resolution</strong>: Consequences and outcomes</li>
+<li><strong>Denouement</strong>: Character moments and future hooks</li>
+</ul>
+<h3 id="scene-transitions"><a class="header" href="#scene-transitions">Scene Transitions</a></h3>
+<p>Effective transitions between scenes:</p>
+<ul>
+<li>Connect to character decisions</li>
+<li>Show passage of time</li>
+<li>Change location or perspective</li>
+<li>Introduce new elements</li>
+<li>Escalate tension or provide contrast</li>
+</ul>
+<h3 id="pacing-adjustments"><a class="header" href="#pacing-adjustments">Pacing Adjustments</a></h3>
+<p>When to adjust pacing:</p>
+<ul>
+<li><strong>Speed up</strong>: When energy is lagging, decisions stall, or focus wanders</li>
+<li><strong>Slow down</strong>: During important character moments, major decisions, or emotional scenes</li>
+<li><strong>Add complexity</strong>: When players are succeeding too easily</li>
+<li><strong>Simplify</strong>: When players are overwhelmed or frustrated</li>
+</ul>
+</div>
+<div class="panel-section">
+## Compensation Principle Flowchart
+<h3 id="when-to-apply-compensation"><a class="header" href="#when-to-apply-compensation">When to Apply Compensation</a></h3>
+<ol>
+<li>Has there been a streak of 3+ successes or failures?</li>
+<li>Is story momentum stalling?</li>
+<li>Is player engagement dropping?</li>
+<li>Are character development opportunities being missed?</li>
+</ol>
+<p>If YES to any → Apply Compensation</p>
+<h3 id="how-to-apply-compensation"><a class="header" href="#how-to-apply-compensation">How to Apply Compensation</a></h3>
+<h4 id="after-success-streak"><a class="header" href="#after-success-streak">After Success Streak</a></h4>
+<ol>
+<li>Acknowledge successes</li>
+<li>Introduce future complications</li>
+<li>Create tension between successes</li>
+<li>Show unintended consequences</li>
+<li>Raise future stakes</li>
+</ol>
+<h4 id="after-failure-streak"><a class="header" href="#after-failure-streak">After Failure Streak</a></h4>
+<ol>
+<li>Honor mechanical failures</li>
+<li>Reveal new information</li>
+<li>Create unexpected advantages</li>
+<li>Introduce helpful elements</li>
+<li>Show character growth opportunities</li>
+</ol>
+</div>
+<div class="panel-section">
+## Dynamic Outcome Examples
+<h3 id="success-5-6-examples"><a class="header" href="#success-5-6-examples">Success (5-6) Examples</a></h3>
+<ul>
+<li><strong>Combat</strong>: "Your attack lands perfectly. The guard falls, but his radio crackles with an incoming check-in request."</li>
+<li><strong>Social</strong>: "The merchant agrees to your terms enthusiastically—too enthusiastically. Word of this deal will spread quickly."</li>
+<li><strong>Exploration</strong>: "You find the hidden passage easily, but disturb ancient dust that begins to trigger forgotten wards."</li>
+</ul>
+<h3 id="partial-success-3-4-examples"><a class="header" href="#partial-success-3-4-examples">Partial Success (3-4) Examples</a></h3>
+<ul>
+<li><strong>Combat</strong>: "You strike the guard down, but not before he shouts an alarm."</li>
+<li><strong>Social</strong>: "The merchant agrees reluctantly, but demands payment in advance."</li>
+<li><strong>Exploration</strong>: "You find the hidden passage, but it's partially collapsed and will be difficult to navigate."</li>
+</ul>
+<h3 id="setback-1-2-examples"><a class="header" href="#setback-1-2-examples">Setback (1-2) Examples</a></h3>
+<ul>
+<li><strong>Combat</strong>: "Your attack misses, but knocks over a shelf that creates cover between you and the guard."</li>
+<li><strong>Social</strong>: "The merchant refuses your offer, but mentions another trader who might be more amenable."</li>
+<li><strong>Exploration</strong>: "You can't find the passage, but discover markings that suggest another entrance exists."</li>
+</ul>
+</div>
+<div class="panel-section">
+## Troubleshooting Common Issues
+<h3 id="when-players-hesitate"><a class="header" href="#when-players-hesitate">When Players Hesitate</a></h3>
+<ul>
+<li>Reference setting elements to provide context</li>
+<li>Show clear asset opportunities</li>
+<li>Connect to character goals</li>
+<li>Present immediate stakes</li>
+<li>Offer a default option</li>
+</ul>
+<h3 id="when-scenes-stall"><a class="header" href="#when-scenes-stall">When Scenes Stall</a></h3>
+<ul>
+<li>Introduce setting complication</li>
+<li>Bring in relationship connection</li>
+<li>Escalate existing tension</li>
+<li>Add time pressure</li>
+<li>Change the scene location</li>
+</ul>
+<h3 id="when-choices-feel-meaningless"><a class="header" href="#when-choices-feel-meaningless">When Choices Feel Meaningless</a></h3>
+<ul>
+<li>Show setting implications</li>
+<li>Connect to character traits</li>
+<li>Add asset considerations</li>
+<li>Reveal hidden stakes</li>
+<li>Create long-term consequences</li>
+</ul>
+<h3 id="when-players-struggle-with-rules"><a class="header" href="#when-players-struggle-with-rules">When Players Struggle With Rules</a></h3>
+<ul>
+<li>Simplify the immediate choice</li>
+<li>Offer a specific resolution method</li>
+<li>Suggest asset or relationship use</li>
+<li>Provide an example from previous play</li>
+<li>Focus on intention over mechanics</li>
+</ul>
+</div>
+<div class="panel-section">
+## Session Management Tools
+<h3 id="scene-stagnation-checklist"><a class="header" href="#scene-stagnation-checklist">Scene Stagnation Checklist</a></h3>
+<p>If a scene is dragging, check for:</p>
+<ul>
+<li><input disabled="" type="checkbox"/>
+Clear character goals</li>
+<li><input disabled="" type="checkbox"/>
+Meaningful stakes</li>
+<li><input disabled="" type="checkbox"/>
+Multiple approach options</li>
+<li><input disabled="" type="checkbox"/>
+Setting integration</li>
+<li><input disabled="" type="checkbox"/>
+Time pressure or urgency</li>
+</ul>
+<h3 id="player-engagement-assessment"><a class="header" href="#player-engagement-assessment">Player Engagement Assessment</a></h3>
+<p>Watch for signs of disengagement:</p>
+<ul>
+<li>Distracted behavior</li>
+<li>Reduced participation</li>
+<li>Focusing on mechanics over story</li>
+<li>Avoiding character moments</li>
+<li>Deferring decisions to others</li>
+</ul>
+<h3 id="narrative-momentum-tracker"><a class="header" href="#narrative-momentum-tracker">Narrative Momentum Tracker</a></h3>
+<p>Rate momentum from 1-5:</p>
+<ol>
+<li>Stalled (immediate intervention needed)</li>
+<li>Slow (needs new elements)</li>
+<li>Steady (maintaining interest)</li>
+<li>Building (increasing engagement)</li>
+<li>Climactic (peak intensity)</li>
+</ol>
+</div>
+<div class="panel-footer">
+*Narrono RPG Session Management Panel - Print for table reference*
+</div>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../appendices/session-templates.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../appendices/quickstart.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../appendices/session-templates.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../appendices/quickstart.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

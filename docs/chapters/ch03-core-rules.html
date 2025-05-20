@@ -1,0 +1,1281 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Chapter 3: Character Creation - Narrono Game Manual</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="A comprehensive role-playing game manual for Narrono">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../css/custom.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Narrono Game Manual</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="chapter-3-core-rules"><a class="header" href="#chapter-3-core-rules">Chapter 3: Core Rules</a></h1>
+<h2 id="characters-shaped-by-setting"><a class="header" href="#characters-shaped-by-setting">Characters Shaped by Setting</a></h2>
+<p>In Narrono, characters don't exist in isolation—they emerge from their setting, shaped by its fundamental aspects. The choices you made during setting creation directly influence what character options make sense, what traits are available, and what kinds of relationships can form between characters.</p>
+<p>This chapter guides you through creating characters that are deeply integrated with your setting through the trait and asset system. You'll learn how to develop characters whose origins, drives, and goals naturally emerge from the world you've built, and how to connect them through the Relationship Web.</p>
+<h2 id="the-character-creation-process"><a class="header" href="#the-character-creation-process">The Character Creation Process</a></h2>
+<p>Creating characters in Narrono follows a structured process that ensures they're firmly rooted in your setting:</p>
+<ol>
+<li><strong>Develop Traits:</strong> Create three core traits (Origin, Drive, Goal) that emerge from setting elements</li>
+<li><strong>Build Assets:</strong> Develop assets that connect to traits and reflect setting elements</li>
+<li><strong>Establish Relationships:</strong> Create the Relationship Web between characters</li>
+<li><strong>Finalize Details:</strong> Complete your character sheet with connections and story elements</li>
+</ol>
+<p>Let's explore each step in detail.</p>
+<h2 id="developing-character-traits"><a class="header" href="#developing-character-traits">Developing Character Traits</a></h2>
+<p>Every character in Narrono is defined by three core traits that emerge directly from your setting's axes:</p>
+<ul>
+<li><strong>Origin:</strong> Shaped by Social Structure</li>
+<li><strong>Drive:</strong> Shaped by Conflict Type</li>
+<li><strong>Goal:</strong> Shaped by Power Scale</li>
+</ul>
+<p>These traits aren't just descriptive labels—they're the foundation of how your character interacts with the world and its mechanics. Each trait influences which resolution method (Direct, Balanced, or Cautious) works best in different situations.</p>
+<h3 id="origin-shaped-by-social-structure"><a class="header" href="#origin-shaped-by-social-structure">Origin: Shaped by Social Structure</a></h3>
+<p>Your character's Origin represents their background, upbringing, and position within the social framework of your setting. It answers the question: "Where do I come from?"</p>
+<h4 id="how-social-structure-shapes-origin"><a class="header" href="#how-social-structure-shapes-origin">How Social Structure Shapes Origin</a></h4>
+<p>Each Social Structure option creates different Origin possibilities:</p>
+<p><strong>Tribal Structure</strong></p>
+<ul>
+<li>Clan Member</li>
+<li>Tribal Elder</li>
+<li>Outcast</li>
+<li>Shaman/Spiritual Leader</li>
+<li>Nomadic Trader</li>
+</ul>
+<p><strong>Hierarchical Structure</strong></p>
+<ul>
+<li>Noble/Aristocrat</li>
+<li>Clergy/Priest</li>
+<li>Merchant/Artisan</li>
+<li>Commoner/Laborer</li>
+<li>Outsider/Foreigner</li>
+</ul>
+<p><strong>Merit-based Structure</strong></p>
+<ul>
+<li>Proven Expert</li>
+<li>Rising Talent</li>
+<li>Self-Made Success</li>
+<li>Academy Graduate</li>
+<li>Unrecognized Genius</li>
+</ul>
+<p><strong>Fluid Structure</strong></p>
+<ul>
+<li>Trend-Setter</li>
+<li>Adaptable Survivor</li>
+<li>Network Hub</li>
+<li>Identity Shifter</li>
+<li>Cultural Translator</li>
+</ul>
+<blockquote>
+<p><strong>Example: Origin Development</strong></p>
+<p>In "Shadow Court" (with Hierarchical Social Structure), Mira develops the Origin "Third Tier Noble of House Vayne." This places her in the aristocracy but not at its highest levels, creating both opportunities and limitations.</p>
+<p>In "Frontier Clans" (with Tribal Social Structure), Karn develops the Origin "Exiled Hunter of the Bear Clan." This establishes his skills and connections while also creating immediate complications.</p>
+</blockquote>
+<h4 id="origin-connections"><a class="header" href="#origin-connections">Origin Connections</a></h4>
+<p>Each Origin should include three connections that create story hooks:</p>
+<ul>
+<li><strong>Bond:</strong> A positive relationship or connection</li>
+<li><strong>Complication:</strong> A problem or challenge</li>
+<li><strong>Weakness:</strong> A limitation or vulnerability</li>
+</ul>
+<blockquote>
+<p><strong>Example: Origin Connections</strong></p>
+<p>For Mira's "Third Tier Noble of House Vayne" Origin:</p>
+<ul>
+<li>Bond: Loyal Family Retainers</li>
+<li>Complication: Succession Dispute</li>
+<li>Weakness: Public Scrutiny</li>
+</ul>
+<p>For Karn's "Exiled Hunter of the Bear Clan" Origin:</p>
+<ul>
+<li>Bond: Secret Clan Allies</li>
+<li>Complication: Blood Debt</li>
+<li>Weakness: Outsider Status</li>
+</ul>
+</blockquote>
+<h3 id="drive-shaped-by-conflict-type"><a class="header" href="#drive-shaped-by-conflict-type">Drive: Shaped by Conflict Type</a></h3>
+<p>Your character's Drive represents their motivation and preferred approach to solving problems. It answers the question: "What pushes me forward?"</p>
+<h4 id="how-conflict-type-shapes-drive"><a class="header" href="#how-conflict-type-shapes-drive">How Conflict Type Shapes Drive</a></h4>
+<p>Each Conflict Type option creates different Drive possibilities:</p>
+<p><strong>Direct Conflict</strong></p>
+<ul>
+<li>Protect Through Strength</li>
+<li>Conquer Through Force</li>
+<li>Survive Through Skill</li>
+<li>Defend Through Vigilance</li>
+<li>Lead Through Action</li>
+</ul>
+<p><strong>Social Conflict</strong></p>
+<ul>
+<li>Influence Through Charm</li>
+<li>Control Through Secrets</li>
+<li>Rise Through Connections</li>
+<li>Protect Through Reputation</li>
+<li>Unify Through Leadership</li>
+</ul>
+<p><strong>Economic Conflict</strong></p>
+<ul>
+<li>Profit Through Trade</li>
+<li>Control Through Resources</li>
+<li>Build Through Investment</li>
+<li>Secure Through Acquisition</li>
+<li>Innovate Through Opportunity</li>
+</ul>
+<p><strong>Ideological Conflict</strong></p>
+<ul>
+<li>Convert Through Faith</li>
+<li>Reform Through Vision</li>
+<li>Preserve Through Tradition</li>
+<li>Enlighten Through Knowledge</li>
+<li>Liberate Through Revolution</li>
+</ul>
+<blockquote>
+<p><strong>Example: Drive Development</strong></p>
+<p>In "Shadow Court" (with Social Conflict), Mira develops the Drive "Secure Power Through Secret Knowledge." This reflects how influence in her setting comes through social maneuvering and hidden information.</p>
+<p>In "Frontier Clans" (with Direct Conflict), Karn develops the Drive "Reclaim Honor Through Proven Strength." This aligns with his setting's emphasis on direct action and physical capability.</p>
+</blockquote>
+<h4 id="drive-connections"><a class="header" href="#drive-connections">Drive Connections</a></h4>
+<p>Like Origin, each Drive should include three connections:</p>
+<ul>
+<li><strong>Bond:</strong> A relationship that supports this Drive</li>
+<li><strong>Complication:</strong> A challenge this Drive creates</li>
+<li><strong>Weakness:</strong> A vulnerability this Drive exposes</li>
+</ul>
+<blockquote>
+<p><strong>Example: Drive Connections</strong></p>
+<p>For Mira's "Secure Power Through Secret Knowledge" Drive:</p>
+<ul>
+<li>Bond: Hidden Archive Keeper</li>
+<li>Complication: Dangerous Information</li>
+<li>Weakness: Obsessive Research</li>
+</ul>
+<p>For Karn's "Reclaim Honor Through Proven Strength" Drive:</p>
+<ul>
+<li>Bond: Respected Warrior Mentor</li>
+<li>Complication: Reckless Challenges</li>
+<li>Weakness: Prideful Decisions</li>
+</ul>
+</blockquote>
+<h3 id="goal-shaped-by-power-scale"><a class="header" href="#goal-shaped-by-power-scale">Goal: Shaped by Power Scale</a></h3>
+<p>Your character's Goal represents their ambition and what they hope to achieve. It answers the question: "What am I working toward?"</p>
+<h4 id="how-power-scale-shapes-goal"><a class="header" href="#how-power-scale-shapes-goal">How Power Scale Shapes Goal</a></h4>
+<p>Each Power Scale option creates different Goal possibilities:</p>
+<p><strong>Personal Power Scale</strong></p>
+<ul>
+<li>Master a Skill</li>
+<li>Protect a Loved One</li>
+<li>Discover Personal Truth</li>
+<li>Overcome Personal Limitation</li>
+<li>Find Inner Peace</li>
+</ul>
+<p><strong>Local Power Scale</strong></p>
+<ul>
+<li>Lead Community</li>
+<li>Change Local Tradition</li>
+<li>Control Neighborhood</li>
+<li>Establish Local Business</li>
+<li>Solve Community Problem</li>
+</ul>
+<p><strong>Regional Power Scale</strong></p>
+<ul>
+<li>Gain Political Office</li>
+<li>Reform Institution</li>
+<li>Control Trade Routes</li>
+<li>Unite Rival Factions</li>
+<li>Discover Regional Secret</li>
+</ul>
+<p><strong>Global Power Scale</strong></p>
+<ul>
+<li>Change World History</li>
+<li>Control Global Resource</li>
+<li>Lead International Movement</li>
+<li>Discover World-Changing Knowledge</li>
+<li>Reshape Power Structure</li>
+</ul>
+<blockquote>
+<p><strong>Example: Goal Development</strong></p>
+<p>In "Shadow Court" (with Local Power Scale), Mira develops the Goal "Reshape House Influence in Harbor District." This fits the local scope of power in her setting.</p>
+<p>In "Frontier Clans" (with Regional Power Scale), Karn develops the Goal "Unite the Three Border Clans." This reflects the regional scope of his setting's conflicts.</p>
+</blockquote>
+<h4 id="goal-connections"><a class="header" href="#goal-connections">Goal Connections</a></h4>
+<p>Each Goal should include three connections:</p>
+<ul>
+<li><strong>Bond:</strong> A relationship that helps achieve this Goal</li>
+<li><strong>Complication:</strong> An obstacle to this Goal</li>
+<li><strong>Weakness:</strong> A personal limitation affecting this Goal</li>
+</ul>
+<blockquote>
+<p><strong>Example: Goal Connections</strong></p>
+<p>For Mira's "Reshape House Influence in Harbor District" Goal:</p>
+<ul>
+<li>Bond: Reform-Minded Peers</li>
+<li>Complication: Conservative Opposition</li>
+<li>Weakness: Idealistic Assumptions</li>
+</ul>
+<p>For Karn's "Unite the Three Border Clans" Goal:</p>
+<ul>
+<li>Bond: Clan Elder Advocate</li>
+<li>Complication: Ancient Blood Feuds</li>
+<li>Weakness: Lack of Diplomatic Experience</li>
+</ul>
+</blockquote>
+<h3 id="trait-integration"><a class="header" href="#trait-integration">Trait Integration</a></h3>
+<p>Your three traits should work together to create a coherent character. Consider:</p>
+<ul>
+<li>How does your Origin influence your Drive?</li>
+<li>How does your Drive support your Goal?</li>
+<li>What tensions exist between your traits?</li>
+<li>How do your traits connect to setting elements?</li>
+</ul>
+<blockquote>
+<p><strong>Example: Trait Integration</strong></p>
+<p><strong>Mira's Traits:</strong></p>
+<ul>
+<li>Origin: Third Tier Noble of House Vayne</li>
+<li>Drive: Secure Power Through Secret Knowledge</li>
+<li>Goal: Reshape House Influence in Harbor District</li>
+</ul>
+<p><strong>Integration:</strong> Mira's position as a Third Tier Noble gives her access to court but limited direct power, driving her to seek influence through secrets. Her goal of reshaping House influence focuses her drive on specific local politics rather than broader ambitions.</p>
+<p><strong>Karn's Traits:</strong></p>
+<ul>
+<li>Origin: Exiled Hunter of the Bear Clan</li>
+<li>Drive: Reclaim Honor Through Proven Strength</li>
+<li>Goal: Unite the Three Border Clans</li>
+</ul>
+<p><strong>Integration:</strong> Karn's exile status creates the need to reclaim honor, while his hunter background gives him skills but not political standing. His goal of uniting clans provides a path to both restore his honor and create a place where exiles like him might belong.</p>
+</blockquote>
+<h2 id="building-character-assets"><a class="header" href="#building-character-assets">Building Character Assets</a></h2>
+<p>Assets represent your character's equipment, special abilities, resources, and advantages. They provide mechanical support for actions and create story opportunities through their use and potential degradation.</p>
+<h3 id="asset-development-process"><a class="header" href="#asset-development-process">Asset Development Process</a></h3>
+<ol>
+<li>Create three assets that connect to your character's traits</li>
+<li>Ensure each asset reflects appropriate setting elements</li>
+<li>Establish how assets can be used and risked</li>
+<li>Consider how assets might evolve through play</li>
+</ol>
+<h3 id="asset-types"><a class="header" href="#asset-types">Asset Types</a></h3>
+<p>Assets fall into several categories based on your setting's axes:</p>
+<h4 id="physical-assets"><a class="header" href="#physical-assets">Physical Assets</a></h4>
+<ul>
+<li>Weapons and armor</li>
+<li>Tools and equipment</li>
+<li>Vehicles and transportation</li>
+<li>Special items and artifacts</li>
+</ul>
+<h4 id="social-assets"><a class="header" href="#social-assets">Social Assets</a></h4>
+<ul>
+<li>Reputation and status</li>
+<li>Organizational membership</li>
+<li>Contacts and informants</li>
+<li>Favors and debts</li>
+</ul>
+<h4 id="knowledge-assets"><a class="header" href="#knowledge-assets">Knowledge Assets</a></h4>
+<ul>
+<li>Special training</li>
+<li>Secret information</li>
+<li>Technical expertise</li>
+<li>Cultural understanding</li>
+</ul>
+<h4 id="supernatural-assets"><a class="header" href="#supernatural-assets">Supernatural Assets</a></h4>
+<ul>
+<li>Magical abilities</li>
+<li>Mystical items</li>
+<li>Supernatural connections</li>
+<li>Special powers</li>
+</ul>
+<blockquote>
+<p><strong>Example: Asset Categories in Different Settings</strong></p>
+<p>In "Shadow Court" (Local/Hidden/Moderate/Hierarchical/Social):</p>
+<ul>
+<li>Physical Assets: Dueling rapier, disguise kit, cipher tools</li>
+<li>Social Assets: Noble title, guild membership, court invitation</li>
+<li>Knowledge Assets: Family secrets, blackmail material, ancient lore</li>
+<li>Supernatural Assets: Minor magical talent, enchanted heirloom, ritual knowledge</li>
+</ul>
+<p>In "Frontier Clans" (Regional/None/Limited/Tribal/Direct):</p>
+<ul>
+<li>Physical Assets: Hunting bow, clan armor, wilderness gear</li>
+<li>Social Assets: Tribal markings, elder's blessing, blood oath</li>
+<li>Knowledge Assets: Survival skills, clan histories, trade routes</li>
+<li>Supernatural Assets: None (due to None Supernatural Level)</li>
+</ul>
+</blockquote>
+<h3 id="asset-creation-guidelines"><a class="header" href="#asset-creation-guidelines">Asset Creation Guidelines</a></h3>
+<p>When creating assets, consider:</p>
+<ol>
+<li><strong>Setting Consistency:</strong> Assets must make sense within your setting's axes</li>
+<li><strong>Trait Connection:</strong> Each asset should connect to at least one trait</li>
+<li><strong>Narrative Potential:</strong> Assets should create story opportunities</li>
+<li><strong>Mechanical Utility:</strong> Assets should provide clear benefits in appropriate situations</li>
+</ol>
+<blockquote>
+<p><strong>Example: Asset Creation</strong></p>
+<p><strong>Mira creates three assets:</strong></p>
+<ol>
+<li>
+<p><strong>Family Grimoire</strong></p>
+<ul>
+<li>Connected to: Origin (Third Tier Noble)</li>
+<li>Setting Elements: Hidden Supernatural, Hierarchical Social Structure</li>
+<li>Description: Ancient book containing family secrets and minor rituals</li>
+<li>Mechanical Use: Provides knowledge about noble houses and minor magical effects</li>
+</ul>
+</li>
+<li>
+<p><strong>Network of Informants</strong></p>
+<ul>
+<li>Connected to: Drive (Secure Power Through Secret Knowledge)</li>
+<li>Setting Elements: Local Power Scale, Social Conflict</li>
+<li>Description: Eyes and ears throughout the Harbor District</li>
+<li>Mechanical Use: Provides information and social leverage</li>
+</ul>
+</li>
+<li>
+<p><strong>Ancestral Signet Ring</strong></p>
+<ul>
+<li>Connected to: Goal (Reshape House Influence)</li>
+<li>Setting Elements: Hierarchical Social Structure, Moderate Technology</li>
+<li>Description: Symbol of family authority that grants access to certain areas</li>
+<li>Mechanical Use: Provides social authority and authentication</li>
+</ul>
+</li>
+</ol>
+<p><strong>Karn creates three assets:</strong></p>
+<ol>
+<li>
+<p><strong>Master-Crafted Hunting Bow</strong></p>
+<ul>
+<li>Connected to: Origin (Exiled Hunter)</li>
+<li>Setting Elements: Limited Technology, Tribal Social Structure</li>
+<li>Description: Exceptional bow made with traditional techniques</li>
+<li>Mechanical Use: Provides advantage in hunting and combat</li>
+</ul>
+</li>
+<li>
+<p><strong>Blood-Price Token</strong></p>
+<ul>
+<li>Connected to: Drive (Reclaim Honor)</li>
+<li>Setting Elements: Tribal Social Structure, Direct Conflict</li>
+<li>Description: Symbol of a debt that must be repaid to restore honor</li>
+<li>Mechanical Use: Provides leverage in clan negotiations</li>
+</ul>
+</li>
+<li>
+<p><strong>Border Maps</strong></p>
+<ul>
+<li>Connected to: Goal (Unite Three Border Clans)</li>
+<li>Setting Elements: Regional Power Scale, Limited Technology</li>
+<li>Description: Detailed maps of territories, resources, and routes</li>
+<li>Mechanical Use: Provides strategic information for travel and negotiation</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<h3 id="asset-states"><a class="header" href="#asset-states">Asset States</a></h3>
+<p>Remember that assets exist in three states that reflect their condition and availability:</p>
+<ul>
+<li><strong>Fresh:</strong> Providing full benefits and support</li>
+<li><strong>Degraded:</strong> Creating complications but still usable</li>
+<li><strong>Depleted:</strong> Temporarily unusable until restored</li>
+</ul>
+<p>Assets can change state through use, risk, and narrative events. When an asset becomes Degraded or Depleted, it creates both mechanical limitations and story opportunities for restoration.</p>
+<blockquote>
+<p><strong>Example: Asset States in Play</strong></p>
+<p>Mira's "Network of Informants" starts Fresh, providing reliable information. After using it to uncover sensitive information about a powerful rival, it becomes Degraded as some informants are compromised. This creates complications (less reliable information) but also story opportunities (how to protect her remaining sources).</p>
+<p>If the network later becomes Depleted through further risk or narrative events, it becomes temporarily unusable until Mira takes actions to rebuild it, perhaps by establishing new contacts or creating new cover identities.</p>
+</blockquote>
+<h2 id="establishing-the-relationship-web"><a class="header" href="#establishing-the-relationship-web">Establishing the Relationship Web</a></h2>
+<p>The Relationship Web connects characters to each other in setting-appropriate ways, creating both narrative bonds and mechanical support systems. Unlike many games where character connections are established during individual creation, Narrono implements the Relationship Web after all characters are developed.</p>
+<h3 id="the-relationship-web-process"><a class="header" href="#the-relationship-web-process">The Relationship Web Process</a></h3>
+<ol>
+<li>Each player introduces their character's traits and assets</li>
+<li>Players collaboratively establish relationships between characters</li>
+<li>Each relationship is defined by type, state, and connections</li>
+<li>The group ensures relationships make sense within the setting</li>
+</ol>
+<h3 id="relationship-types"><a class="header" href="#relationship-types">Relationship Types</a></h3>
+<p>Relationships fall into several categories based on your setting's axes:</p>
+<h4 id="family-and-blood-ties"><a class="header" href="#family-and-blood-ties">Family and Blood Ties</a></h4>
+<ul>
+<li>Siblings: Rivalry, responsibility, shared legacy</li>
+<li>Distant Relatives: Rediscovered connections</li>
+<li>Adopted Family: Chosen bonds</li>
+<li>Legacy Inheritors: Shared burdens</li>
+<li>Clan Representatives: Family duty</li>
+</ul>
+<h4 id="professional-connections"><a class="header" href="#professional-connections">Professional Connections</a></h4>
+<ul>
+<li>Former Colleagues: Shared experience</li>
+<li>Rivals in Same Field: Competition</li>
+<li>Contractor and Client: Obligation</li>
+<li>Superior and Subordinate: Authority</li>
+<li>Partners with Unequal Status: Power imbalance</li>
+</ul>
+<h4 id="debt-and-obligation"><a class="header" href="#debt-and-obligation">Debt and Obligation</a></h4>
+<ul>
+<li>Life-Debt: Extreme obligation</li>
+<li>Financial Entanglement: Resources</li>
+<li>Oath-Bound: Formal promise</li>
+<li>Blackmail Relationship: Leverage</li>
+<li>Inherited Obligation: Ancestral commitments</li>
+</ul>
+<h4 id="shared-history"><a class="header" href="#shared-history">Shared History</a></h4>
+<ul>
+<li>Childhood Friends: Reconnection</li>
+<li>Former Cell-mates: Prison bonds</li>
+<li>Survivors of Disaster: Trauma bond</li>
+<li>Fellow Veterans: Battlefield memories</li>
+<li>Witnesses to Secret Event: Shared knowledge</li>
+</ul>
+<h4 id="adversarial-connections"><a class="header" href="#adversarial-connections">Adversarial Connections</a></h4>
+<ul>
+<li>Former Enemies: Tentative alliance</li>
+<li>Competing Heirs: Disputed inheritance</li>
+<li>Ideological Opponents: Philosophical difference</li>
+<li>Betrayer and Betrayed: Broken trust</li>
+<li>Hunter and Quarry: Pursuit turned partnership</li>
+</ul>
+<blockquote>
+<p><strong>Example: Relationship Types in Different Settings</strong></p>
+<p>In "Shadow Court" (Local/Hidden/Moderate/Hierarchical/Social):</p>
+<ul>
+<li>Family Ties: Competing noble cousins, distant relation with secret claim</li>
+<li>Professional: Court advisor and noble patron, guild master and apprentice</li>
+<li>Debt: Life-debt for saving from assassination, blackmail over secret magic</li>
+<li>Shared History: Childhood friends from academy, witnesses to royal scandal</li>
+<li>Adversarial: Former rivals now allied against common threat, competing heirs</li>
+</ul>
+<p>In "Frontier Clans" (Regional/None/Limited/Tribal/Direct):</p>
+<ul>
+<li>Family Ties: Siblings from rival clans, adopted into different tribes</li>
+<li>Professional: Mentor and student hunters, rival traders</li>
+<li>Debt: Blood oath of protection, life-debt for rescue in wilderness</li>
+<li>Shared History: Survivors of same raid, fellow exiles</li>
+<li>Adversarial: Former blood enemies now bound by common cause, rival champions</li>
+</ul>
+</blockquote>
+<h3 id="relationship-states"><a class="header" href="#relationship-states">Relationship States</a></h3>
+<p>Like assets, relationships exist in multiple states:</p>
+<ul>
+<li><strong>Strong:</strong> Provides full benefits and support</li>
+<li><strong>Strained:</strong> Creates complications but still provides some benefits</li>
+<li><strong>Broken:</strong> Temporarily unusable until restored</li>
+<li><strong>Transformed:</strong> Changed into a new type of relationship</li>
+</ul>
+<p>Relationships can change state through play, creating both mechanical effects and narrative developments.</p>
+<blockquote>
+<p><strong>Example: Relationship States</strong></p>
+<p>Mira and another character, Lord Darius (a Military Commander), have a "Debt and Obligation" relationship that begins as Strong. This provides mutual support in appropriate situations.</p>
+<p>If Mira asks for help that compromises Darius's military duties, the relationship might become Strained, creating complications while still providing limited benefits.</p>
+<p>If Mira later betrays Darius's trust completely, the relationship could become Broken, requiring significant narrative resolution before it can be used again.</p>
+<p>Alternatively, through play, their relationship might Transform from "Debt and Obligation" to "Professional Connection" or even "Family Tie" (through marriage or adoption), changing its nature and benefits.</p>
+</blockquote>
+<h3 id="creating-character-relationships"><a class="header" href="#creating-character-relationships">Creating Character Relationships</a></h3>
+<p>When establishing relationships between characters, consider:</p>
+<ol>
+<li><strong>Setting Consistency:</strong> Relationships should make sense within your setting's axes</li>
+<li><strong>Trait Connections:</strong> How do character traits influence the relationship?</li>
+<li><strong>Asset Interactions:</strong> What assets might be shared or connected?</li>
+<li><strong>Narrative Potential:</strong> What story opportunities does the relationship create?</li>
+<li><strong>Mechanical Support:</strong> How can characters support each other mechanically?</li>
+</ol>
+<blockquote>
+<p><strong>Example: Relationship Creation</strong></p>
+<p><strong>Relationship between Mira and Karn:</strong></p>
+<ul>
+<li><strong>Type:</strong> Debt and Obligation - Inherited Obligation</li>
+<li><strong>State:</strong> Strong</li>
+<li><strong>Description:</strong> Mira's family has a generations-old obligation to protect Karn's clan during times of hardship, stemming from an ancient alliance.</li>
+<li><strong>Mechanical Benefits:</strong> Mira can provide social support in noble circles; Karn can provide protection and wilderness guidance.</li>
+<li><strong>Potential Complications:</strong> Mira's family considers the debt outdated; Karn's clan expects more than Mira can deliver.</li>
+<li><strong>Shared Assets:</strong> Mira can access Karn's Border Maps; Karn can benefit from Mira's Family Grimoire for certain rituals.</li>
+<li><strong>Growth Potential:</strong> Could evolve into a true alliance beyond obligation, or strain under conflicting goals.</li>
+</ul>
+</blockquote>
+<h3 id="the-complete-relationship-web"><a class="header" href="#the-complete-relationship-web">The Complete Relationship Web</a></h3>
+<p>Once all character relationships are established, you'll have a complete Relationship Web that connects the entire group. This web should:</p>
+<ul>
+<li>Create meaningful connections between all characters</li>
+<li>Establish clear mechanical support options</li>
+<li>Generate interesting narrative tensions</li>
+<li>Reflect the setting's fundamental aspects</li>
+<li>Allow for evolution through play</li>
+</ul>
+<blockquote>
+<p><strong>Example: Relationship Web Visualization</strong></p>
+<pre><code class="language-mermaid">graph TD
+    Mira["Mira"] --- |"Inherited Obligation (Strong)"| Karn["Karn"]
+    Mira --- |"Former Rivals (Strained)"| Darius["Lord Darius"]
+    Karn --- |"Blood Brothers (Strong)"| Thana["Thana"]
+    Darius --- |"Uneasy Alliance (Strained)"| Thana
+    Darius --- |"Mentor-Student (Strong)"| Elara["Elara"]
+    Thana --- |"Life-Debt (Strong)"| Elara
+    Elara --- |"Secret Partners (Strong)"| Mira
+</code></pre>
+<p>This web shows how five characters are interconnected, with each relationship having a type and state. It creates a complex network of support options and potential complications.</p>
+</blockquote>
+<h2 id="finalizing-your-character"><a class="header" href="#finalizing-your-character">Finalizing Your Character</a></h2>
+<p>With traits, assets, and relationships established, you're ready to complete your character sheet. This involves:</p>
+<ol>
+<li>
+<p><strong>Recording Traits and Connections:</strong> Document your Origin, Drive, and Goal with their associated bonds, complications, and weaknesses.</p>
+</li>
+<li>
+<p><strong>Noting Assets and States:</strong> Record your assets, their connections to traits, and their current states (all starting Fresh).</p>
+</li>
+<li>
+<p><strong>Mapping Relationships:</strong> Document your relationships with other characters, including type, state, and potential benefits.</p>
+</li>
+<li>
+<p><strong>Establishing World Connections:</strong> Note how your character connects to the broader setting through power structures, social groups, resources, and knowledge.</p>
+</li>
+<li>
+<p><strong>Identifying Story Elements:</strong> Record active plots, setting complications, personal goals, and group impacts that involve your character.</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>Example: Completed Character Summary</strong></p>
+<p><strong>Mira, Third Tier Noble of House Vayne</strong></p>
+<p><strong>Traits:</strong></p>
+<ul>
+<li>
+<p>Origin: Third Tier Noble of House Vayne</p>
+<ul>
+<li>Bond: Loyal Family Retainers</li>
+<li>Complication: Succession Dispute</li>
+<li>Weakness: Public Scrutiny</li>
+</ul>
+</li>
+<li>
+<p>Drive: Secure Power Through Secret Knowledge</p>
+<ul>
+<li>Bond: Hidden Archive Keeper</li>
+<li>Complication: Dangerous Information</li>
+<li>Weakness: Obsessive Research</li>
+</ul>
+</li>
+<li>
+<p>Goal: Reshape House Influence in Harbor District</p>
+<ul>
+<li>Bond: Reform-Minded Peers</li>
+<li>Complication: Conservative Opposition</li>
+<li>Weakness: Idealistic Assumptions</li>
+</ul>
+</li>
+</ul>
+<p><strong>Assets:</strong></p>
+<ul>
+<li>Family Grimoire (Fresh)</li>
+<li>Network of Informants (Fresh)</li>
+<li>Ancestral Signet Ring (Fresh)</li>
+</ul>
+<p><strong>Relationships:</strong></p>
+<ul>
+<li>With Karn: Inherited Obligation (Strong)</li>
+<li>With Lord Darius: Debt and Obligation (Strong)</li>
+<li>With Elara: Secret Partners (Strong)</li>
+</ul>
+<p><strong>World Connections:</strong></p>
+<ul>
+<li>Power: Minor position in noble hierarchy, influence in Harbor District</li>
+<li>Social: Member of House Vayne, connections to reform movement</li>
+<li>Resources: Access to family wealth, control of small estate</li>
+<li>Knowledge: Family secrets, court gossip, hidden supernatural lore</li>
+</ul>
+<p><strong>Story Elements:</strong></p>
+<ul>
+<li>Active Plots: Succession dispute, reform movement, supernatural investigation</li>
+<li>Setting Complications: Rising tension between noble houses, supernatural incidents</li>
+<li>Personal Goals: Secure family position, expand knowledge, implement reforms</li>
+<li>Group Impact: Provides social access, contributes supernatural knowledge</li>
+</ul>
+</blockquote>
+<h2 id="character-evolution"><a class="header" href="#character-evolution">Character Evolution</a></h2>
+<p>Characters in Narrono aren't static—they evolve through play as they interact with their setting and each other. Understanding how characters change helps you plan for long-term development.</p>
+<h3 id="trait-evolution"><a class="header" href="#trait-evolution">Trait Evolution</a></h3>
+<p>Characters develop through their traits' interaction with the setting:</p>
+<h4 id="origin-social-structure"><a class="header" href="#origin-social-structure">Origin (Social Structure)</a></h4>
+<ul>
+<li>Develop new connections within social framework</li>
+<li>Navigate changing status and position</li>
+<li>Face challenges to traditional roles</li>
+<li>Build or strain relationships</li>
+</ul>
+<h4 id="drive-conflict-type"><a class="header" href="#drive-conflict-type">Drive (Conflict Type)</a></h4>
+<ul>
+<li>Adapt methods to new challenges</li>
+<li>Discover alternative approaches</li>
+<li>Face conflicting motivations</li>
+<li>Evolve goals and methods</li>
+</ul>
+<h4 id="goal-power-scale"><a class="header" href="#goal-power-scale">Goal (Power Scale)</a></h4>
+<ul>
+<li>Expand or focus ambitions</li>
+<li>Deal with changing scope</li>
+<li>Navigate new power dynamics</li>
+<li>Adjust to achieved objectives</li>
+</ul>
+<blockquote>
+<p><strong>Example: Trait Evolution</strong></p>
+<p>Mira's Origin as a "Third Tier Noble" might evolve as she gains influence, perhaps becoming "Rising Power in House Vayne" to reflect her changing status.</p>
+<p>Her Drive to "Secure Power Through Secret Knowledge" might shift to "Reform System Through Revealed Truths" as her motivations change from personal power to systemic change.</p>
+<p>Her Goal to "Reshape House Influence" might expand to "Transform Harbor District Politics" as her ambitions grow beyond her family.</p>
+</blockquote>
+<h3 id="asset-development"><a class="header" href="#asset-development">Asset Development</a></h3>
+<p>Assets evolve through use and story:</p>
+<h4 id="state-management"><a class="header" href="#state-management">State Management</a></h4>
+<ul>
+<li>Fresh → Full benefits and opportunities</li>
+<li>Degraded → Limited use with complications</li>
+<li>Depleted → Temporarily unusable, needs recovery</li>
+</ul>
+<h4 id="recovery-methods"><a class="header" href="#recovery-methods">Recovery Methods</a></h4>
+<ul>
+<li>Through narrative resolution</li>
+<li>Using group resources</li>
+<li>Creating story opportunities</li>
+<li>Leveraging relationships</li>
+</ul>
+<h4 id="evolution-paths"><a class="header" href="#evolution-paths">Evolution Paths</a></h4>
+<ul>
+<li>Upgrade existing capabilities</li>
+<li>Add new features or aspects</li>
+<li>Transform through story events</li>
+<li>Combine with other assets</li>
+</ul>
+<blockquote>
+<p><strong>Example: Asset Evolution</strong></p>
+<p>Mira's "Family Grimoire" might evolve from a collection of family secrets to a powerful magical tome as she discovers hidden pages or deciphers obscure passages.</p>
+<p>Her "Network of Informants" might expand from the Harbor District to cover multiple districts, or specialize in supernatural information as her focus changes.</p>
+<p>Her "Ancestral Signet Ring" might reveal hidden powers or be modified to serve new purposes as she learns more about her family's history.</p>
+</blockquote>
+<h3 id="relationship-evolution"><a class="header" href="#relationship-evolution">Relationship Evolution</a></h3>
+<p>Relationships develop through play and interaction:</p>
+<h4 id="state-changes"><a class="header" href="#state-changes">State Changes</a></h4>
+<ul>
+<li>Strong → Strengthened through shared successes</li>
+<li>Strained → Tested by conflicts and choices</li>
+<li>Broken → Damaged by major betrayals</li>
+<li>Transformed → Changed into new relationship types</li>
+</ul>
+<h4 id="development-paths"><a class="header" href="#development-paths">Development Paths</a></h4>
+<ul>
+<li>Deepening existing bonds</li>
+<li>Forming new connections</li>
+<li>Resolving old conflicts</li>
+<li>Transforming relationships</li>
+</ul>
+<blockquote>
+<p><strong>Example: Relationship Evolution</strong></p>
+<p>Mira's "Inherited Obligation" relationship with Karn might transform into a true friendship as they work together beyond the bounds of traditional obligation.</p>
+<p>Her relationship with Lord Darius might strain if their goals conflict, requiring careful navigation to maintain the benefits while managing the complications.</p>
+<p>She might form entirely new relationships with characters introduced during play, expanding her Relationship Web and creating new support options.</p>
+</blockquote>
+<h2 id="character-creation-tools"><a class="header" href="#character-creation-tools">Character Creation Tools</a></h2>
+<p>To help you create characters, here are some practical tools and techniques:</p>
+<h3 id="character-worksheet"><a class="header" href="#character-worksheet">Character Worksheet</a></h3>
+<p>Use this worksheet to document your character:</p>
+<pre><code>CHARACTER NAME: ______________________
+
+SETTING AXES:
+- Power Scale: ______________________
+- Supernatural Level: ______________________
+- Technology Level: ______________________
+- Social Structure: ______________________
+- Conflict Type: ______________________
+
+TRAITS:
+1. Origin: ______________________
+   - Bond: ______________________
+   - Complication: ______________________
+   - Weakness: ______________________
+
+2. Drive: ______________________
+   - Bond: ______________________
+   - Complication: ______________________
+   - Weakness: ______________________
+
+3. Goal: ______________________
+   - Bond: ______________________
+   - Complication: ______________________
+   - Weakness: ______________________
+
+ASSETS:
+1. Name: ______________________
+   - Connected to: ______________________
+   - Setting Elements: ______________________
+   - Description: ______________________
+   - State: Fresh / Degraded / Depleted
+
+2. Name: ______________________
+   - Connected to: ______________________
+   - Setting Elements: ______________________
+   - Description: ______________________
+   - State: Fresh / Degraded / Depleted
+
+3. Name: ______________________
+   - Connected to: ______________________
+   - Setting Elements: ______________________
+   - Description: ______________________
+   - State: Fresh / Degraded / Depleted
+
+RELATIONSHIPS:
+1. With: ______________________
+   - Type: ______________________
+   - State: Strong / Strained / Broken / Transformed
+   - Benefits: ______________________
+   - Complications: ______________________
+
+2. With: ______________________
+   - Type: ______________________
+   - State: Strong / Strained / Broken / Transformed
+   - Benefits: ______________________
+   - Complications: ______________________
+
+WORLD CONNECTIONS:
+- Power: ______________________
+- Social: ______________________
+- Resources: ______________________
+- Knowledge: ______________________
+
+STORY ELEMENTS:
+- Active Plots: ______________________
+- Setting Complications: ______________________
+- Personal Goals: ______________________
+- Group Impact: ______________________
+</code></pre>
+<h3 id="character-creation-flowchart"><a class="header" href="#character-creation-flowchart">Character Creation Flowchart</a></h3>
+<pre><code>1. UNDERSTAND SETTING
+   ↓
+2. DEVELOP TRAITS
+   ↓ Origin (from Social Structure)
+   ↓ Drive (from Conflict Type)
+   ↓ Goal (from Power Scale)
+   ↓
+3. BUILD ASSETS
+   ↓ Connect to traits
+   ↓ Reflect setting elements
+   ↓ Create story opportunities
+   ↓
+4. ESTABLISH RELATIONSHIPS
+   ↓ Define types and states
+   ↓ Create mechanical benefits
+   ↓ Build in complications
+   ↓
+5. FINALIZE DETAILS
+   ↓ World connections
+   ↓ Story elements
+   ↓ Character sheet completion
+</code></pre>
+<h3 id="ai-assistance"><a class="header" href="#ai-assistance">AI Assistance</a></h3>
+<p>Narrono includes an AI Character Generation Agent that can help you develop character ideas. The AI can:</p>
+<ul>
+<li>Generate trait options based on setting axes</li>
+<li>Suggest appropriate assets</li>
+<li>Recommend relationship types</li>
+<li>Create integrated character concepts</li>
+<li>Develop NPC groups for solo play</li>
+</ul>
+<p>To use the AI Character Generation Agent, provide your setting's axis choices and any specific character elements you already have in mind. The AI will analyze the setting and generate character options that fit within its framework.</p>
+<blockquote>
+<p><strong>Example: AI Character Generation</strong></p>
+<p>A player might ask the AI: "Generate a character for 'Shadow Court' with a focus on uncovering supernatural secrets."</p>
+<p>The AI would analyze the setting (Local/Hidden/Moderate/Hierarchical/Social) and generate a complete character with traits, assets, and relationship suggestions that fit both the setting and the player's concept.</p>
+</blockquote>
+<p>Remember that the AI is a tool to inspire and assist, not replace your creativity. Use its suggestions as starting points that you can modify, expand, or completely reimagine based on your interests.</p>
+<h2 id="example-characters"><a class="header" href="#example-characters">Example Characters</a></h2>
+<p>To illustrate how different settings create different character options, here are three fully developed examples:</p>
+<h3 id="character-from-shadow-court"><a class="header" href="#character-from-shadow-court">Character from "Shadow Court"</a></h3>
+<p><strong>Setting:</strong> Local/Hidden/Moderate/Hierarchical/Social</p>
+<p><strong>Elara, Court Physician with Secret Studies</strong></p>
+<p><strong>Traits:</strong></p>
+<ul>
+<li>
+<p>Origin: Royal Academy Graduate</p>
+<ul>
+<li>Bond: Faculty Mentor</li>
+<li>Complication: Academic Rivals</li>
+<li>Weakness: Theoretical Over Practical</li>
+</ul>
+</li>
+<li>
+<p>Drive: Uncover Truth Through Methodical Research</p>
+<ul>
+<li>Bond: Anonymous Benefactor</li>
+<li>Complication: Dangerous Knowledge</li>
+<li>Weakness: Obsessive Focus</li>
+</ul>
+</li>
+<li>
+<p>Goal: Reform Medical Practices in Noble Quarter</p>
+<ul>
+<li>Bond: Progressive Noble Patron</li>
+<li>Complication: Entrenched Traditions</li>
+<li>Weakness: Political Naivety</li>
+</ul>
+</li>
+</ul>
+<p><strong>Assets:</strong></p>
+<ul>
+<li>
+<p>Physician's Kit (Connected to Origin)</p>
+<ul>
+<li>Setting Elements: Moderate Technology, Hierarchical Society</li>
+<li>Description: Advanced medical tools and remedies</li>
+<li>Enables treatment of injuries and analysis of unusual conditions</li>
+</ul>
+</li>
+<li>
+<p>Hidden Laboratory (Connected to Drive)</p>
+<ul>
+<li>Setting Elements: Hidden Supernatural, Local Power</li>
+<li>Description: Secret workspace for supernatural research</li>
+<li>Allows investigation of supernatural phenomena away from prying eyes</li>
+</ul>
+</li>
+<li>
+<p>Court Appointment (Connected to Goal)</p>
+<ul>
+<li>Setting Elements: Hierarchical Society, Social Conflict</li>
+<li>Description: Official position providing access to noble houses</li>
+<li>Grants legitimate reason to interact with nobility and their secrets</li>
+</ul>
+</li>
+</ul>
+<p><strong>Relationships:</strong></p>
+<ul>
+<li>
+<p>With Mira: Secret Partners (Strong)</p>
+<ul>
+<li>Benefits: Mira provides social protection; Elara provides medical expertise</li>
+<li>Complications: Mira's political ambitions may expose Elara's research</li>
+<li>Shared Assets: Elara can use Mira's Family Grimoire; Mira can access Elara's Laboratory</li>
+</ul>
+</li>
+<li>
+<p>With Lord Darius: Mentor-Student (Strong)</p>
+<ul>
+<li>Benefits: Darius provides military protection; Elara provides medical care</li>
+<li>Complications: Darius disapproves of supernatural research</li>
+<li>Shared Assets: Darius can access Elara's medical expertise; Elara can use Darius's military contacts</li>
+</ul>
+</li>
+</ul>
+<p><strong>World Connections:</strong></p>
+<ul>
+<li>Power: Official court position, influence in medical community</li>
+<li>Social: Academy connections, noble patients, underground researchers</li>
+<li>Resources: Medical supplies, research materials, modest stipend</li>
+<li>Knowledge: Medical expertise, growing supernatural understanding</li>
+</ul>
+<p><strong>Story Elements:</strong></p>
+<ul>
+<li>Active Plots: Investigating unusual illness, researching supernatural phenomena</li>
+<li>Setting Complications: Tension between science and tradition, supernatural incidents</li>
+<li>Personal Goals: Advance medical knowledge, understand supernatural elements</li>
+<li>Group Impact: Provides medical support, contributes scientific perspective</li>
+</ul>
+<h3 id="character-from-frontier-clans"><a class="header" href="#character-from-frontier-clans">Character from "Frontier Clans"</a></h3>
+<p><strong>Setting:</strong> Regional/None/Limited/Tribal/Direct</p>
+<p><strong>Thana, Clan Diplomat with Warrior Past</strong></p>
+<p><strong>Traits:</strong></p>
+<ul>
+<li>
+<p>Origin: Wolf Clan Warrior</p>
+<ul>
+<li>Bond: Battle-Brothers</li>
+<li>Complication: Old War Wounds</li>
+<li>Weakness: Tribal Prejudices</li>
+</ul>
+</li>
+<li>
+<p>Drive: Forge Peace Through Strength Respected</p>
+<ul>
+<li>Bond: Elder Council Advisor</li>
+<li>Complication: Warmonger Opposition</li>
+<li>Weakness: Impatience with Formality</li>
+</ul>
+</li>
+<li>
+<p>Goal: Establish Border Alliance</p>
+<ul>
+<li>Bond: Visionary Clan Chief</li>
+<li>Complication: Ancient Blood Feuds</li>
+<li>Weakness: Overlooking Cultural Differences</li>
+</ul>
+</li>
+</ul>
+<p><strong>Assets:</strong></p>
+<ul>
+<li>
+<p>Ceremonial Weapons (Connected to Origin)</p>
+<ul>
+<li>Setting Elements: Limited Technology, Tribal Social Structure</li>
+<li>Description: Traditional weapons that mark clan status and battle honors</li>
+<li>Provides authority in warrior gatherings and ceremonial combat advantage</li>
+</ul>
+</li>
+<li>
+<p>Peace Tokens (Connected to Drive)</p>
+<ul>
+<li>Setting Elements: Tribal Social Structure, Direct Conflict</li>
+<li>Description: Sacred objects exchanged between clans to symbolize truces</li>
+<li>Enables formal diplomatic interactions and safe passage</li>
+</ul>
+</li>
+<li>
+<p>Border Territory Maps (Connected to Goal)</p>
+<ul>
+<li>Setting Elements: Regional Power Scale, Limited Technology</li>
+<li>Description: Detailed knowledge of disputed territories and resources</li>
+<li>Provides strategic advantage in negotiations and travel</li>
+</ul>
+</li>
+</ul>
+<p><strong>Relationships:</strong></p>
+<ul>
+<li>
+<p>With Karn: Blood Brothers (Strong)</p>
+<ul>
+<li>Benefits: Karn provides hunting skills; Thana provides diplomatic access</li>
+<li>Complications: Karn's exile status creates tension with traditional clan members</li>
+<li>Shared Assets: Thana can use Karn's Hunting Bow; Karn can use Thana's Peace Tokens</li>
+</ul>
+</li>
+<li>
+<p>With Lord Darius: Uneasy Alliance (Strained)</p>
+<ul>
+<li>Benefits: Darius provides outside perspective; Thana provides clan knowledge</li>
+<li>Complications: Different approaches to conflict resolution</li>
+<li>Shared Assets: Limited sharing due to strained relationship</li>
+</ul>
+</li>
+</ul>
+<p><strong>World Connections:</strong></p>
+<ul>
+<li>Power: Respected warrior status, emerging diplomatic influence</li>
+<li>Social: Clan connections, warrior circles, elder council access</li>
+<li>Resources: Clan territories, traditional crafts, hunting grounds</li>
+<li>Knowledge: Border territories, clan histories, rival strengths</li>
+</ul>
+<p><strong>Story Elements:</strong></p>
+<ul>
+<li>Active Plots: Border dispute negotiation, warrior circle reform</li>
+<li>Setting Complications: Drought affecting territories, rival clan provocations</li>
+<li>Personal Goals: Establish lasting peace, maintain warrior honor</li>
+<li>Group Impact: Provides combat support, enables clan negotiations</li>
+</ul>
+<h3 id="character-from-corporate-wars"><a class="header" href="#character-from-corporate-wars">Character from "Corporate Wars"</a></h3>
+<p><strong>Setting:</strong> Global/None/Advanced/Merit/Economic</p>
+<p><strong>Vex, Corporate Security Specialist</strong></p>
+<p><strong>Traits:</strong></p>
+<ul>
+<li>
+<p>Origin: Self-Made Security Expert</p>
+<ul>
+<li>Bond: Underground Network</li>
+<li>Complication: Corporate Blacklist</li>
+<li>Weakness: Trust Issues</li>
+</ul>
+</li>
+<li>
+<p>Drive: Secure Position Through Proven Value</p>
+<ul>
+<li>Bond: Department Director</li>
+<li>Complication: Competing Specialists</li>
+<li>Weakness: Workaholic Tendencies</li>
+</ul>
+</li>
+<li>
+<p>Goal: Control Global Security Standards</p>
+<ul>
+<li>Bond: Industry Alliance</li>
+<li>Complication: Regulatory Resistance</li>
+<li>Weakness: Ethical Blind Spots</li>
+</ul>
+</li>
+</ul>
+<p><strong>Assets:</strong></p>
+<ul>
+<li>
+<p>Cutting-Edge Security Suite (Connected to Origin)</p>
+<ul>
+<li>Setting Elements: Advanced Technology, Merit-based Structure</li>
+<li>Description: Proprietary software and hardware for security operations</li>
+<li>Provides advanced threat detection and system penetration capabilities</li>
+</ul>
+</li>
+<li>
+<p>Corporate Clearance (Connected to Drive)</p>
+<ul>
+<li>Setting Elements: Merit-based Structure, Economic Conflict</li>
+<li>Description: High-level access to corporate systems and facilities</li>
+<li>Enables resource acquisition and information access</li>
+</ul>
+</li>
+<li>
+<p>Global Contact Network (Connected to Goal)</p>
+<ul>
+<li>Setting Elements: Global Power Scale, Advanced Technology</li>
+<li>Description: Connections with security professionals worldwide</li>
+<li>Provides intelligence gathering and influence in multiple markets</li>
+</ul>
+</li>
+</ul>
+<p><strong>Relationships:</strong></p>
+<ul>
+<li>
+<p>With Mira (from Shadow Court crossover game):</p>
+<ul>
+<li>Type: Professional Connection - Former Colleagues</li>
+<li>State: Strong</li>
+<li>Benefits: Mira provides social intelligence; Vex provides technical support</li>
+<li>Complications: Different approaches to information sharing</li>
+<li>Shared Assets: Vex can access Mira's Network of Informants; Mira can use Vex's Security Suite</li>
+</ul>
+</li>
+<li>
+<p>With Karn (from Frontier Clans crossover game):</p>
+<ul>
+<li>Type: Shared History - Survivors of Disaster</li>
+<li>State: Strained</li>
+<li>Benefits: Karn provides physical protection; Vex provides technological solutions</li>
+<li>Complications: Cultural misunderstandings, different values</li>
+<li>Shared Assets: Limited sharing due to strained relationship</li>
+</ul>
+</li>
+</ul>
+<p><strong>World Connections:</strong></p>
+<ul>
+<li>Power: Corporate security influence, industry standard-setting</li>
+<li>Social: Professional networks, underground contacts, corporate hierarchy</li>
+<li>Resources: Advanced technology, corporate expense accounts, data access</li>
+<li>Knowledge: Security protocols, corporate secrets, global threats</li>
+</ul>
+<p><strong>Story Elements:</strong></p>
+<ul>
+<li>Active Plots: Corporate espionage investigation, security standard development</li>
+<li>Setting Complications: Market volatility, emerging security threats</li>
+<li>Personal Goals: Establish security dominance, secure long-term position</li>
+<li>Group Impact: Provides technical expertise, enables secure operations</li>
+</ul>
+<h2 id="conclusion-characters-in-context"><a class="header" href="#conclusion-characters-in-context">Conclusion: Characters in Context</a></h2>
+<p>The character creation process in Narrono ensures that every character is deeply rooted in their setting. By deriving traits from setting axes, creating assets that reflect setting elements, and establishing relationships that make sense within the world, you create characters who feel like natural parts of their environment rather than generic archetypes dropped into a backdrop.</p>
+<p>Remember these key principles as you create and develop your characters:</p>
+<ol>
+<li>
+<p><strong>Setting Shapes Characters:</strong> Your character's traits, assets, and relationships should all emerge naturally from the setting you've created.</p>
+</li>
+<li>
+<p><strong>Traits Drive Mechanics:</strong> Your character's traits directly influence which resolution methods work best in different situations, creating a mechanical connection between narrative and gameplay.</p>
+</li>
+<li>
+<p><strong>Assets Create Opportunities:</strong> Assets aren't just mechanical bonuses—they're story elements that create both advantages and complications through their use and potential degradation.</p>
+</li>
+<li>
+<p><strong>Relationships Matter:</strong> The Relationship Web connects characters in meaningful ways, providing both support and tension that drives the narrative forward.</p>
+</li>
+<li>
+<p><strong>Characters Evolve:</strong> Through play, your character will change and develop as they interact with their setting and each other, creating a dynamic narrative that reflects their experiences.</p>
+</li>
+</ol>
+<p>In the next chapter, we'll explore the detailed mechanics of Narrono, showing how the Pool System, asset management, and relationship dynamics work together to create a rich, engaging gameplay experience.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../chapters/ch02-setting-creation.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../chapters/ch04-detailed-mechanics.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../chapters/ch02-setting-creation.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../chapters/ch04-detailed-mechanics.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

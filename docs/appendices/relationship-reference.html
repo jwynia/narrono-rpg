@@ -1,0 +1,398 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Relationship Reference - Narrono Game Manual</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="A comprehensive role-playing game manual for Narrono">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../css/custom.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Narrono Game Manual</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="relationship-guide"><a class="header" href="#relationship-guide">Relationship Guide</a></h1>
+<p>Relationships are the connections between characters that provide both opportunities and complications. This guide explains how relationships work in Narrono and how to use them effectively in play.</p>
+<h2 id="understanding-relationships"><a class="header" href="#understanding-relationships">Understanding Relationships</a></h2>
+<p>Each relationship has three key components:</p>
+<ol>
+<li><strong>The Parties Involved</strong>: Who is connected (usually two characters, but can include groups)</li>
+<li><strong>The Relationship Type</strong>: The nature of the connection (professional, personal, antagonistic, etc.)</li>
+<li><strong>The Current State</strong>: How strong or strained the relationship is at present</li>
+</ol>
+<h2 id="relationship-types"><a class="header" href="#relationship-types">Relationship Types</a></h2>
+<p>Relationships can take many forms, each with different implications:</p>
+<h3 id="personal-relationships"><a class="header" href="#personal-relationships">Personal Relationships</a></h3>
+<ul>
+<li>Family Ties: Connections through blood or adoption</li>
+<li>Friendships: Voluntary bonds based on mutual affection</li>
+<li>Romantic Connections: Intimate emotional attachments</li>
+<li>Mentorships: Guidance and learning relationships</li>
+</ul>
+<h3 id="professional-relationships"><a class="header" href="#professional-relationships">Professional Relationships</a></h3>
+<ul>
+<li>Authority Chains: Hierarchical connections (boss/employee, officer/subordinate)</li>
+<li>Collegial Bonds: Peer relationships in work or organizations</li>
+<li>Client Connections: Service provider and recipient relationships</li>
+<li>Alliance Partnerships: Formal cooperation between equals</li>
+</ul>
+<h3 id="antagonistic-relationships"><a class="header" href="#antagonistic-relationships">Antagonistic Relationships</a></h3>
+<ul>
+<li>Rivalries: Competition for the same goals or resources</li>
+<li>Blackmail Bonds: Relationships based on mutual leverage</li>
+<li>Vendettas: Ongoing conflicts driven by past wrongs</li>
+<li>Hunter/Hunted: Pursuit relationships</li>
+</ul>
+<h3 id="community-relationships"><a class="header" href="#community-relationships">Community Relationships</a></h3>
+<ul>
+<li>Group Memberships: Belonging to organizations or communities</li>
+<li>Public Personas: Relationships with broader society</li>
+<li>Factional Ties: Connections to political or social movements</li>
+<li>Cultural Bonds: Shared heritage or background connections</li>
+</ul>
+<h2 id="relationship-states"><a class="header" href="#relationship-states">Relationship States</a></h2>
+<p>Like assets, relationships exist in different states that reflect their current condition:</p>
+<h3 id="strong"><a class="header" href="#strong">Strong</a></h3>
+<ul>
+<li>Providing full benefits and support</li>
+<li>Reliable and trustworthy</li>
+<li>Adds one die to your pool when leveraged</li>
+<li>Creates opportunities for both parties</li>
+</ul>
+<p><strong>Example</strong>: Elena's Strong relationship with the City Council gives her reliable influence over policy decisions.</p>
+<h3 id="strained"><a class="header" href="#strained">Strained</a></h3>
+<ul>
+<li>Limited benefits with complications</li>
+<li>Requires extra effort to maintain</li>
+<li>No dice bonus when used</li>
+<li>May create additional challenges</li>
+</ul>
+<p><strong>Example</strong>: Marcus's Strained blackmail bond with Elena means both must tread carefully, with trust broken down and subtle threats exchanged.</p>
+<h3 id="broken"><a class="header" href="#broken">Broken</a></h3>
+<ul>
+<li>Temporarily unusable</li>
+<li>Active hostility or complete disconnection</li>
+<li>Provides no benefits and may create obstacles</li>
+<li>Requires significant effort to repair</li>
+</ul>
+<p><strong>Example</strong>: If Clara's relationship with her captain becomes Broken, she might face disciplinary action and lose access to police resources.</p>
+<h3 id="transformed"><a class="header" href="#transformed">Transformed</a></h3>
+<ul>
+<li>Changed into a different type of relationship</li>
+<li>Fundamentally altered in nature</li>
+<li>May be stronger or weaker than before</li>
+<li>Creates new narrative possibilities</li>
+</ul>
+<p><strong>Example</strong>: A professional mentorship might transform into a friendship, or a rivalry might transform into a reluctant alliance.</p>
+<h2 id="using-relationships-in-play"><a class="header" href="#using-relationships-in-play">Using Relationships in Play</a></h2>
+<h3 id="leveraging-strong-relationships"><a class="header" href="#leveraging-strong-relationships">Leveraging Strong Relationships</a></h3>
+<p>When a Strong relationship is relevant to your action:</p>
+<ul>
+<li>Add one die to your pool</li>
+<li>Describe how the relationship helps</li>
+<li>Consider potential strain if the action fails</li>
+<li>Create narrative connections to the other party</li>
+</ul>
+<h3 id="managing-strained-relationships"><a class="header" href="#managing-strained-relationships">Managing Strained Relationships</a></h3>
+<p>When working with a Strained relationship:</p>
+<ul>
+<li>Navigate carefully to avoid further damage</li>
+<li>Look for opportunities to demonstrate good faith</li>
+<li>Consider what would restore trust</li>
+<li>Use the tension to create interesting story moments</li>
+</ul>
+<h3 id="repairing-broken-relationships"><a class="header" href="#repairing-broken-relationships">Repairing Broken Relationships</a></h3>
+<p>To restore a Broken relationship:</p>
+<ul>
+<li>Address the root cause of the break</li>
+<li>Make meaningful amends or changes</li>
+<li>Demonstrate commitment to improvement</li>
+<li>Create a narrative moment of reconciliation</li>
+</ul>
+<h3 id="transforming-relationships"><a class="header" href="#transforming-relationships">Transforming Relationships</a></h3>
+<p>Relationships can transform when:</p>
+<ul>
+<li>Circumstances fundamentally change</li>
+<li>A significant event affects both parties</li>
+<li>The basis of the relationship shifts</li>
+<li>Both parties agree to redefine their connection</li>
+</ul>
+<h2 id="relationship-recovery"><a class="header" href="#relationship-recovery">Relationship Recovery</a></h2>
+<h3 id="minor-recovery--1-strain"><a class="header" href="#minor-recovery--1-strain">Minor Recovery (-1 Strain)</a></h3>
+<ul>
+<li>Meaningful conversation</li>
+<li>Small gesture of good faith</li>
+<li>Shared success in a minor challenge</li>
+<li>Temporary alignment of goals</li>
+</ul>
+<h3 id="major-recovery--2-strain"><a class="header" href="#major-recovery--2-strain">Major Recovery (-2 Strain)</a></h3>
+<ul>
+<li>Significant sacrifice for the other party</li>
+<li>Resolving a long-standing issue</li>
+<li>Shared triumph over a major obstacle</li>
+<li>Profound moment of understanding</li>
+</ul>
+<h3 id="complete-reset"><a class="header" href="#complete-reset">Complete Reset</a></h3>
+<ul>
+<li>Life-changing event that affects both parties</li>
+<li>Fundamental transformation of circumstances</li>
+<li>Extraordinary sacrifice or demonstration of trust</li>
+<li>Mutual decision to begin anew</li>
+</ul>
+<h2 id="relationship-examples-in-play"><a class="header" href="#relationship-examples-in-play">Relationship Examples in Play</a></h2>
+<h3 id="example-1-leveraging-a-strong-relationship"><a class="header" href="#example-1-leveraging-a-strong-relationship">Example 1: Leveraging a Strong Relationship</a></h3>
+<p><strong>Situation</strong>: Clara needs information about a suspicious case file that's been restricted.</p>
+<p><strong>Relationship Use</strong>: She leverages her Strong relationship with Detective Sarah Chen.</p>
+<p><strong>Mechanics</strong>:</p>
+<ul>
+<li>Base pool: 3d6</li>
+<li>+1 die for Strong relationship</li>
+<li>Roll 4d6, getting 1, 3, 4, 5</li>
+<li>Using Direct Method (highest die): 5</li>
+<li>Outcome: Success</li>
+</ul>
+<p><strong>Narration</strong>: "Clara catches Sarah in the break room. 'That Northside case from last month—something feels off about it.' Sarah glances around, then nods. 'Check my desk drawer after shift. I made copies of the original reports before they were altered.'"</p>
+<h3 id="example-2-navigating-a-strained-relationship"><a class="header" href="#example-2-navigating-a-strained-relationship">Example 2: Navigating a Strained Relationship</a></h3>
+<p><strong>Situation</strong>: Marcus needs to warn Elena about a threat to her family despite their Strained blackmail bond.</p>
+<p><strong>Mechanics</strong>:</p>
+<ul>
+<li>Base pool: 3d6</li>
+<li>No bonus die due to Strained relationship</li>
+<li>Roll 3d6, getting 2, 3, 6</li>
+<li>Using Cautious Method (lowest die): 2</li>
+<li>Outcome: Setback</li>
+</ul>
+<p><strong>Narration</strong>: "Marcus approaches Elena after the council meeting, but his attempt at discretion comes across as suspicious. 'Whatever game you're playing, Webb, I'm not interested,' she says coldly, walking away before he can explain about the danger he's discovered."</p>
+<h3 id="example-3-repairing-a-relationship"><a class="header" href="#example-3-repairing-a-relationship">Example 3: Repairing a Relationship</a></h3>
+<p><strong>Situation</strong>: Clara's relationship with Captain Mercer has become Broken after he discovered her unauthorized investigation.</p>
+<p><strong>Recovery Action</strong>: Clara presents evidence that proves her suspicions were justified.</p>
+<p><strong>Narration</strong>: "Clara places the folder on Mercer's desk. 'I know I broke protocol, sir, but this is why.' As he reviews the evidence, his expression shifts from anger to concern. 'This doesn't excuse your methods, Hayes, but... you were right to dig deeper. Next time, come to me first.'"</p>
+<h2 id="strategic-relationship-management"><a class="header" href="#strategic-relationship-management">Strategic Relationship Management</a></h2>
+<h3 id="building-new-relationships"><a class="header" href="#building-new-relationships">Building New Relationships</a></h3>
+<ul>
+<li>Identify potential valuable connections</li>
+<li>Create opportunities for initial contact</li>
+<li>Demonstrate value or common interest</li>
+<li>Develop trust through consistent actions</li>
+</ul>
+<h3 id="maintaining-multiple-relationships"><a class="header" href="#maintaining-multiple-relationships">Maintaining Multiple Relationships</a></h3>
+<ul>
+<li>Balance time and attention across connections</li>
+<li>Be aware of conflicting loyalties</li>
+<li>Look for synergies between relationships</li>
+<li>Prioritize based on current needs and goals</li>
+</ul>
+<h3 id="relationship-risk-assessment"><a class="header" href="#relationship-risk-assessment">Relationship Risk Assessment</a></h3>
+<p>Before risking strain on a relationship, consider:</p>
+<ul>
+<li>How critical is the relationship to your goals?</li>
+<li>Are there alternative relationships that could help?</li>
+<li>What would recovery require?</li>
+<li>Does the potential benefit outweigh the risk?</li>
+</ul>
+<h3 id="relationship-evolution"><a class="header" href="#relationship-evolution">Relationship Evolution</a></h3>
+<p>As the story progresses, relationships naturally evolve:</p>
+<ul>
+<li>New facets of connection emerge</li>
+<li>Power dynamics shift</li>
+<li>Trust deepens or erodes</li>
+<li>Shared experiences create bonds or divisions</li>
+</ul>
+<p>Remember that relationships are dynamic elements that respond to your choices and actions. Managing them effectively is as important as managing your assets or traits.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../appendices/asset-guide.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../appendices/resolution-guide.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../appendices/asset-guide.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../appendices/resolution-guide.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

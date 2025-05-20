@@ -1,0 +1,1212 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Relationship Guides - Narrono Game Manual</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="A comprehensive role-playing game manual for Narrono">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../css/custom.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Narrono Game Manual</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="relationship-guides"><a class="header" href="#relationship-guides">Relationship Guides</a></h1>
+<h1 id="relationship-guides-1"><a class="header" href="#relationship-guides-1">Relationship Guides</a></h1>
+<p>These guides help players and Game Facilitators (GFs) create and manage the Relationship Web in Narrono, a core system that creates meaningful connections between characters and factions with both narrative weight and mechanical significance.</p>
+<h2 id="guide-contents"><a class="header" href="#guide-contents">Guide Contents</a></h2>
+<h3 id="character-to-character-relationships-guide"><a class="header" href="#character-to-character-relationships-guide"><a href="./character-to-character-guide.html">Character-to-Character Relationships Guide</a></a></h3>
+<p>This guide focuses on creating meaningful relationships between player characters, covering:</p>
+<ul>
+<li>Relationship type selection</li>
+<li>Status establishment</li>
+<li>Tension point identification</li>
+<li>Development potential</li>
+<li>Integration with character traits</li>
+<li>Mechanical implementation</li>
+<li>Documentation templates</li>
+<li>Example relationships</li>
+</ul>
+<h3 id="character-to-faction-relationships-guide"><a class="header" href="#character-to-faction-relationships-guide"><a href="./character-to-faction-guide.html">Character-to-Faction Relationships Guide</a></a></h3>
+<p>This guide focuses on creating relationships between characters and factions, covering:</p>
+<ul>
+<li>Position establishment</li>
+<li>Influence mapping</li>
+<li>Obligation framework</li>
+<li>Benefit structure</li>
+<li>Evolution triggers</li>
+<li>Setting integration</li>
+<li>Mechanical implementation</li>
+<li>Documentation templates</li>
+<li>Example relationships</li>
+</ul>
+<h3 id="relationship-web-construction-guide"><a class="header" href="#relationship-web-construction-guide"><a href="./relationship-web-guide.html">Relationship Web Construction Guide</a></a></h3>
+<p>This guide focuses on creating and managing the overall Relationship Web, covering:</p>
+<ul>
+<li>Network visualization</li>
+<li>Connection density guidelines</li>
+<li>Tension distribution</li>
+<li>Balance assessment</li>
+<li>Evolution planning</li>
+<li>Implementation process</li>
+<li>Relationship web templates</li>
+<li>Example relationship webs</li>
+</ul>
+<h2 id="using-these-guides"><a class="header" href="#using-these-guides">Using These Guides</a></h2>
+<p>These guides are designed to be used during:</p>
+<ol>
+<li><strong>Session Zero</strong>: When establishing initial relationships between characters and factions</li>
+<li><strong>Campaign Planning</strong>: When designing faction interactions and potential relationship developments</li>
+<li><strong>Mid-Campaign</strong>: When evolving relationships or introducing new connections</li>
+<li><strong>Troubleshooting</strong>: When relationship dynamics need adjustment or rebalancing</li>
+</ol>
+<h2 id="integration-with-other-materials"><a class="header" href="#integration-with-other-materials">Integration with Other Materials</a></h2>
+<p>These relationship guides work in conjunction with:</p>
+<ul>
+<li><strong>Session Templates</strong>: Particularly the <a href="../session-templates/first-session-template.html">First Session Template</a> for establishing initial relationships</li>
+<li><strong>GF Screens</strong>: Especially the <a href="../gf-screens/character-management-panel.html">Character Management Panel</a> for tracking relationship evolution</li>
+<li><strong>Core Rules</strong>: Building on the Relationship Web system described in the core mechanics</li>
+</ul>
+<h2 id="printable-materials"><a class="header" href="#printable-materials">Printable Materials</a></h2>
+<p>Consider printing these guides for reference during play, especially:</p>
+<ul>
+<li>The documentation templates for recording relationships</li>
+<li>The example relationship webs for visualization reference</li>
+<li>The tension distribution guidelines for creating dynamic interactions</li>
+</ul>
+<hr />
+<p><em>These guides implement the Relationship Web system described in the Narrono RPG core mechanics, providing practical tools for creating meaningful connections between characters and factions.</em></p>
+<h1 id="character-to-character-relationships-guide-1"><a class="header" href="#character-to-character-relationships-guide-1">Character-to-Character Relationships Guide</a></h1>
+<p>This guide helps players and Game Facilitators (GFs) create meaningful relationships between player characters in Narrono, ensuring they have both narrative weight and mechanical significance.</p>
+<hr />
+<h2 id="1-relationship-type-selection"><a class="header" href="#1-relationship-type-selection">1. Relationship Type Selection</a></h2>
+<p>Choose a relationship type that fits the setting and characters:</p>
+<h3 id="family-and-blood-ties"><a class="header" href="#family-and-blood-ties">Family and Blood Ties</a></h3>
+<ul>
+<li><strong>Siblings</strong>: Rivalry, responsibility, shared legacy</li>
+<li><strong>Distant Relatives</strong>: Rediscovered connections</li>
+<li><strong>Adopted Family</strong>: Chosen bonds</li>
+<li><strong>Legacy Inheritors</strong>: Shared burdens</li>
+<li><strong>Clan Representatives</strong>: Family duty</li>
+</ul>
+<h3 id="professional-connections"><a class="header" href="#professional-connections">Professional Connections</a></h3>
+<ul>
+<li><strong>Former Colleagues</strong>: Shared experience</li>
+<li><strong>Rivals in Same Field</strong>: Competition</li>
+<li><strong>Contractor and Client</strong>: Obligation</li>
+<li><strong>Superior and Subordinate</strong>: Authority</li>
+<li><strong>Partners with Unequal Status</strong>: Power imbalance</li>
+</ul>
+<h3 id="debt-and-obligation"><a class="header" href="#debt-and-obligation">Debt and Obligation</a></h3>
+<ul>
+<li><strong>Life-Debt</strong>: Extreme obligation</li>
+<li><strong>Financial Entanglement</strong>: Resources</li>
+<li><strong>Oath-Bound</strong>: Formal promise</li>
+<li><strong>Blackmail Relationship</strong>: Leverage</li>
+<li><strong>Inherited Obligation</strong>: Ancestral commitments</li>
+</ul>
+<h3 id="shared-history"><a class="header" href="#shared-history">Shared History</a></h3>
+<ul>
+<li><strong>Childhood Friends</strong>: Reconnection</li>
+<li><strong>Former Cell-mates</strong>: Prison bonds</li>
+<li><strong>Survivors of Disaster</strong>: Trauma bond</li>
+<li><strong>Fellow Veterans</strong>: Battlefield memories</li>
+<li><strong>Witnesses to Secret Event</strong>: Shared knowledge</li>
+</ul>
+<h3 id="adversarial-connections"><a class="header" href="#adversarial-connections">Adversarial Connections</a></h3>
+<ul>
+<li><strong>Former Enemies</strong>: Tentative alliance</li>
+<li><strong>Competing Heirs</strong>: Disputed inheritance</li>
+<li><strong>Ideological Opponents</strong>: Philosophical difference</li>
+<li><strong>Betrayer and Betrayed</strong>: Broken trust</li>
+<li><strong>Hunter and Quarry</strong>: Pursuit turned partnership</li>
+</ul>
+<hr />
+<h2 id="2-status-establishment"><a class="header" href="#2-status-establishment">2. Status Establishment</a></h2>
+<p>Determine the current state of the relationship:</p>
+<h3 id="strong"><a class="header" href="#strong">Strong</a></h3>
+<ul>
+<li>Full trust and cooperation</li>
+<li>Reliable support</li>
+<li>Clear communication</li>
+<li>Shared goals or values</li>
+<li>Provides full mechanical benefits</li>
+</ul>
+<h3 id="strained"><a class="header" href="#strained">Strained</a></h3>
+<ul>
+<li>Underlying tensions</li>
+<li>Recent disagreements</li>
+<li>Conflicting priorities</li>
+<li>Unresolved issues</li>
+<li>Limited mechanical benefits</li>
+</ul>
+<h3 id="broken"><a class="header" href="#broken">Broken</a></h3>
+<ul>
+<li>Active conflict</li>
+<li>Betrayal or failure</li>
+<li>Fundamental disagreement</li>
+<li>Requires repair</li>
+<li>No mechanical benefits until restored</li>
+</ul>
+<h3 id="transformed"><a class="header" href="#transformed">Transformed</a></h3>
+<ul>
+<li>Recently changed relationship type</li>
+<li>Evolving dynamics</li>
+<li>New boundaries</li>
+<li>Uncertain expectations</li>
+<li>Modified mechanical benefits</li>
+</ul>
+<hr />
+<h2 id="3-tension-point-identification"><a class="header" href="#3-tension-point-identification">3. Tension Point Identification</a></h2>
+<p>Identify 1-3 specific tensions that add depth and potential for development:</p>
+<h3 id="internal-tensions"><a class="header" href="#internal-tensions">Internal Tensions</a></h3>
+<ul>
+<li><strong>Conflicting Values</strong>: Different moral codes or priorities</li>
+<li><strong>Unequal Investment</strong>: One character more committed than the other</li>
+<li><strong>Unresolved Past</strong>: Lingering issues from shared history</li>
+<li><strong>Competing Needs</strong>: Both want different things from the relationship</li>
+<li><strong>Secret Resentment</strong>: Hidden feelings of anger or jealousy</li>
+</ul>
+<h3 id="external-tensions"><a class="header" href="#external-tensions">External Tensions</a></h3>
+<ul>
+<li><strong>Outside Pressures</strong>: Faction or family disapproval</li>
+<li><strong>Competing Loyalties</strong>: Obligations to others that conflict</li>
+<li><strong>Resource Scarcity</strong>: Not enough to satisfy both characters</li>
+<li><strong>Status Differences</strong>: Social or power imbalances</li>
+<li><strong>Third-Party Interference</strong>: Someone actively disrupting the bond</li>
+</ul>
+<h3 id="setting-based-tensions"><a class="header" href="#setting-based-tensions">Setting-Based Tensions</a></h3>
+<ul>
+<li><strong>Axis Conflicts</strong>: Different relationships to setting axes</li>
+<li><strong>Faction Tensions</strong>: Belonging to groups with opposing interests</li>
+<li><strong>Location Separation</strong>: Geographic challenges</li>
+<li><strong>Cultural Differences</strong>: Misunderstandings due to background</li>
+<li><strong>Historical Context</strong>: Setting history affecting the relationship</li>
+</ul>
+<hr />
+<h2 id="4-development-potential"><a class="header" href="#4-development-potential">4. Development Potential</a></h2>
+<p>Plan how the relationship might evolve through play:</p>
+<h3 id="strengthening-paths"><a class="header" href="#strengthening-paths">Strengthening Paths</a></h3>
+<ul>
+<li><strong>Shared Adversity</strong>: Facing challenges together</li>
+<li><strong>Mutual Support</strong>: Helping each other achieve goals</li>
+<li><strong>Understanding Growth</strong>: Learning to accept differences</li>
+<li><strong>Trust Building</strong>: Proving reliability in critical moments</li>
+<li><strong>Boundary Respect</strong>: Honoring each other's limits</li>
+</ul>
+<h3 id="complication-paths"><a class="header" href="#complication-paths">Complication Paths</a></h3>
+<ul>
+<li><strong>Betrayal Risk</strong>: Situations that test loyalty</li>
+<li><strong>Competing Priorities</strong>: Forced to choose between relationship and other values</li>
+<li><strong>External Pressure</strong>: Others trying to drive characters apart</li>
+<li><strong>Secret Revelation</strong>: Hidden information coming to light</li>
+<li><strong>Resource Conflict</strong>: Forced to compete for limited assets</li>
+</ul>
+<h3 id="transformation-paths"><a class="header" href="#transformation-paths">Transformation Paths</a></h3>
+<ul>
+<li><strong>Role Reversal</strong>: Power dynamics shifting</li>
+<li><strong>Relationship Type Change</strong>: Evolving into a different connection</li>
+<li><strong>Mutual Growth</strong>: Both characters changing together</li>
+<li><strong>Independence Development</strong>: Becoming less codependent</li>
+<li><strong>Merging Goals</strong>: Finding common purpose</li>
+</ul>
+<hr />
+<h2 id="5-integration-with-traits"><a class="header" href="#5-integration-with-traits">5. Integration with Traits</a></h2>
+<p>Connect the relationship to character traits for deeper integration:</p>
+<h3 id="origin-connections"><a class="header" href="#origin-connections">Origin Connections</a></h3>
+<ul>
+<li>How do the characters' backgrounds interact?</li>
+<li>Are there shared experiences or contrasting upbringings?</li>
+<li>Do their origins create natural tensions or bonds?</li>
+<li>How does social structure affect their connection?</li>
+</ul>
+<h3 id="drive-interactions"><a class="header" href="#drive-interactions">Drive Interactions</a></h3>
+<ul>
+<li>Do their motivations complement or conflict?</li>
+<li>Can one help the other achieve their drive?</li>
+<li>How do their approaches to conflict differ or align?</li>
+<li>What happens when drives pull in opposite directions?</li>
+</ul>
+<h3 id="goal-alignment"><a class="header" href="#goal-alignment">Goal Alignment</a></h3>
+<ul>
+<li>Are their goals compatible or contradictory?</li>
+<li>Can they help each other achieve their aims?</li>
+<li>What happens if one succeeds while the other fails?</li>
+<li>How might goals evolve through their relationship?</li>
+</ul>
+<h3 id="asset-sharing"><a class="header" href="#asset-sharing">Asset Sharing</a></h3>
+<ul>
+<li>Which assets might they share?</li>
+<li>How do their different assets complement each other?</li>
+<li>What tensions might arise from asset imbalances?</li>
+<li>How might assets be risked to support the relationship?</li>
+</ul>
+<hr />
+<h2 id="6-mechanical-implementation"><a class="header" href="#6-mechanical-implementation">6. Mechanical Implementation</a></h2>
+<p>Apply concrete mechanical effects to the relationship:</p>
+<h3 id="pool-support"><a class="header" href="#pool-support">Pool Support</a></h3>
+<ul>
+<li>Add relationship dice to pools when connection is relevant</li>
+<li>Enable combined actions with enhanced effects</li>
+<li>Allow connected characters to share certain assets</li>
+<li>Provide recovery support for other relationships</li>
+</ul>
+<h3 id="risk-and-reward"><a class="header" href="#risk-and-reward">Risk and Reward</a></h3>
+<ul>
+<li>Risk relationship status (strain) for additional dice</li>
+<li>Gain favorable conditions when working together</li>
+<li>Face complications when relationship tensions are triggered</li>
+<li>Restore strained or broken relationships through narrative actions</li>
+</ul>
+<h3 id="status-effects"><a class="header" href="#status-effects">Status Effects</a></h3>
+<ul>
+<li><strong>Strong</strong>: Full dice benefits, asset sharing, favorable conditions</li>
+<li><strong>Strained</strong>: Reduced benefits, potential complications, limited sharing</li>
+<li><strong>Broken</strong>: No benefits, active complications, no sharing</li>
+<li><strong>Transformed</strong>: Modified benefits based on new relationship type</li>
+</ul>
+<hr />
+<h2 id="7-documentation-template"><a class="header" href="#7-documentation-template">7. Documentation Template</a></h2>
+<p>For each character-to-character relationship, record:</p>
+<pre><code>Character 1: [Name]
+Character 2: [Name]
+Relationship Type: [Type]
+Current Status: [Strong/Strained/Broken/Transformed]
+
+Tension Points:
+1. [Specific tension]
+2. [Specific tension]
+3. [Specific tension]
+
+Trait Connections:
+- Origin: [How origins interact]
+- Drive: [How drives interact]
+- Goal: [How goals interact]
+
+Mechanical Effects:
+- [Specific benefit or complication]
+- [Specific benefit or complication]
+
+Development Notes:
+- [Potential evolution paths]
+- [Key moments that might trigger changes]
+</code></pre>
+<hr />
+<h2 id="8-example-relationships"><a class="header" href="#8-example-relationships">8. Example Relationships</a></h2>
+<h3 id="example-1-former-rivals-now-allies"><a class="header" href="#example-1-former-rivals-now-allies">Example 1: Former Rivals Now Allies</a></h3>
+<pre><code>Character 1: Elara, Guild Mage
+Character 2: Thorne, Rogue Spellcaster
+Relationship Type: Former Rivals in Same Field
+Current Status: Strained but Improving
+
+Tension Points:
+1. Elara still represents the guild that exiled Thorne
+2. Both compete for rare magical resources
+3. Thorne knows a secret about Elara's past
+
+Trait Connections:
+- Origin: Elara's privileged academy training vs. Thorne's self-taught methods
+- Drive: Both seek magical knowledge but for different purposes
+- Goal: Thorne wants recognition, Elara wants stability
+
+Mechanical Effects:
+- +1 die when combining magical approaches
+- Complications arise when guild politics are involved
+- Can share magical assets but with risk of strain
+
+Development Notes:
+- Could strengthen through facing a common magical threat
+- Might transform into mentorship if one saves the other
+- Risk of breaking if guild forces Elara to choose sides
+</code></pre>
+<h3 id="example-2-siblings-with-conflicting-loyalties"><a class="header" href="#example-2-siblings-with-conflicting-loyalties">Example 2: Siblings with Conflicting Loyalties</a></h3>
+<pre><code>Character 1: Kira, Resistance Fighter
+Character 2: Markus, Imperial Officer
+Relationship Type: Siblings
+Current Status: Broken
+
+Tension Points:
+1. Opposite sides of political conflict
+2. Shared family secret that could destroy both
+3. Competing claims to family inheritance
+
+Trait Connections:
+- Origin: Same family but chose different paths
+- Drive: Both seek to honor parents' memory differently
+- Goal: Kira wants revolution, Markus wants reform
+
+Mechanical Effects:
+- Currently no benefits due to broken status
+- If restored, would provide strong social assets
+- Each knows the other's weaknesses (tactical advantage)
+
+Development Notes:
+- Could be restored through family crisis requiring cooperation
+- Might transform if one changes political allegiance
+- Potential for powerful alliance if they find common ground
+</code></pre>
+<hr />
+<h2 id="notes-for-game-facilitators"><a class="header" href="#notes-for-game-facilitators">Notes for Game Facilitators</a></h2>
+<ul>
+<li>Use relationships as story drivers, not just mechanical benefits</li>
+<li>Create scenes that specifically test or strengthen relationships</li>
+<li>Allow relationships to evolve naturally through play</li>
+<li>Encourage players to invoke relationships in creative ways</li>
+<li>Balance relationship benefits with meaningful costs and risks</li>
+<li>Use relationship tensions to create compelling complications</li>
+<li>Reward players for playing into relationship dynamics</li>
+<li>Document relationship changes as the campaign progresses</li>
+</ul>
+<hr />
+<p><em>Use this guide to create rich, dynamic relationships between player characters that drive the narrative and provide meaningful mechanical interactions.</em></p>
+<h1 id="character-to-faction-relationships-guide-1"><a class="header" href="#character-to-faction-relationships-guide-1">Character-to-Faction Relationships Guide</a></h1>
+<p>This guide helps players and Game Facilitators (GFs) create meaningful relationships between player characters and factions in Narrono, adding depth to the setting and creating narrative opportunities.</p>
+<hr />
+<h2 id="1-position-establishment"><a class="header" href="#1-position-establishment">1. Position Establishment</a></h2>
+<p>Define the character's standing within or relationship to the faction:</p>
+<h3 id="internal-positions"><a class="header" href="#internal-positions">Internal Positions</a></h3>
+<ul>
+<li><strong>Core Member</strong>: Fully integrated, high commitment</li>
+<li><strong>Rising Member</strong>: Gaining influence, proving worth</li>
+<li><strong>Established Member</strong>: Stable position, known quantity</li>
+<li><strong>Marginal Member</strong>: On the periphery, limited involvement</li>
+<li><strong>Leadership</strong>: Decision-making authority</li>
+</ul>
+<h3 id="external-positions"><a class="header" href="#external-positions">External Positions</a></h3>
+<ul>
+<li><strong>Ally</strong>: Supportive but independent</li>
+<li><strong>Contractor</strong>: Professional relationship</li>
+<li><strong>Rival</strong>: Competitive but respectful</li>
+<li><strong>Adversary</strong>: Active opposition</li>
+<li><strong>Target</strong>: Pursued by the faction</li>
+</ul>
+<h3 id="special-positions"><a class="header" href="#special-positions">Special Positions</a></h3>
+<ul>
+<li><strong>Former Member</strong>: Left voluntarily or expelled</li>
+<li><strong>Infiltrator</strong>: Secret membership or spying</li>
+<li><strong>Debtor</strong>: Owes the faction</li>
+<li><strong>Patron</strong>: Supports the faction</li>
+<li><strong>Legacy Connection</strong>: Inherited relationship</li>
+</ul>
+<hr />
+<h2 id="2-influence-mapping"><a class="header" href="#2-influence-mapping">2. Influence Mapping</a></h2>
+<p>Chart the bidirectional influence between character and faction:</p>
+<h3 id="factions-influence-on-character"><a class="header" href="#factions-influence-on-character">Faction's Influence on Character</a></h3>
+<ul>
+<li><strong>Resources</strong>: What assets the faction provides</li>
+<li><strong>Protection</strong>: How the faction shields the character</li>
+<li><strong>Limitations</strong>: Restrictions imposed by the relationship</li>
+<li><strong>Expectations</strong>: What the faction demands</li>
+<li><strong>Identity</strong>: How the connection shapes the character</li>
+</ul>
+<h3 id="characters-influence-on-faction"><a class="header" href="#characters-influence-on-faction">Character's Influence on Faction</a></h3>
+<ul>
+<li><strong>Contribution</strong>: What the character provides</li>
+<li><strong>Connections</strong>: Other relationships the character brings</li>
+<li><strong>Reputation</strong>: How the character affects faction standing</li>
+<li><strong>Direction</strong>: Character's impact on faction goals</li>
+<li><strong>Internal Politics</strong>: Allies and rivals within the faction</li>
+</ul>
+<h3 id="influence-strength"><a class="header" href="#influence-strength">Influence Strength</a></h3>
+<ul>
+<li><strong>Dominant</strong>: Overwhelming control or impact</li>
+<li><strong>Strong</strong>: Significant but not total influence</li>
+<li><strong>Moderate</strong>: Notable but limited influence</li>
+<li><strong>Weak</strong>: Minimal impact</li>
+<li><strong>Potential</strong>: Unrealized influence that could grow</li>
+</ul>
+<hr />
+<h2 id="3-obligation-framework"><a class="header" href="#3-obligation-framework">3. Obligation Framework</a></h2>
+<p>Establish the commitments and expectations that define the relationship:</p>
+<h3 id="formal-obligations"><a class="header" href="#formal-obligations">Formal Obligations</a></h3>
+<ul>
+<li><strong>Contracts</strong>: Written agreements</li>
+<li><strong>Oaths</strong>: Sworn commitments</li>
+<li><strong>Debts</strong>: Resources owed</li>
+<li><strong>Positions</strong>: Official roles and duties</li>
+<li><strong>Membership Requirements</strong>: Standard expectations</li>
+</ul>
+<h3 id="informal-obligations"><a class="header" href="#informal-obligations">Informal Obligations</a></h3>
+<ul>
+<li><strong>Favors</strong>: Unwritten expectations</li>
+<li><strong>Loyalty</strong>: Expected allegiance</li>
+<li><strong>Representation</strong>: Behavior reflecting on faction</li>
+<li><strong>Support</strong>: Assistance in times of need</li>
+<li><strong>Information</strong>: Intelligence sharing</li>
+</ul>
+<h3 id="obligation-balance"><a class="header" href="#obligation-balance">Obligation Balance</a></h3>
+<ul>
+<li><strong>One-sided</strong>: Character owes much more (or less)</li>
+<li><strong>Imbalanced</strong>: Significant disparity in obligations</li>
+<li><strong>Balanced</strong>: Roughly equal commitments</li>
+<li><strong>Evolving</strong>: Shifting balance over time</li>
+<li><strong>Contested</strong>: Disagreement about obligations</li>
+</ul>
+<hr />
+<h2 id="4-benefit-structure"><a class="header" href="#4-benefit-structure">4. Benefit Structure</a></h2>
+<p>Define what each party gains from the relationship:</p>
+<h3 id="character-benefits"><a class="header" href="#character-benefits">Character Benefits</a></h3>
+<ul>
+<li><strong>Material Resources</strong>: Equipment, funds, facilities</li>
+<li><strong>Information Access</strong>: Intelligence, knowledge, secrets</li>
+<li><strong>Status</strong>: Social standing, reputation</li>
+<li><strong>Protection</strong>: Security, backing in conflicts</li>
+<li><strong>Opportunities</strong>: Access to special situations</li>
+</ul>
+<h3 id="faction-benefits"><a class="header" href="#faction-benefits">Faction Benefits</a></h3>
+<ul>
+<li><strong>Skills/Abilities</strong>: Character's unique capabilities</li>
+<li><strong>Connections</strong>: Access to character's network</li>
+<li><strong>Representation</strong>: Character as public face</li>
+<li><strong>Deniability</strong>: Character for unofficial actions</li>
+<li><strong>Perspective</strong>: Character's unique viewpoint</li>
+</ul>
+<h3 id="benefit-dynamics"><a class="header" href="#benefit-dynamics">Benefit Dynamics</a></h3>
+<ul>
+<li><strong>Mutual Growth</strong>: Both sides prosper together</li>
+<li><strong>Zero-sum</strong>: One benefits at other's expense</li>
+<li><strong>Synergistic</strong>: Benefits multiply through cooperation</li>
+<li><strong>Diminishing Returns</strong>: Decreasing value over time</li>
+<li><strong>Potential</strong>: Unrealized benefits that could develop</li>
+</ul>
+<hr />
+<h2 id="5-evolution-triggers"><a class="header" href="#5-evolution-triggers">5. Evolution Triggers</a></h2>
+<p>Identify events that could change the relationship:</p>
+<h3 id="strengthening-triggers"><a class="header" href="#strengthening-triggers">Strengthening Triggers</a></h3>
+<ul>
+<li><strong>Successful Collaboration</strong>: Achieving goals together</li>
+<li><strong>External Threat</strong>: Uniting against common enemy</li>
+<li><strong>Resource Exchange</strong>: Mutually beneficial sharing</li>
+<li><strong>Aligned Growth</strong>: Parallel development</li>
+<li><strong>Crisis Support</strong>: Standing together in difficulty</li>
+</ul>
+<h3 id="straining-triggers"><a class="header" href="#straining-triggers">Straining Triggers</a></h3>
+<ul>
+<li><strong>Failed Obligation</strong>: Not meeting expectations</li>
+<li><strong>Competing Interests</strong>: Goals coming into conflict</li>
+<li><strong>External Pressure</strong>: Outside forces creating tension</li>
+<li><strong>Resource Scarcity</strong>: Not enough to go around</li>
+<li><strong>Leadership Change</strong>: New direction for faction</li>
+</ul>
+<h3 id="transformation-triggers"><a class="header" href="#transformation-triggers">Transformation Triggers</a></h3>
+<ul>
+<li><strong>Major Victory/Defeat</strong>: Significant outcome changing dynamics</li>
+<li><strong>Character Evolution</strong>: Personal growth changing needs</li>
+<li><strong>Faction Evolution</strong>: Organizational change</li>
+<li><strong>Revelation</strong>: Discovery of new information</li>
+<li><strong>External Shift</strong>: Setting changes affecting relationship</li>
+</ul>
+<hr />
+<h2 id="6-setting-integration"><a class="header" href="#6-setting-integration">6. Setting Integration</a></h2>
+<p>Connect the faction relationship to the Five Axes framework:</p>
+<h3 id="power-scale"><a class="header" href="#power-scale">Power Scale</a></h3>
+<ul>
+<li><strong>Personal</strong>: Individual relationships within faction</li>
+<li><strong>Local</strong>: Community-level faction influence</li>
+<li><strong>Regional</strong>: Extended reach and resources</li>
+<li><strong>Global</strong>: Widespread power and connections</li>
+</ul>
+<h3 id="supernatural-level"><a class="header" href="#supernatural-level">Supernatural Level</a></h3>
+<ul>
+<li><strong>None</strong>: Purely mundane organization</li>
+<li><strong>Hidden</strong>: Secret supernatural elements</li>
+<li><strong>Open</strong>: Known supernatural aspects</li>
+<li><strong>Dominant</strong>: Primarily supernatural in nature</li>
+</ul>
+<h3 id="technology-level"><a class="header" href="#technology-level">Technology Level</a></h3>
+<ul>
+<li><strong>Limited</strong>: Basic tools and resources</li>
+<li><strong>Moderate</strong>: Standard technology</li>
+<li><strong>Advanced</strong>: Cutting-edge capabilities</li>
+<li><strong>Fantastic</strong>: Beyond current possibilities</li>
+</ul>
+<h3 id="social-structure"><a class="header" href="#social-structure">Social Structure</a></h3>
+<ul>
+<li><strong>Tribal</strong>: Family/clan-based organization</li>
+<li><strong>Hierarchical</strong>: Clear chain of command</li>
+<li><strong>Merit-based</strong>: Advancement through achievement</li>
+<li><strong>Fluid</strong>: Adaptable and changing structure</li>
+</ul>
+<h3 id="conflict-type"><a class="header" href="#conflict-type">Conflict Type</a></h3>
+<ul>
+<li><strong>Direct</strong>: Physical/military approach</li>
+<li><strong>Social</strong>: Influence and reputation focus</li>
+<li><strong>Economic</strong>: Resource control emphasis</li>
+<li><strong>Ideological</strong>: Belief and value centered</li>
+</ul>
+<hr />
+<h2 id="7-mechanical-implementation"><a class="header" href="#7-mechanical-implementation">7. Mechanical Implementation</a></h2>
+<p>Apply concrete mechanical effects to the relationship:</p>
+<h3 id="asset-access"><a class="header" href="#asset-access">Asset Access</a></h3>
+<ul>
+<li>Faction-specific assets available to character</li>
+<li>Requirements to access faction resources</li>
+<li>Consequences of using faction assets</li>
+<li>Asset recovery through faction connections</li>
+</ul>
+<h3 id="pool-support-1"><a class="header" href="#pool-support-1">Pool Support</a></h3>
+<ul>
+<li>Faction backing providing dice in relevant situations</li>
+<li>Reputation effects on social interactions</li>
+<li>Knowledge access affecting information gathering</li>
+<li>Resource access influencing preparation</li>
+</ul>
+<h3 id="complications-and-opportunities"><a class="header" href="#complications-and-opportunities">Complications and Opportunities</a></h3>
+<ul>
+<li>Faction obligations creating story hooks</li>
+<li>Rival factions creating complications</li>
+<li>Advancement opportunities within faction</li>
+<li>Faction conflicts pulling in character</li>
+</ul>
+<h3 id="status-effects-1"><a class="header" href="#status-effects-1">Status Effects</a></h3>
+<ul>
+<li><strong>Good Standing</strong>: Full benefits and support</li>
+<li><strong>Probationary</strong>: Limited benefits, proving loyalty</li>
+<li><strong>Tense</strong>: Reduced benefits, potential complications</li>
+<li><strong>Broken</strong>: No benefits, possible active hostility</li>
+</ul>
+<hr />
+<h2 id="8-documentation-template"><a class="header" href="#8-documentation-template">8. Documentation Template</a></h2>
+<p>For each character-to-faction relationship, record:</p>
+<pre><code>Character: [Name]
+Faction: [Name]
+Position: [Internal/External Position]
+Current Standing: [Good/Probationary/Tense/Broken]
+
+Influence:
+- Faction → Character: [Type and strength]
+- Character → Faction: [Type and strength]
+
+Obligations:
+- Character owes: [Specific commitments]
+- Faction provides: [Specific support]
+
+Benefits:
+- Character gains: [Specific advantages]
+- Faction gains: [Specific advantages]
+
+Evolution Triggers:
+- Strengthening: [Specific events]
+- Straining: [Specific events]
+- Transformation: [Specific events]
+
+Setting Integration:
+- [How this relationship reflects the Five Axes]
+
+Mechanical Effects:
+- [Specific benefits or complications]
+- [Available assets or resources]
+</code></pre>
+<hr />
+<h2 id="9-example-relationships"><a class="header" href="#9-example-relationships">9. Example Relationships</a></h2>
+<h3 id="example-1-guild-member"><a class="header" href="#example-1-guild-member">Example 1: Guild Member</a></h3>
+<pre><code>Character: Elara, Artificer
+Faction: Arcane Craftsmen Guild
+Position: Rising Member
+Current Standing: Good
+
+Influence:
+- Faction → Character: Strong resource access, moderate identity shaping
+- Character → Faction: Weak overall, but growing reputation contribution
+
+Obligations:
+- Character owes: Quarterly dues, crafting contributions, adherence to guild code
+- Faction provides: Training, market access, legal protection
+
+Benefits:
+- Character gains: Workshop access, material discounts, knowledge sharing
+- Faction gains: Innovative techniques, quality products, fresh perspective
+
+Evolution Triggers:
+- Strengthening: Creating a remarkable invention, resolving guild dispute
+- Straining: Missing dues, quality complaints, breaking guild secrets
+- Transformation: Election to leadership, major discovery, rival guild offer
+
+Setting Integration:
+- Regional power scale (guild spans several cities)
+- Open supernatural (magical crafting is known practice)
+- Advanced technology (pushing boundaries of magical artifice)
+- Hierarchical structure (clear ranks and advancement path)
+- Economic conflict (competition with other guilds and markets)
+
+Mechanical Effects:
+- +1 die on crafting-related rolls when using guild resources
+- Access to rare materials as assets
+- Obligation to respond to guild summons (potential complication)
+</code></pre>
+<h3 id="example-2-criminal-organization-target"><a class="header" href="#example-2-criminal-organization-target">Example 2: Criminal Organization Target</a></h3>
+<pre><code>Character: Thorne, Former Thief
+Faction: The Obsidian Hand (criminal syndicate)
+Position: Target (former member who left with valuable information)
+Current Standing: Broken
+
+Influence:
+- Faction → Character: Strong threat, moderate limitation of movement
+- Character → Faction: Weak but potential blackmail leverage
+
+Obligations:
+- Character owes: Return of stolen information, silence about operations
+- Faction provides: Nothing currently (formerly protection and income)
+
+Benefits:
+- Character gains: Knowledge of syndicate operations (dangerous asset)
+- Faction gains: Nothing currently (seeks to eliminate security risk)
+
+Evolution Triggers:
+- Strengthening: Unlikely, but possible through major leverage gain
+- Straining: Further exposure of syndicate secrets, evading capture
+- Transformation: Providing valuable service, blackmail success, leadership change
+
+Setting Integration:
+- Local power scale (syndicate controls one city district)
+- Hidden supernatural (rumored deals with shadow entities)
+- Moderate technology (standard security and weapons)
+- Hierarchical structure (strict chain of command)
+- Direct conflict (enforces through violence and intimidation)
+
+Mechanical Effects:
+- Complication: Syndicate agents may appear at inconvenient times
+- Asset: Inside knowledge of criminal operations
+- Potential ally if relationship can be transformed
+</code></pre>
+<hr />
+<h2 id="notes-for-game-facilitators-1"><a class="header" href="#notes-for-game-facilitators-1">Notes for Game Facilitators</a></h2>
+<ul>
+<li>Use faction relationships to create story hooks and complications</li>
+<li>Allow characters to develop multiple faction relationships with varying levels of commitment</li>
+<li>Create interesting tensions between different faction relationships</li>
+<li>Use faction evolution to reflect the impact of character actions</li>
+<li>Allow faction relationships to change based on character choices</li>
+<li>Create scenes that specifically test or leverage faction relationships</li>
+<li>Use factions to introduce new assets, information, and opportunities</li>
+<li>Balance faction benefits with meaningful obligations</li>
+</ul>
+<hr />
+<p><em>Use this guide to create rich, dynamic relationships between characters and factions that expand the setting and provide meaningful narrative and mechanical interactions.</em></p>
+<h1 id="relationship-web-construction-guide-1"><a class="header" href="#relationship-web-construction-guide-1">Relationship Web Construction Guide</a></h1>
+<p>This guide helps players and Game Facilitators (GFs) create and manage the Relationship Web in Narrono, a network of connections between characters and factions that drives narrative and provides mechanical benefits.</p>
+<hr />
+<h2 id="1-network-visualization"><a class="header" href="#1-network-visualization">1. Network Visualization</a></h2>
+<p>Create a visual representation of all relationships in the game:</p>
+<h3 id="basic-visualization"><a class="header" href="#basic-visualization">Basic Visualization</a></h3>
+<ul>
+<li>Place character names in a circle or grid</li>
+<li>Draw lines connecting related characters</li>
+<li>Use different line styles for relationship types:
+<ul>
+<li>Solid lines for positive relationships</li>
+<li>Dashed lines for strained relationships</li>
+<li>Dotted lines for broken relationships</li>
+<li>Double lines for transformed relationships</li>
+</ul>
+</li>
+<li>Add faction names outside the character circle</li>
+<li>Connect characters to relevant factions</li>
+</ul>
+<h3 id="enhanced-visualization"><a class="header" href="#enhanced-visualization">Enhanced Visualization</a></h3>
+<ul>
+<li>Use color coding for relationship types</li>
+<li>Add symbols to represent tension points</li>
+<li>Indicate relationship strength by line thickness</li>
+<li>Show directional influence with arrows</li>
+<li>Group related characters in clusters</li>
+<li>Position factions based on their relationships to each other</li>
+</ul>
+<h3 id="digital-tools"><a class="header" href="#digital-tools">Digital Tools</a></h3>
+<ul>
+<li>Mind mapping software</li>
+<li>Relationship mapping tools</li>
+<li>Simple drawing programs</li>
+<li>Dedicated RPG relationship trackers</li>
+<li>Collaborative online whiteboards</li>
+</ul>
+<h3 id="physical-tools"><a class="header" href="#physical-tools">Physical Tools</a></h3>
+<ul>
+<li>Large paper or whiteboard</li>
+<li>Index cards for characters and factions</li>
+<li>Colored string or yarn for connections</li>
+<li>Repositionable notes for changing elements</li>
+<li>Tokens to mark tension points</li>
+</ul>
+<hr />
+<h2 id="2-connection-density-guidelines"><a class="header" href="#2-connection-density-guidelines">2. Connection Density Guidelines</a></h2>
+<p>Determine the appropriate number and distribution of relationships:</p>
+<h3 id="optimal-density"><a class="header" href="#optimal-density">Optimal Density</a></h3>
+<ul>
+<li><strong>Minimum Connections</strong>: Each character should have at least 2-3 meaningful relationships</li>
+<li><strong>Maximum Connections</strong>: Avoid more than 5-7 connections per character</li>
+<li><strong>Group Size Formula</strong>: For a group of N characters, aim for N to 2N total relationships</li>
+<li><strong>Faction Connections</strong>: Each character should have 1-2 faction relationships</li>
+</ul>
+<h3 id="connection-distribution"><a class="header" href="#connection-distribution">Connection Distribution</a></h3>
+<ul>
+<li><strong>Even Distribution</strong>: Ensure all characters have similar numbers of connections</li>
+<li><strong>Varied Types</strong>: Mix relationship types (family, professional, adversarial, etc.)</li>
+<li><strong>Varied States</strong>: Include relationships in different states (strong, strained, broken)</li>
+<li><strong>Cross-Group Connections</strong>: Ensure no character is isolated from the group</li>
+</ul>
+<h3 id="setting-appropriate-density"><a class="header" href="#setting-appropriate-density">Setting-Appropriate Density</a></h3>
+<ul>
+<li><strong>Power Scale Impact</strong>:
+<ul>
+<li>Personal: More intimate, fewer connections</li>
+<li>Global: More extensive, complex networks</li>
+</ul>
+</li>
+<li><strong>Social Structure Impact</strong>:
+<ul>
+<li>Tribal: Dense family/clan connections</li>
+<li>Fluid: More diverse, changing connections</li>
+</ul>
+</li>
+<li><strong>Technology Level Impact</strong>:
+<ul>
+<li>Limited: Primarily local, direct connections</li>
+<li>Advanced: More distant, mediated connections</li>
+</ul>
+</li>
+</ul>
+<h3 id="balance-considerations"><a class="header" href="#balance-considerations">Balance Considerations</a></h3>
+<ul>
+<li>Avoid one character becoming the "hub" of all relationships</li>
+<li>Create triangular relationship structures for dynamic interactions</li>
+<li>Ensure both allies and tensions exist in the network</li>
+<li>Balance character-to-character and character-to-faction connections</li>
+<li>Consider how relationships might evolve over time</li>
+</ul>
+<hr />
+<h2 id="3-tension-distribution"><a class="header" href="#3-tension-distribution">3. Tension Distribution</a></h2>
+<p>Strategically place tensions throughout the Relationship Web:</p>
+<h3 id="tension-types"><a class="header" href="#tension-types">Tension Types</a></h3>
+<ul>
+<li><strong>Internal Character Tensions</strong>: Conflicting goals or values within a character</li>
+<li><strong>Interpersonal Tensions</strong>: Conflicts between characters</li>
+<li><strong>Character-Faction Tensions</strong>: Conflicts between characters and organizations</li>
+<li><strong>Faction-Faction Tensions</strong>: Conflicts between organizations</li>
+<li><strong>Setting Tensions</strong>: Conflicts arising from the world itself</li>
+</ul>
+<h3 id="tension-placement"><a class="header" href="#tension-placement">Tension Placement</a></h3>
+<ul>
+<li><strong>Distribute Across Web</strong>: Don't concentrate all tension in one area</li>
+<li><strong>Connect to Character Goals</strong>: Link tensions to what characters care about</li>
+<li><strong>Create Triangles</strong>: Three-way tensions create dynamic situations</li>
+<li><strong>Balance with Strong Bonds</strong>: Offset tensions with supportive relationships</li>
+<li><strong>Layer Tensions</strong>: Create both surface and deeper tensions</li>
+</ul>
+<h3 id="tension-intensity"><a class="header" href="#tension-intensity">Tension Intensity</a></h3>
+<ul>
+<li><strong>Low Intensity</strong>: Background tensions that color interactions</li>
+<li><strong>Medium Intensity</strong>: Active issues that require attention</li>
+<li><strong>High Intensity</strong>: Critical conflicts that demand resolution</li>
+<li><strong>Varied Intensity</strong>: Mix different levels for dynamic play</li>
+<li><strong>Escalating Potential</strong>: Tensions that could grow more serious</li>
+</ul>
+<h3 id="tension-triggers"><a class="header" href="#tension-triggers">Tension Triggers</a></h3>
+<ul>
+<li><strong>Identify Specific Events</strong>: What might activate each tension?</li>
+<li><strong>Create Warning Signs</strong>: How will players recognize rising tension?</li>
+<li><strong>Plan Consequences</strong>: What happens if tension boils over?</li>
+<li><strong>Design Resolution Paths</strong>: How might tensions be resolved?</li>
+<li><strong>Consider Chain Reactions</strong>: How might one tension affect others?</li>
+</ul>
+<hr />
+<h2 id="4-balance-assessment"><a class="header" href="#4-balance-assessment">4. Balance Assessment</a></h2>
+<p>Evaluate and adjust the Relationship Web for engaging play:</p>
+<h3 id="narrative-balance"><a class="header" href="#narrative-balance">Narrative Balance</a></h3>
+<ul>
+<li><strong>Spotlight Distribution</strong>: Ensure all characters have meaningful relationships</li>
+<li><strong>Story Potential</strong>: Check that relationships create interesting situations</li>
+<li><strong>Agency Balance</strong>: Verify that all players can affect the web</li>
+<li><strong>Setting Integration</strong>: Confirm relationships reflect the game world</li>
+<li><strong>Development Paths</strong>: Ensure relationships can evolve meaningfully</li>
+</ul>
+<h3 id="mechanical-balance"><a class="header" href="#mechanical-balance">Mechanical Balance</a></h3>
+<ul>
+<li><strong>Resource Distribution</strong>: Check that relationship benefits are fairly distributed</li>
+<li><strong>Skill Complementarity</strong>: Ensure characters can support each other's weaknesses</li>
+<li><strong>Challenge Appropriateness</strong>: Verify that tensions create suitable difficulties</li>
+<li><strong>Recovery Options</strong>: Confirm that damaged relationships can be repaired</li>
+<li><strong>System Integration</strong>: Ensure relationships interact with other game mechanics</li>
+</ul>
+<h3 id="group-dynamic-balance"><a class="header" href="#group-dynamic-balance">Group Dynamic Balance</a></h3>
+<ul>
+<li><strong>Cooperation Potential</strong>: Verify that characters have reasons to work together</li>
+<li><strong>Conflict Potential</strong>: Ensure tensions create interesting but not destructive conflicts</li>
+<li><strong>Independence Balance</strong>: Check that characters maintain individual agency</li>
+<li><strong>Interdependence Balance</strong>: Ensure characters need each other</li>
+<li><strong>Player Comfort</strong>: Verify that relationship dynamics respect player boundaries</li>
+</ul>
+<h3 id="assessment-questions"><a class="header" href="#assessment-questions">Assessment Questions</a></h3>
+<ol>
+<li>Does each character have meaningful connections?</li>
+<li>Are there both strong bonds and interesting tensions?</li>
+<li>Do relationships create compelling story opportunities?</li>
+<li>Is mechanical benefit distributed fairly?</li>
+<li>Does the web reflect the setting appropriately?</li>
+<li>Can all relationships evolve in interesting ways?</li>
+<li>Are there sufficient connection points for new elements?</li>
+<li>Does the web create a cohesive group dynamic?</li>
+</ol>
+<hr />
+<h2 id="5-evolution-planning"><a class="header" href="#5-evolution-planning">5. Evolution Planning</a></h2>
+<p>Prepare for how the Relationship Web will change through play:</p>
+<h3 id="evolution-mechanisms"><a class="header" href="#evolution-mechanisms">Evolution Mechanisms</a></h3>
+<ul>
+<li><strong>Session Triggers</strong>: Events during play that change relationships</li>
+<li><strong>Milestone Changes</strong>: Major shifts at significant story points</li>
+<li><strong>Player Initiation</strong>: Character-driven relationship changes</li>
+<li><strong>GF Initiation</strong>: Setting-driven relationship changes</li>
+<li><strong>System Mechanics</strong>: Game rules that modify relationships</li>
+</ul>
+<h3 id="planning-for-growth"><a class="header" href="#planning-for-growth">Planning for Growth</a></h3>
+<ul>
+<li><strong>New Connections</strong>: How and when new relationships might form</li>
+<li><strong>Strengthening Paths</strong>: How strained relationships might improve</li>
+<li><strong>Recovery Routes</strong>: How broken relationships might be restored</li>
+<li><strong>Transformation Opportunities</strong>: How relationships might change type</li>
+<li><strong>Faction Evolution</strong>: How organization relationships might develop</li>
+</ul>
+<h3 id="tracking-changes"><a class="header" href="#tracking-changes">Tracking Changes</a></h3>
+<ul>
+<li><strong>Visual Updates</strong>: Modifying the relationship map</li>
+<li><strong>Documentation</strong>: Recording relationship changes</li>
+<li><strong>History Tracking</strong>: Noting key events that changed relationships</li>
+<li><strong>State Tracking</strong>: Monitoring relationship states</li>
+<li><strong>Mechanical Updates</strong>: Adjusting game benefits accordingly</li>
+</ul>
+<h3 id="narrative-integration"><a class="header" href="#narrative-integration">Narrative Integration</a></h3>
+<ul>
+<li><strong>Relationship Scenes</strong>: Dedicated moments to explore connections</li>
+<li><strong>Consequence Reflection</strong>: Showing how relationship changes affect the story</li>
+<li><strong>Character Growth</strong>: Linking relationship evolution to character development</li>
+<li><strong>Setting Impact</strong>: Demonstrating how relationship changes affect the world</li>
+<li><strong>Theme Reinforcement</strong>: Using relationship evolution to highlight game themes</li>
+</ul>
+<hr />
+<h2 id="6-implementation-process"><a class="header" href="#6-implementation-process">6. Implementation Process</a></h2>
+<p>Step-by-step approach to creating the Relationship Web:</p>
+<h3 id="session-zero-process"><a class="header" href="#session-zero-process">Session Zero Process</a></h3>
+<ol>
+<li><strong>Create Characters Individually</strong>: Focus on setting connection first</li>
+<li><strong>Share Character Concepts</strong>: Brief introduction of each character</li>
+<li><strong>Brainstorm Connections</strong>: Players suggest potential relationships</li>
+<li><strong>Establish Primary Relationships</strong>: Define 1-2 key connections per character</li>
+<li><strong>Add Faction Relationships</strong>: Connect characters to organizations</li>
+<li><strong>Identify Tensions</strong>: Add complexity to each relationship</li>
+<li><strong>Visualize the Web</strong>: Create a map of all connections</li>
+<li><strong>Balance Assessment</strong>: Evaluate and adjust as needed</li>
+<li><strong>Document Details</strong>: Record specifics of each relationship</li>
+<li><strong>Plan First Tests</strong>: Identify early scenes to explore relationships</li>
+</ol>
+<h3 id="mid-campaign-process"><a class="header" href="#mid-campaign-process">Mid-Campaign Process</a></h3>
+<ol>
+<li><strong>Review Current Web</strong>: Assess the state of all relationships</li>
+<li><strong>Document Changes</strong>: Update based on play events</li>
+<li><strong>Identify Stagnant Areas</strong>: Find relationships needing attention</li>
+<li><strong>Plan Development Scenes</strong>: Create opportunities for evolution</li>
+<li><strong>Introduce New Elements</strong>: Add new connections as appropriate</li>
+<li><strong>Resolve or Escalate Tensions</strong>: Move conflicts forward</li>
+<li><strong>Rebalance if Needed</strong>: Adjust to maintain engaging dynamics</li>
+<li><strong>Update Visualization</strong>: Revise the relationship map</li>
+<li><strong>Check Mechanical Effects</strong>: Ensure system integration</li>
+<li><strong>Plan Next Phase</strong>: Identify future evolution opportunities</li>
+</ol>
+<hr />
+<h2 id="7-relationship-web-templates"><a class="header" href="#7-relationship-web-templates">7. Relationship Web Templates</a></h2>
+<h3 id="small-group-template-3-4-players"><a class="header" href="#small-group-template-3-4-players">Small Group Template (3-4 Players)</a></h3>
+<pre><code>Character A ←→ Character B (Strong: Allies)
+Character B ←→ Character C (Strained: Rivals)
+Character C ←→ Character A (Transformed: Former Enemies)
+Character A ←→ Faction 1 (Good Standing: Member)
+Character B ←→ Faction 2 (Good Standing: Ally)
+Character C ←→ Faction 1 (Tense: Former Member)
+Faction 1 ←→ Faction 2 (Rivals)
+</code></pre>
+<h3 id="medium-group-template-5-6-players"><a class="header" href="#medium-group-template-5-6-players">Medium Group Template (5-6 Players)</a></h3>
+<pre><code>Character A ←→ Character B (Strong: Family)
+Character B ←→ Character C (Strong: Colleagues)
+Character C ←→ Character D (Strained: Competitors)
+Character D ←→ Character E (Broken: Former Allies)
+Character E ←→ Character A (Transformed: Mentor/Student)
+Character B ←→ Character E (Strong: Friends)
+Character A ←→ Faction 1 (Good Standing: Member)
+Character C ←→ Faction 2 (Good Standing: Member)
+Character D ←→ Faction 3 (Tense: Contractor)
+Character E ←→ Faction 1 (Probationary: New Recruit)
+Faction 1 ←→ Faction 2 (Allies)
+Faction 2 ←→ Faction 3 (Adversaries)
+</code></pre>
+<h3 id="triangle-based-template"><a class="header" href="#triangle-based-template">Triangle-Based Template</a></h3>
+<pre><code>Character A ←→ Character B ←→ Character C ←→ Character A
+(Triangle 1: Family members with shared secret)
+
+Character C ←→ Character D ←→ Character E ←→ Character C
+(Triangle 2: Professional colleagues with competing goals)
+
+Character E ←→ Character A
+(Bridge between triangles: Mentor/Student relationship)
+
+Each character connects to 1-2 factions
+Factions have their own relationship network
+</code></pre>
+<hr />
+<h2 id="8-example-relationship-web"><a class="header" href="#8-example-relationship-web">8. Example Relationship Web</a></h2>
+<h3 id="shadow-court-example-5-players"><a class="header" href="#shadow-court-example-5-players">Shadow Court Example (5 Players)</a></h3>
+<pre><code>Elena (Noble) ←→ Marcus (Guard Captain) [Strong: Allies]
+Marcus ←→ Lyra (Spy) [Strained: Former Colleagues]
+Lyra ←→ Thorne (Merchant) [Strong: Secret Partners]
+Thorne ←→ Vesper (Scholar) [Transformed: Former Rivals]
+Vesper ←→ Elena [Broken: Family Dispute]
+Elena ←→ Thorne [Strained: Business Arrangement]
+Marcus ←→ Vesper [Strong: Friends]
+
+Elena ←→ Royal Court [Good Standing: Member]
+Marcus ←→ City Guard [Good Standing: Leader]
+Lyra ←→ Shadow Network [Good Standing: Agent]
+Lyra ←→ Royal Court [Tense: Infiltrator]
+Thorne ←→ Merchant Guild [Good Standing: Member]
+Vesper ←→ Academy [Good Standing: Scholar]
+Vesper ←→ Royal Court [Probationary: Advisor]
+
+Royal Court ←→ City Guard [Allies]
+Royal Court ←→ Shadow Network [Adversaries]
+Merchant Guild ←→ Royal Court [Tense]
+Academy ←→ Royal Court [Allies]
+</code></pre>
+<h3 id="visualization-example"><a class="header" href="#visualization-example">Visualization Example</a></h3>
+<pre><code>[Royal Court] --------- [City Guard]
+     |  |                   |
+     |  |                   |
+    Elena -------------- Marcus
+     |  \                 / |
+     |   \               /  |
+     |    \             /   |
+     |     \           /    |
+     |      \         /     |
+  [Academy]  \       /      |
+     |        \     /       |
+     |         \   /        |
+    Vesper -------------- Thorne
+     |                      |
+     |                      |
+     |                      |
+    [Shadow Network] -- [Merchant Guild]
+           |
+           |
+          Lyra
+</code></pre>
+<hr />
+<h2 id="9-notes-for-game-facilitators"><a class="header" href="#9-notes-for-game-facilitators">9. Notes for Game Facilitators</a></h2>
+<ul>
+<li>Use the Relationship Web as a primary story driver</li>
+<li>Create scenes that specifically test or develop relationships</li>
+<li>Allow the web to evolve naturally through play</li>
+<li>Use relationship tensions to create compelling complications</li>
+<li>Balance spotlight time across different relationships</li>
+<li>Encourage players to suggest relationship developments</li>
+<li>Document relationship changes after significant events</li>
+<li>Use the web to integrate new characters or elements</li>
+<li>Periodically review and update the visual representation</li>
+<li>Create milestone sessions focused on relationship evolution</li>
+<li>Use relationship changes to reflect character growth</li>
+<li>Balance mechanical benefits with narrative development</li>
+</ul>
+<hr />
+<p><em>Use this guide to create a dynamic, evolving Relationship Web that drives your Narrono campaign and creates meaningful connections between characters, factions, and the setting.</em></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../appendices/playtest-materials.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../appendices/session-templates.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../appendices/playtest-materials.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../appendices/session-templates.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
